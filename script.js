@@ -82,17 +82,17 @@ window.onload = function() {
 
 // 3. 힌트 보기 (제품 상세페이지 이동)
 function openProductPage() {
-    window.open("https://thesoo.co.kr/product/detail.html", "_blank");
+    window.open("https://thesoo.co/about/gongjindan", "_blank");
 }
 
 // 4. 카카오 채널로 이동 (이벤트 응모)
 function goToKakaoChannel() {
     // 👇 실제 카카오 채널 링크로 꼭 수정해주세요!
-    const kakaoChannelLink = "https://pf.kakao.com/_xxxxxx"; 
+    const kakaoChannelLink = "http://pf.kakao.com/_JReVG/friend"; 
     window.open(kakaoChannelLink, "_blank");
 }
 
 // 5. 결과 공유하기
 function shareKakao() {
-    alert("링크가 복사되었습니다. 가족과 친구들에게 공유해보세요!");
+    alert("링크가 복사 완료! 가족과 친구들에게 공유해보세요!");
 }
