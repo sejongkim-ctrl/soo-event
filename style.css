@@ -144,33 +144,24 @@ body {
     background: linear-gradient(to top, #FEE5E5 40%, transparent 40%);
 }
 
-/* [NEW] 제품 이미지 스테이지 (고급 프레임 적용) */
+/* [수정됨] 제품 이미지 스테이지 (외곽의 두꺼운 금테두리 적용) */
 .product-stage {
     position: relative;
     margin: 0 auto 30px;
     width: 100%;
     max-width: 280px;
     
-    /* 둥근 모서리와 깊은 그림자 */
+    /* 둥근 모서리와 외곽의 두꺼운 금색 테두리 */
     border-radius: 24px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 
-                0 0 0 1px rgba(197, 160, 89, 0.2);
+    border: 3px solid var(--brand-gold); /* 3px 두께의 금색 테두리 */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), /* 깊은 바닥 그림자 */
+                inset 0 0 15px rgba(197, 160, 89, 0.2); /* 테두리 안쪽의 은은한 금빛 */
     overflow: hidden;
     background: #fff;
-    transform: translateZ(0); /* 사파리 버그 방지 */
+    transform: translateZ(0);
 }
 
-/* 내부 금테 라인 추가 (액자 효과) */
-.product-stage::after {
-    content: '';
-    position: absolute;
-    top: 12px; right: 12px; bottom: 12px; left: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.6);
-    border-radius: 16px;
-    pointer-events: none;
-    z-index: 2;
-}
+/* 기존의 내부 테두리(::after)는 삭제되었습니다. */
 
 .product-img {
     width: 100%;
@@ -178,21 +169,40 @@ body {
     transition: transform 0.5s ease;
 }
 
-/* 힌트 버튼 (프레임 안쪽 배치) */
+/* [수정됨] 힌트 버튼 (깜빡이는 애니메이션 추가) */
 .hint-tag {
     position: absolute;
-    bottom: 12px; right: 12px;
+    bottom: 15px; right: 15px; /* 위치를 테두리 안쪽으로 살짝 조정 */
     background: rgba(93, 16, 19, 0.95);
     color: #fff;
     border: 1px solid var(--brand-gold);
-    padding: 8px 16px;
+    padding: 9px 18px; /* 크기를 조금 키워 존재감 향상 */
     border-radius: 30px;
-    font-size: 11px;
+    font-size: 12px;
     z-index: 10;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     cursor: pointer;
     backdrop-filter: blur(4px);
     font-weight: 700;
+    
+    /* 금빛으로 깜빡이는(숨쉬는) 애니메이션 적용 */
+    animation: pulse-gold 2s infinite;
+}
+
+/* 버튼 깜빡임 애니메이션 키프레임 */
+@keyframes pulse-gold {
+    0% {
+        box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 15px 5px rgba(197, 160, 89, 0); /* 금빛 그림자가 퍼지는 효과 */
+        transform: scale(1.03); /* 살짝 커짐 */
+        border-color: #fff; /* 테두리가 밝게 빛남 */
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
+        transform: scale(1);
+    }
 }
 
 .product-details {
