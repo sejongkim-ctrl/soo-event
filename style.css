@@ -1,8 +1,8 @@
 /* 1. 기본 세팅 및 컬러 변수 */
 :root {
-    /* 배경은 더 깊고 어두운 와인색으로 무게감을 줍니다 */
-    --bg-deep: #5D1013;
-    --bg-gradient: linear-gradient(180deg, #4A0A0C 0%, #82181C 100%);
+    /* 배경은 더 깊고 어두운 와인색 (참고 이미지 반영) */
+    --bg-deep: #4A0A0C;
+    --bg-gradient: linear-gradient(180deg, #4A0A0C 0%, #5D1013 100%);
     
     /* 브랜드 컬러 */
     --brand-red: #82181C;
@@ -13,13 +13,12 @@
     --text-black: #1A1A1A;
     --text-gray: #555555;
     
-    /* 그림자 (어두운 배경에 맞게 조정) */
+    /* 그림자 */
     --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 body {
-    background: var(--bg-gradient); /* 전체 배경을 브랜드 컬러로 변경 */
-    background-attachment: fixed;   /* 스크롤 해도 배경 고정 */
+    background: var(--bg-deep); /* 배경색 변경 */
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
     padding: 20px 0;
@@ -29,58 +28,59 @@ body {
     color: var(--text-black);
 }
 
-/* 2. 메인 컨테이너 (투명하게 변경) */
 .container {
     width: 100%;
     max-width: 420px;
-    background: transparent; /* 배경색 제거 (카드를 띄우기 위함) */
-    padding: 0 20px;         /* 좌우 여백 추가 */
+    background: transparent;
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
-/* 상단 헤더 (흰색/금색 텍스트로 변경) */
+/* 상단 헤더 (THE SOO 스타일 적용) */
 .page-header {
     text-align: center;
-    padding: 10px 0 24px;
+    padding: 10px 0 30px;
 }
 .brand-logo {
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Noto Serif KR', serif; /* 명조체 */
     font-weight: 700;
-    color: #fff;  /* 흰색 로고 */
-    letter-spacing: 2px;
-    font-size: 15px;
-    opacity: 0.9;
+    color: #fff;  /* 흰색 글씨 */
+    letter-spacing: 3px; /* 자간 넓게 */
+    font-size: 20px;     /* 폰트 키움 */
+    display: block;
 }
 .header-line {
     display: block;
-    width: 40px;
+    width: 30px;
     height: 1px;
-    background: var(--brand-gold); /* 금색 라인 */
-    margin: 10px auto 0;
+    background: var(--brand-gold);
+    margin: 12px auto 0;
 }
 
-/* 3. 콘텐츠 박스 (각 섹션을 '흰색 카드'로 분리) */
+/* 콘텐츠 박스 공통 */
 .content-box {
     background: #fff;
     padding: 30px 24px;
     text-align: center;
-    border-radius: 16px; /* 둥근 모서리 */
+    border-radius: 16px;
     box-shadow: var(--shadow-card);
-    margin-bottom: 24px; /* 카드 사이 간격 */
+    margin-bottom: 24px;
     position: relative;
     overflow: hidden;
 }
 
 /* 섹션 1: 결과 카드 */
+/* 뱃지 스타일 변경 (갈색 알약 모양) */
 .result-badge {
     display: inline-block;
-    background: var(--bg-deep); /* 뱃지도 어두운 색으로 변경 */
+    background: #5D1013; /* 짙은 버건디 */
     color: #fff;
-    font-size: 11px;
-    padding: 5px 14px;
+    font-size: 13px;
+    padding: 6px 18px;
     border-radius: 20px;
-    margin-bottom: 16px;
-    letter-spacing: 1px;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
 }
 
 .title-serif {
@@ -94,10 +94,10 @@ body {
 
 .frame-wrapper {
     padding: 8px;
-    border: 1px solid rgba(130, 24, 28, 0.1); /* 연한 테두리 */
+    border: 1px solid rgba(130, 24, 28, 0.1);
     border-radius: 16px;
     margin-bottom: 24px;
-    background: #FFFCF5; /* 사진 배경에 살짝 미색 */
+    background: #FFFCF5;
 }
 
 .img-frame img {
@@ -128,14 +128,13 @@ body {
 .btn-text-only:hover { color: var(--brand-red); }
 
 
-/* 섹션 2: 프리미엄 처방 (가장 강조) */
+/* 섹션 2: 프리미엄 처방 */
 .premium-box {
     background: #fff;
-    border: 2px solid var(--brand-gold); /* 금색 테두리로 강조 */
+    border: 2px solid var(--brand-gold);
     padding-top: 40px;
 }
 
-/* 장식용 원 (배경 데코) */
 .deco-circle {
     position: absolute;
     top: -50px; left: 50%;
@@ -162,10 +161,9 @@ body {
 
 .highlight {
     color: var(--brand-red);
-    background: linear-gradient(to top, #FEE5E5 40%, transparent 40%); /* 형광펜 느낌 변경 */
+    background: linear-gradient(to top, #FEE5E5 40%, transparent 40%);
 }
 
-/* 제품 이미지 */
 .product-stage {
     position: relative;
     margin: 0 auto 30px;
@@ -190,7 +188,7 @@ body {
 .hint-tag {
     position: absolute;
     bottom: -12px; right: -10px;
-    background: var(--bg-deep); /* 어두운 버튼 */
+    background: #5D1013;
     color: #fff;
     border: 1px solid var(--brand-gold);
     padding: 8px 16px;
@@ -201,7 +199,6 @@ body {
     cursor: pointer;
 }
 
-/* 제품 상세 텍스트 */
 .product-details {
     background: #F9F9F9;
     padding: 24px 16px;
@@ -237,11 +234,10 @@ body {
     font-weight: bold;
 }
 
-
-/* 섹션 3: 이벤트 응모 (마지막 강조) */
+/* 섹션 3: 이벤트 */
 .last-box {
     padding-bottom: 30px;
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFF8E7 100%); /* 살짝 금빛 그라데이션 */
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF8E7 100%);
 }
 
 .event-banner {
@@ -267,14 +263,13 @@ body {
     color: var(--text-black);
     font-weight: 800;
 }
-
 .event-banner p {
     margin: 0;
     font-size: 13px;
     color: #777;
 }
 
-/* 황금 버튼 */
+/* 버튼 */
 .btn-golden {
     width: 100%;
     background: var(--gold-gradient);
@@ -299,7 +294,7 @@ body {
     width: 50%; height: 100%;
     background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
     transform: skewX(-20deg);
-    animation: shine 6s infinite;
+    animation: shine 6s infinite; /* 속도 6초로 유지 */
 }
 
 @keyframes shine {
@@ -314,11 +309,10 @@ body {
     margin-top: 16px;
 }
 
-/* 하단 푸터 (배경색에 맞춰 밝게 변경) */
 footer {
     text-align: center;
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.5); /* 흰색 투명도 */
+    color: rgba(255, 255, 255, 0.5);
     padding-bottom: 40px;
     letter-spacing: 1px;
 }
