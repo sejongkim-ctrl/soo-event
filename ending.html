@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE SOO : 이벤트 응모</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 이벤트 페이지 전용 추가 스타일 */
+        .form-box {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 16px;
+            text-align: left; /* 폼은 왼쪽 정렬이 기본 */
+            margin-bottom: 24px;
+        }
+        
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--brand-red);
+            margin-bottom: 8px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        /* 1. 동의 박스 스타일 */
+        .agree-box {
+            background: #F9F9F9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .agree-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 12px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 10px;
+        }
+        .radio-label {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.2s;
+        }
+        /* 라디오 버튼 숨기고 디자인 입히기 */
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + .radio-label {
+            border-color: var(--brand-red);
+            background: #FFF5F5;
+            color: var(--brand-red);
+            font-weight: 700;
+            box-shadow: 0 0 0 1px var(--brand-red);
+        }
+
+        /* 2. 제품 소개 미니 섹션 */
+        .product-mini {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #FFFCF5;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 12px;
+        }
+        .mini-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .mini-text h4 {
+            margin: 0 0 5px 0;
+            font-size: 15px;
+            color: var(--text-black);
+            font-family: 'Noto Serif KR', serif;
+        }
+        .mini-text p {
+            margin: 0;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* 3. 입력 폼 스타일 */
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-label {
+            font-size: 13px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box; /* 패딩 포함 크기 계산 */
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--brand-gold);
+            box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
+        }
+        .address-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #eee;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <span class="brand-logo">THE SOO</span>
+            <span class="header-line"></span>
+        </header>
+
+        <form id="submit-form" class="content-box">
+            <h2 class="title-serif" style="font-size: 22px; margin-bottom: 30px;">수[壽] 한약<br>순금 1돈 이벤트 응모</h2>
+
+            <div class="input-group">
+                <span class="section-label">01. 안내사항 확인</span>
+                <div class="agree-box">
+                    <p class="agree-text">
+                        [개인정보 수집 및 마케팅 활용 동의]<br>
+                        이벤트 당첨 안내 및 브랜드의 혜택/정보 수신을 위해 제세공과금 발생 고지 및 연락처 수집에 동의합니다.
+                    </p>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="agree" value="yes" required>
+                            <div class="radio-label">동의합니다 (예)</div>
+                        </label>
+                        <label>
+                            <input type="radio" name="agree" value="no">
+                            <div class="radio-label">동의하지 않습니다</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group" style="margin-top: 30px;">
+                <span class="section-label">02. 2026 설날 선물 제안</span>
+                <div class="product-mini">
+                    <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
+                    <div class="mini-text">
+                        <h4>황제의 보약, 공진단</h4>
+                        <p>처방 받았던 제품! 전문 한의사의 1:1 밀착 상담을 받아보세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group" style="margin-top: 30px;">
+                <span class="section-label">03. 배송 정보 입력</span>
+                
+                <div class="input-group">
+                    <label class="input-label">이름</label>
+                    <input type="text" name="name" class="input-field" placeholder="성함을 입력해주세요" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">휴대전화</label>
+                    <input type="tel" name="phone" class="input-field" placeholder="010-0000-0000" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">주소</label>
+                    <input type="text" name="address" class="input-field" placeholder="경품을 수령하실 주소를 입력해주세요" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-golden" id="submit-btn">
+                <span class="shiny"></span>
+                응모 완료하기
+            </button>
+            <p class="footer-notice" style="margin-top: 10px;">*정보 오기재로 인한 불이익은 책임지지 않습니다.</p>
+        </form>
+
+        <footer>
+            <p>© 2026 SOO BRAND. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // 👇👇 여기에 아까 복사한 '구글 웹 앱 URL'을 따옴표 안에 넣어주세요! 👇👇
+        const scriptURL = "https://script.google.com/macros/s/아이디/exec"; 
+
+        const form = document.forms['submit-form'];
+        const btn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // 1. 동의 여부 체크
+            const agreeValue = form.querySelector('input[name="agree"]:checked').value;
+            if(agreeValue === 'no') {
+                alert("이벤트 응모를 위해서는 동의가 필요합니다.");
+                return;
+            }
+
+            // 2. 버튼 로딩 중 처리 (중복 클릭 방지)
+            btn.innerHTML = "접수 중입니다...";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+
+            // 3. 데이터 전송 (AJAX)
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                alert("🎉 응모가 정상적으로 완료되었습니다!\n담당자가 확인 후 연락드리겠습니다.");
+                // 완료 후 이동할 페이지가 있다면 여기에 작성 (예: window.location.href = 'end.html')
+                // 지금은 그냥 새로고침
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+                btn.innerHTML = "응모 완료하기";
+                btn.disabled = false;
+                btn.style.opacity = "1";
+            });
+        });
+    </script>
+</body>
+</html>
