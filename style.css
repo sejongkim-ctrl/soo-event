@@ -327,41 +327,49 @@ footer {
     letter-spacing: 1px;
 }
 /* =========================================
-   모바일 최적화 및 텍스트 줄바꿈 방지 패치
+   모바일 최적화 및 텍스트 줄바꿈 방지 패치 (업데이트 완료)
    ========================================= */
 
 /* 1. 한국어 단어 단위 줄바꿈 설정 (글자가 중간에 뚝 끊기는 것 방지) */
 .check-list li,
 .event-banner p,
 .desc-text,
-.detail-title {
+.detail-title,
+.event-banner h3 { /* h3(이벤트 타이틀) 추가 */
     word-break: keep-all; /* 단어 중간에 줄바꿈 금지 */
     word-wrap: break-word;
 }
 
 /* 2. 체크 아이콘 찌그러짐 방지 */
 .check-icon {
-    flex-shrink: 0; /* 공간이 좁아도 아이콘 크기는 줄어들지 않음 */
+    flex-shrink: 0;
 }
 
 /* 3. 작은 화면(아이폰 미니, SE 등) 전용 맞춤 설정 */
 @media screen and (max-width: 380px) {
     
-    /* 체크리스트 폰트 사이즈 살짝 축소 & 자간 좁힘 */
+    /* [수정 1] 체크리스트 폰트 축소 */
     .check-list li {
-        font-size: 13px !important; /* 기존 14px -> 13px */
-        letter-spacing: -0.5px;     /* 자간을 좁혀서 한 줄에 더 많이 들어가게 함 */
+        font-size: 13px !important;
+        letter-spacing: -0.5px;
+    }
+
+    /* [수정 2] 트로피 타이틀 한 줄로 맞추기 (폰트 대폭 축소) */
+    .event-banner h3 {
+        font-size: 15px !important; /* 기존 19px -> 15px로 줄임 */
+        letter-spacing: -0.5px;     /* 자간을 좁혀서 공간 확보 */
+        white-space: nowrap;        /* 강제로 한 줄 유지 */
     }
 
     /* 이벤트 설명 텍스트 축소 */
     .event-banner p {
-        font-size: 12px !important; /* 기존 13px -> 12px */
-        letter-spacing: -0.3px;
+        font-size: 12px !important;
+        letter-spacing: -0.5px;
     }
 
-    /* 컨텐츠 박스 좌우 여백을 조금 줄여서 글자 공간 확보 */
+    /* 컨텐츠 박스 좌우 여백 축소 */
     .content-box {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
     }
 }
