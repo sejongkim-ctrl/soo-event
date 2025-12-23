@@ -273,9 +273,10 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-golden" id="submit-btn">
-                <span class="shiny"></span>
-                응모 완료하기
+            <button type="button" class="btn-golden" id="submit-btn" onclick="submitForm()">
+                            <span class="shiny"></span>
+                            응모 완료하기
+            </button>
             </button>
             <p class="footer-notice" style="margin-top: 10px;">*정보 오기재로 인한 불이익은 책임지지 않습니다.</p>
         </form>
@@ -289,72 +290,72 @@
   <script>
         // 👇👇 [주의] 아까 만드신 본인의 구글 앱스 스크립트 주소를 꼭 다시 넣어주세요! 👇👇
         const scriptURL = "https://script.google.com/macros/s/AKfycbx7ZUQ_ImrhKiGTEPbX2G9cbGMOCvSr0V8V4gsrtOscwjgdEwjlVgoYtnHns--wdjg4FQ/exec"; 
-        // [기능 1] 클릭 추적 및 이동 함수
+        // [기능 1] 클릭 추적 (상품 클릭 시)
         function trackClickAndGo() {
             var input = document.getElementById('is_clicked_input');
             if(input) {
                 input.value = "O";
-                // 팝업 차단 방지를 위해 약간의 지연 후 이동할 수도 있으나, 기본 방식 유지
-                window.open("https://thesoo.co.kr/product/detail.html", "_blank");
+                window.open("https://thesoo.co/", "_blank");
             }
         }
 
-        // [핵심 수정] 폼을 찾는 방식을 가장 안전한 ID 방식으로 변경
-        const form = document.getElementById('submit-form');
-        const btn = document.getElementById('submit-btn');
+        // [기능 2] 폼 제출 처리 (핵심 수정)
+        function submitForm() {
+            const form = document.getElementById('submit-form');
+            const btn = document.getElementById('submit-btn');
 
-        // 폼이 정상적으로 있는지 확인 후 실행
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                // 1. 가장 먼저 '새로고침(제출)'을 막습니다. (내용 삭제 방지)
-                e.preventDefault();
+            // 1. 동의 여부 체크 (가장 먼저 실행)
+            // 라디오 버튼 중 체크된 녀석을 찾습니다.
+            const agreeInput = document.querySelector('input[name="agree"]:checked');
+
+            // 1-1. 아무것도 선택하지 않았거나(null), '동의하지 않음(no)'인 경우
+            if (!agreeInput || agreeInput.value === 'no') {
+                alert("1. 안내사항 동의가 필요합니다.");
                 
-                // 2. 동의 여부 체크
-                const agreeInput = form.querySelector('input[name="agree"]:checked');
-
-                // 2-1. 아무것도 선택하지 않았거나, '동의하지 않음'인 경우
-                if (!agreeInput || agreeInput.value === 'no') {
-                    alert("1. 안내사항 동의가 필요합니다.");
-                    
-                    // 약관 박스 위치로 부드럽게 이동
-                    const agreeSection = document.querySelector('.agree-scroll-box');
-                    if(agreeSection) {
-                        agreeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                    return; // 여기서 멈춤 (전송 안 함)
+                // 약관 박스 위치 찾아서 스크롤 이동
+                const agreeSection = document.querySelector('.agree-scroll-box');
+                if(agreeSection) {
+                    agreeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
+                return; // ✋ 여기서 함수 종료! (데이터 전송 안 함, 내용 유지됨)
+            }
 
-                // 3. 통과되면 버튼 잠금 (중복 클릭 방지)
-                if(btn) {
-                    btn.innerHTML = "접수 중입니다...";
-                    btn.disabled = true;
-                }
+            // --- 여기 밑으로는 동의한 사람만 내려옵니다 ---
 
-                // 4. 데이터 전송
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
+            // 2. 필수 입력값(이름, 번호, 주소) 비었는지 체크
+            const name = form.querySelector('input[name="name"]').value;
+            const phone = form.querySelector('input[name="phone"]').value;
+            const address = form.querySelector('input[name="address"]').value;
 
-                fetch(scriptURL, { 
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(data)
-                })
-                .then(() => {
-                    alert("🎉 응모가 완료되었습니다!\n(담당자가 확인 후 연락드립니다)");
-                    window.location.reload();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert("오류가 발생했습니다. 다시 시도해주세요.");
-                    if(btn) {
-                        btn.disabled = false;
-                        btn.innerHTML = "응모 완료하기";
-                    }
-                });
+            if(!name || !phone || !address) {
+                alert("이름, 연락처, 주소를 모두 입력해주세요.");
+                return;
+            }
+
+            // 3. 버튼 잠금 (중복 클릭 방지)
+            btn.innerHTML = "접수 중입니다...";
+            btn.disabled = true;
+
+            // 4. 데이터 전송 (AJAX)
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch(scriptURL, { 
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                alert("🎉 응모가 완료되었습니다!\n(담당자가 확인 후 연락드립니다)");
+                window.location.reload(); // 성공했을 때만 새로고침
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("오류가 발생했습니다. 다시 시도해주세요.");
+                btn.disabled = false;
+                btn.innerHTML = "응모 완료하기";
             });
-        } else {
-            console.error("오류: 'submit-form' 아이디를 가진 폼을 찾을 수 없습니다.");
         }
     </script>
 </body>
