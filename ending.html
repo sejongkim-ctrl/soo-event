@@ -231,28 +231,27 @@
                 </div>
             </div>
 
-            <div class="input-group" style="margin-top: 30px;">
-            <div class="input-group" style="margin-top: 35px;">
-                            <span class="section-label">02. 2026 적토마를 위한 활력 선물 제안</span>
-                            
-                            <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
-            
-                            <div class="product-mini clickable-box" onclick="trackClickAndGo()">
-                                <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
-                                <div class="mini-text">
-                                    <h4>공진단계의 까르x에</h4>
-                                    <p>처방 받았던 제품! 전문 한의사의<br>1:1 밀착 상담을 받아보세요.</p>
-                                    <span class="click-guide">👆 터치하여 자세히 보기</span>
-                                </div>
-                            </div>
-            
-                            <div class="badge-container">
-                                <div class="chance-badge">
-                                    <span class="badge-icon">🍀</span>
-                                    <span>박스를 클릭하면 <strong>당첨확률 UP!</strong></span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="input-group" style="margin-top: 35px;">
+                <span class="section-label">02. 2026 적토마를 위한 활력 선물 제안</span>
+                
+                <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
+
+                <div class="product-mini clickable-box" onclick="trackClickAndGo()">
+                    <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
+                    <div class="mini-text">
+                        <h4>공진단계의 까르x에</h4>
+                        <p>처방 받았던 제품! 전문 한의사의<br>1:1 밀착 상담을 받아보세요.</p>
+                        <span class="click-guide">👆 터치하여 자세히 보기</span>
+                    </div>
+                </div>
+
+                <div class="badge-container">
+                    <div class="chance-badge">
+                        <span class="badge-icon">🍀</span>
+                        <span>박스를 클릭하면 <strong>당첨확률 UP!</strong></span>
+                    </div>
+                </div>
+            </div>
 
             <div class="input-group" style="margin-top: 30px;">
                 <span class="section-label">03. 응모자 정보 입력</span>
@@ -290,39 +289,39 @@
   <script>
         // 👇👇 [주의] 아까 만드신 본인의 구글 앱스 스크립트 주소를 꼭 다시 넣어주세요! 👇👇
         const scriptURL = "https://script.google.com/macros/s/AKfycbx7ZUQ_ImrhKiGTEPbX2G9cbGMOCvSr0V8V4gsrtOscwjgdEwjlVgoYtnHns--wdjg4FQ/exec"; 
-        // [기능 1] 클릭 추적 (상품 클릭 시)
+        // [기능 1] 상품 클릭 시 새 창 열기 + 데이터 기록
         function trackClickAndGo() {
             var input = document.getElementById('is_clicked_input');
             if(input) {
-                input.value = "O";
-                window.open("https://thesoo.co/", "_blank");
+                input.value = "O"; // 클릭했음(O)으로 변경
             }
+            // 새 창 열기
+            window.open("https://thesoo.co.kr/product/detail.html", "_blank");
         }
 
-        // [기능 2] 폼 제출 처리 (핵심 수정)
+        // [기능 2] 폼 제출 및 검증 (스크롤 수정됨)
         function submitForm() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
 
-            // 1. 동의 여부 체크 (가장 먼저 실행)
-            // 라디오 버튼 중 체크된 녀석을 찾습니다.
+            // 1. 동의 여부 체크
             const agreeInput = document.querySelector('input[name="agree"]:checked');
 
-            // 1-1. 아무것도 선택하지 않았거나(null), '동의하지 않음(no)'인 경우
+            // 동의를 안 했거나(null), '동의하지 않음(no)'을 선택한 경우
             if (!agreeInput || agreeInput.value === 'no') {
                 alert("1. 안내사항 동의가 필요합니다.");
                 
-                // 약관 박스 위치 찾아서 스크롤 이동
-                const agreeSection = document.querySelector('.agree-scroll-box');
-                if(agreeSection) {
-                    agreeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // 👇 [수정됨] 스크롤 이동 대상을 'agree-box'를 감싸는 부모 요소로 변경 (더 확실함)
+                // 1번 섹션(안내사항)의 제목 부분을 찾아서 이동
+                const firstSection = document.querySelector('.section-label'); 
+                
+                if(firstSection) {
+                    firstSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-                return; // ✋ 여기서 함수 종료! (데이터 전송 안 함, 내용 유지됨)
+                return; // 전송 중단
             }
 
-            // --- 여기 밑으로는 동의한 사람만 내려옵니다 ---
-
-            // 2. 필수 입력값(이름, 번호, 주소) 비었는지 체크
+            // 2. 필수 정보 입력 체크
             const name = form.querySelector('input[name="name"]').value;
             const phone = form.querySelector('input[name="phone"]').value;
             const address = form.querySelector('input[name="address"]').value;
@@ -332,11 +331,11 @@
                 return;
             }
 
-            // 3. 버튼 잠금 (중복 클릭 방지)
+            // 3. 전송 시작 (버튼 잠금)
             btn.innerHTML = "접수 중입니다...";
             btn.disabled = true;
 
-            // 4. 데이터 전송 (AJAX)
+            // 4. 구글 시트로 데이터 전송
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
@@ -348,11 +347,11 @@
             })
             .then(() => {
                 alert("🎉 응모가 완료되었습니다!\n(담당자가 확인 후 연락드립니다)");
-                window.location.reload(); // 성공했을 때만 새로고침
+                window.location.reload(); // 성공 시 새로고침
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert("오류가 발생했습니다. 다시 시도해주세요.");
+                alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
                 btn.disabled = false;
                 btn.innerHTML = "응모 완료하기";
             });
