@@ -58,6 +58,30 @@
         }
         .chance-badge strong { color: #D32F2F; font-weight: 800; }
         @keyframes bounce-badge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        /* [NEW] 01. 02. 03. 번호와 제목 꾸미기 */
+        .section-header-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        /* 번호 스타일 (금색, 작게) */
+        .step-num {
+            display: block; /* 줄바꿈 기능 */
+            font-size: 14px;
+            font-weight: 700;
+            color: #C5A059; /* 브랜드 골드색 */
+            margin-bottom: 5px;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        /* 제목 스타일 (검정, 크고 진하게) */
+        .step-title {
+            display: block; /* 줄바꿈 기능 */
+            font-size: 20px; /* 폰트 크기 키움 */
+            font-weight: 700;
+            color: #1A1A1A;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +94,11 @@
         <form id="submit-form" class="content-box">
             <h2 class="title-serif" style="font-size: 22px; margin-bottom: 30px;">수[壽] 한약<br>순금 1돈 이벤트 응모</h2>
 
-            <div class="input-group" id="section-1-target"> <span class="section-label">01. 안내사항 확인</span>
+            <div class="input-group" id="section-1-target">
+                <div class="section-header-group">
+                <span class="step-num">01.</span>
+                <span class="step-title">안내사항 확인</span>
+            </div>
                 <div class="agree-box">
                     <div class="agree-scroll-box">
                         <strong>[개인정보 수집 및 마케팅 활용 동의]</strong><br><br>
@@ -101,7 +129,10 @@
             </div>
 
             <div class="input-group" style="margin-top: 35px;">
-                <span class="section-label">02. 2026 적토마를 위한 활력 선물 제안</span>
+                <div class="section-header-group">
+                <span class="step-num">02.</span>응
+                <span class="step-title">2026 적토마를 위한<br>활력 선물 제안</span>
+            </div>
                 
                 <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
 
@@ -123,7 +154,10 @@
             </div>
 
             <div class="input-group" style="margin-top: 30px;">
-                <span class="section-label">03. 응모자 정보 입력</span>
+                <div class="section-header-group">
+                <span class="step-num">03.</span>
+                <span class="step-title">응모자 정보 입력</span>
+            </div>
                 
                 <div class="input-group">
                     <label class="input-label">이름</label>
