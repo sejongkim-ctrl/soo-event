@@ -109,12 +109,12 @@ const resultData = {
     // 기본값 (에러 방지용)
     "default": {
         title: "2026년 당신의 운세는?",
-        img: "./images/result_horse.jpg", 
+        img: "./images/result_quiz.jpg", 
         desc: "테스트 결과를 불러오지 못했습니다. 다시 시도해주세요.",
         productSub: "지친 나를 위한",
         productTitle: "황제 처방",
         productCopy: "\"2026년, 당신에게 가장 귀한<br>기력을 선물하세요\"",
-        productImg: "./images/product_main.jpg", // 기본 제품 사진
+        productImg: "./images/product_horse.jpg", // 기본 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     }
 };
