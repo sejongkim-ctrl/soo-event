@@ -1,17 +1,17 @@
-// 1. 결과 데이터 세팅 (8가지 유형 + 개별 구매 링크)
+// 1. 결과 데이터 세팅 (8가지 유형 + 맞춤형 제품 이미지 추가)
 const resultData = {
     // 🐴 1. 적토마
     "horse": {
+        // [상단 결과 카드용]
         title: "폭주하는 2026 적토마",
         img: "./images/result_horse.jpg",
         desc: "브레이크 고장 난 트럭처럼 달리시네요! 열정은 넘치지만 엔진 과열(방전)이 우려됩니다. 잠시 멈춰서 최고급 연료를 채워주세요.",
         
-        // 처방전 섹션 멘트
+        // [하단 처방전 섹션용]
         productSub: "지친 나, 그리고 부모님을 위한",
         productTitle: "황제 처방",
         productCopy: "\"폭주하는 적토마에게 필요한 건<br>황제의 '브레이크' 공진단입니다\"",
-        
-        // 👇 [중요] 적토마용 제품 구매 링크 (수정해주세요)
+        productImg: "./images/product_horse.jpg",  // 👈 [NEW] 적토마용 제품 사진 (파일명 확인!)
         productUrl: "https://thesoo.co/about/gongjindan" 
     },
 
@@ -24,8 +24,7 @@ const resultData = {
         productSub: "꾸준한 당신을 지켜줄",
         productTitle: "지속가능 처방",
         productCopy: "\"오래가는 거북이처럼,<br>끝까지 지치지 않는 힘을 선물하세요\"",
-        
-        // 👇 거북이용 제품 구매 링크
+        productImg: "./images/product_turtle.jpg", // 👈 [NEW] 거북이용 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
@@ -38,8 +37,7 @@ const resultData = {
         productSub: "방전된 당신을 살려낼",
         productTitle: "생존 처방",
         productCopy: "\"내일의 체력을 당겨쓴 당신,<br>이제 진짜 '원기'를 채워넣을 때입니다\"",
-        
-        // 👇 좀비용 제품 구매 링크
+        productImg: "./images/product_zombie.jpg", // 👈 [NEW] 좀비용 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
@@ -52,8 +50,7 @@ const resultData = {
         productSub: "과부하 걸린 뇌를 위한",
         productTitle: "에너지 처방",
         productCopy: "\"스마트한 당신의 머리에<br>강력한 '사향'의 에너지를 공급하세요\"",
-        
-        // 👇 AI용 제품 구매 링크
+        productImg: "./images/product_ai.jpg", // 👈 [NEW] AI용 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
@@ -66,8 +63,7 @@ const resultData = {
         productSub: "자주 아픈 당신을 위한",
         productTitle: "강철 처방",
         productCopy: "\"유리 같은 체력을 강철처럼!<br>면역력을 위한 최고의 선택입니다\"",
-        
-        // 👇 개복치용 제품 구매 링크
+        productImg: "./images/product_sunfish.jpg", // 👈 [NEW] 개복치용 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
@@ -80,8 +76,7 @@ const resultData = {
         productSub: "무기력한 당신을 깨울",
         productTitle: "활력 처방",
         productCopy: "\"귀찮음을 이기는 힘,<br>단 한 알로 활력을 깨워보세요\"",
-        
-        // 👇 나무늘보용 제품 구매 링크
+        productImg: "./images/product_sloth.jpg", // 👈 [NEW] 나무늘보용 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
@@ -94,8 +89,7 @@ const resultData = {
         productSub: "성공을 노리는 당신께",
         productTitle: "집중 처방",
         productCopy: "\"목표를 쟁취하는 힘,<br>흐트러짐 없는 집중력을 선물합니다\"",
-        
-        // 👇 맹수용 제품 구매 링크
+        productImg: "./images/product_eagle.jpg", // 👈 [NEW] 맹수용 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
@@ -108,8 +102,7 @@ const resultData = {
         productSub: "완벽한 당신을 유지할",
         productTitle: "완벽 처방",
         productCopy: "\"빛나는 갓생을 위해,<br>속부터 꽉 채우는 프리미엄을 더하세요\"",
-        
-        // 👇 유니콘용 제품 구매 링크
+        productImg: "./images/product_unicorn.jpg", // 👈 [NEW] 유니콘용 제품 사진
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
@@ -121,48 +114,60 @@ const resultData = {
         productSub: "지친 나를 위한",
         productTitle: "황제 처방",
         productCopy: "\"2026년, 당신에게 가장 귀한<br>기력을 선물하세요\"",
-        productUrl: "https://thesoo.co/about/gongjindan" // 기본 몰 주소
+        productImg: "./images/product_main.jpg", // 기본 제품 사진
+        productUrl: "https://thesoo.co/about/gongjindan"
     }
 };
 
-// 전역 변수로 현재 데이터를 저장 (버튼 클릭 시 사용)
+// 전역 변수로 현재 데이터를 저장
 let currentData = null;
 
-// 2. 페이지 로드 시 URL 파라미터 확인 및 콘텐츠 교체
+// 2. 페이지 로드 시 콘텐츠 교체 (이미지 교체 로직 포함)
 window.onload = function() {
     const params = new URLSearchParams(window.location.search);
     const type = params.get('type'); 
     
-    // 데이터 찾아서 전역 변수에 저장
+    // 데이터 찾기
     currentData = resultData[type] || resultData["default"];
 
     if (currentData) {
-        // [섹션 1] 결과 화면 교체
-        document.getElementById('result-title').innerText = currentData.title;
-        document.getElementById('result-img').src = currentData.img;
-        document.getElementById('result-desc').innerText = currentData.desc;
+        // [섹션 1] 결과 화면 교체 (상단)
+        const resultTitle = document.getElementById('result-title');
+        const resultImg = document.getElementById('result-img');
+        const resultDesc = document.getElementById('result-desc');
 
-        // [섹션 2] 처방전 멘트 교체
-        document.getElementById('product-sub').innerText = currentData.productSub;
-        document.getElementById('product-title').innerHTML = currentData.productTitle;
-        document.getElementById('product-copy').innerHTML = currentData.productCopy;
+        if(resultTitle) resultTitle.innerText = currentData.title;
+        if(resultImg) resultImg.src = currentData.img;
+        if(resultDesc) resultDesc.innerText = currentData.desc;
+
+        // [섹션 2] 처방전 화면 교체 (하단) - ⭐여기가 핵심 수정됨⭐
+        const productSub = document.getElementById('product-sub');
+        const productTitle = document.getElementById('product-title');
+        const productCopy = document.getElementById('product-copy');
+        const productImgEl = document.getElementById('recommend-img'); // 2번째 섹션 이미지 ID
+
+        if(productSub) productSub.innerText = currentData.productSub;
+        if(productTitle) productTitle.innerHTML = currentData.productTitle;
+        if(productCopy) productCopy.innerHTML = currentData.productCopy;
+        
+        // 👇 제품 이미지 교체 로직
+        if(productImgEl) {
+            productImgEl.src = currentData.productImg;
+        }
     }
 };
 
-// 3. [업그레이드] 처방전 제품 보러가기 (동적 링크 이동)
+// 3. 제품 보러가기 링크 이동
 function openProductPage() {
     if (currentData && currentData.productUrl) {
-        // 현재 결과에 맞는 제품 링크로 이동
         window.open(currentData.productUrl, "_blank");
     } else {
-        // 만약 데이터가 없으면 기본 쇼핑몰로 이동
         window.open("https://thesoo.co/about/gongjindan", "_blank");
     }
 }
 
-// 4. 카카오 채널로 이동 (이벤트 응모)
+// 4. 카카오 채널 이동
 function goToKakaoChannel() {
-    // 👇 실제 카카오 채널 링크로 수정 필수!
     const kakaoChannelLink = "http://pf.kakao.com/_JReVG/friend"; 
     window.open(kakaoChannelLink, "_blank");
 }
