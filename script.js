@@ -1,120 +1,120 @@
-// 1. 결과 데이터 세팅 (8가지 유형 + 맞춤형 제품 이미지 추가)
+// 1. 결과 데이터 세팅 (8가지 유형 : 야망/낭만 + 위엄/다정 + 육체/정신)
 const resultData = {
-    // 🐴 1. 적토마
+    // [Type 1] 야망+위엄+육체 -> 불도저 (기존: horse)
     "horse": {
-        // [상단 결과 카드용]
-        title: "폭주하는 2026 적토마",
+        // 상단 결과 카드
+        title: "천하를 평정할 \"불도저 정복 군주\"",
         img: "./images/result_horse.jpg",
-        desc: "브레이크 고장 난 트럭처럼 달리시네요! 열정은 넘치지만 엔진 과열(방전)이 우려됩니다. 잠시 멈춰서 최고급 연료를 채워주세요.",
+        desc: "\"내 사전에 후진은 없다!\" 목표를 향해 돌진하는 스타일이시군요. 하지만 당신이 밖에서 전쟁을 치르는 동안, 부모님의 '무릎과 허리'는 무너지고 있습니다. 정복 전쟁도 체력이 국력! 부모님께 잃어버린 '힘'을 되찾아주세요.",
         
-        // [하단 처방전 섹션용]
-        productSub: "지친 나, 그리고 부모님을 위한",
-        productTitle: "황제 처방",
-        productCopy: "\"폭주하는 적토마에게 필요한 건<br>황제의 '브레이크' 공진단입니다\"",
-        productImg: "./images/product_horse.jpg",  // 👈 [NEW] 적토마용 제품 사진 (파일명 확인!)
+        // 하단 처방전 섹션
+        productSub: "활력 충전이 필요한 순간",
+        productTitle: "프리미엄 녹용 처방",
+        productCopy: "\"천하장사 같던 부모님께<br>잃어버린 '힘'을 되찾아주세요\"",
+        productImg: "./images/product_horse.jpg", 
         productUrl: "https://thesoo.co/about/gongjindan" 
     },
 
-    // 🐢 2. 거북이
-    "turtle": {
-        title: "뚝심 있는 황금 거북이",
-        img: "./images/result_turtle.jpg",
-        desc: "느리지만 확실하게! 꾸준함은 당신의 무기지만, 버티는 것만으로는 한계가 옵니다. 끝까지 완주할 수 있는 은은한 힘을 보충하세요.",
-        
-        productSub: "꾸준한 당신을 지켜줄",
-        productTitle: "지속가능 처방",
-        productCopy: "\"오래가는 거북이처럼,<br>끝까지 지치지 않는 힘을 선물하세요\"",
-        productImg: "./images/product_turtle.jpg", // 👈 [NEW] 거북이용 제품 사진
-        productUrl: "https://thesoo.co/about/gongjindan"
-    },
-
-    // 🧟‍♂️ 3. 좀비
-    "zombie": {
-        title: "카페인 중독 좀비",
-        img: "./images/result_zombie.jpg",
-        desc: "오늘만 사시는군요. 내일의 체력까지 가불해 쓴 당신, 카페인으로는 버틸 수 없습니다. 이제 진짜 '피(기력)'가 필요합니다.",
-        
-        productSub: "방전된 당신을 살려낼",
-        productTitle: "생존 처방",
-        productCopy: "\"내일의 체력을 당겨쓴 당신,<br>이제 진짜 '원기'를 채워넣을 때입니다\"",
-        productImg: "./images/product_zombie.jpg", // 👈 [NEW] 좀비용 제품 사진
-        productUrl: "https://thesoo.co/about/gongjindan"
-    },
-
-    // 🤖 4. AI
+    // [Type 2] 야망+위엄+정신 -> 전략가 (기존: ai)
     "ai": {
-        title: "배터리 3% 남은 AI",
+        title: "차갑지만 완벽한 \"냉철한 전략가\"",
         img: "./images/result_ai.jpg",
-        desc: "머리는 알파고인데 몸은 고철이네요. 과부하 걸리기 직전입니다! 효율적인 에너지 공급으로 시스템 종료를 막아야 합니다.",
+        desc: "\"감성보단 이성!\" 빈틈없는 계획으로 집안을 일으킬 뇌섹 군주시군요. 하지만 당신의 비상한 두뇌를 물려주신 부모님은 요즘 총기가 예전 같지 않습니다. 전략가에게 필요한 건 맑은 정신입니다.",
         
-        productSub: "과부하 걸린 뇌를 위한",
-        productTitle: "에너지 처방",
-        productCopy: "\"스마트한 당신의 머리에<br>강력한 '사향'의 에너지를 공급하세요\"",
-        productImg: "./images/product_ai.jpg", // 👈 [NEW] AI용 제품 사진
+        productSub: "흐릿해진 머리를 맑게",
+        productTitle: "공진단 두뇌 처방",
+        productCopy: "\"깜빡하는 부모님의 기억력,<br>맑은 정신을 선물하세요\"",
+        productImg: "./images/product_ai.jpg",
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // 🐟 5. 개복치
-    "sunfish": {
-        title: "바사삭 쿠크다스 개복치",
-        img: "./images/result_sunfish.jpg",
-        desc: "작은 스트레스에도 파사삭! 유리멘탈과 저질 체력을 동시에 가지셨군요. 당신에겐 아주 강력하고 단단한 기력 보호막이 필요합니다.",
-        
-        productSub: "자주 아픈 당신을 위한",
-        productTitle: "강철 처방",
-        productCopy: "\"유리 같은 체력을 강철처럼!<br>면역력을 위한 최고의 선택입니다\"",
-        productImg: "./images/product_sunfish.jpg", // 👈 [NEW] 개복치용 제품 사진
-        productUrl: "https://thesoo.co/about/gongjindan"
-    },
-
-    // 🦥 6. 나무늘보
-    "sloth": {
-        title: "이불 밖은 위험한 나무늘보",
-        img: "./images/result_sloth.jpg",
-        desc: "'다음 생에 할게...' 만사가 귀찮은 건 게으름이 아니라 체력 부족입니다. 누워만 있기엔 2026년이 너무 아깝지 않나요?",
-        
-        productSub: "무기력한 당신을 깨울",
-        productTitle: "활력 처방",
-        productCopy: "\"귀찮음을 이기는 힘,<br>단 한 알로 활력을 깨워보세요\"",
-        productImg: "./images/product_sloth.jpg", // 👈 [NEW] 나무늘보용 제품 사진
-        productUrl: "https://thesoo.co/about/gongjindan"
-    },
-
-    // 🦅 7. 맹수(독수리)
+    // [Type 3] 야망+다정+육체 -> 플렉스 황제 (기존: eagle)
     "eagle": {
-        title: "노리는 게 많은 야망 맹수",
+        title: "금은보화 뿌리는 \"플렉스(Flex) 황제\"",
         img: "./images/result_eagle.jpg",
-        desc: "목표를 향해 돌진하는 최상위 포식자! 하지만 사냥하느라 기력을 다 쓰셨군요. 재충전 없는 사냥은 실패할 뿐입니다.",
+        desc: "\"엄마 이거 사!\" 성공의 맛을 함께 나누는 효도왕이시군요. 하지만 부모님은 좋은 옷을 입고 나갈 '기운'이 없으십니다. 명품 가방보다 명품 근육! 겉치장보다 속부터 채워야 할 때입니다.",
         
-        productSub: "성공을 노리는 당신께",
-        productTitle: "집중 처방",
-        productCopy: "\"목표를 쟁취하는 힘,<br>흐트러짐 없는 집중력을 선물합니다\"",
-        productImg: "./images/product_eagle.jpg", // 👈 [NEW] 맹수용 제품 사진
+        productSub: "명품 가방보다 명품 근육",
+        productTitle: "관절/근육 강화 처방",
+        productCopy: "\"부모님의 뼈와 근육을 채우는 것,<br>그것이 진짜 효도 플렉스입니다\"",
+        productImg: "./images/product_eagle.jpg",
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // 🦄 8. 유니콘
+    // [Type 4] 야망+다정+정신 -> 세종대왕 (기존: turtle)
+    "turtle": {
+        title: "덕으로 다스리는 \"성군 세종대왕\"",
+        img: "./images/result_turtle.jpg",
+        desc: "능력과 인성을 겸비한 완벽한 K-장녀/장남! 자식 걱정은 덜었지만, 부모님은 '노화'라는 섭리 앞에서 작아지십니다. 성군의 덕목은 평온함! 부모님의 불안한 심신을 편안하게 다스려주세요.",
+        
+        productSub: "불안한 심신을 편안하게",
+        productTitle: "심신안정 우황 처방",
+        productCopy: "\"작은 일에도 놀라시는 부모님께<br>평온한 휴식을 선물하세요\"",
+        productImg: "./images/product_turtle.jpg",
+        productUrl: "https://thesoo.co/about/gongjindan"
+    },
+
+    // [Type 5] 낭만+위엄+육체 -> 선비 (기존: unicorn)
     "unicorn": {
-        title: "갓생 사는 유니콘",
+        title: "바람처럼 자유로운 \"독야청청 선비\"",
         img: "./images/result_unicorn.jpg",
-        desc: "일도 취미도 완벽! 남들이 볼 땐 환상적이지만, 속은 텅 비어가고 있진 않나요? 빛나는 겉모습만큼 속도 꽉 채워야 할 때입니다.",
+        desc: "\"내 인생은 나의 것.\" 독립심 강한 마이웨이 군주시군요. 당신이 자유를 즐기는 사이, 부모님은 '노쇠'와 싸우고 계십니다. 자유롭게 다니시려면 튼튼한 다리가 필수입니다.",
         
-        productSub: "완벽한 당신을 유지할",
-        productTitle: "완벽 처방",
-        productCopy: "\"빛나는 갓생을 위해,<br>속부터 꽉 채우는 프리미엄을 더하세요\"",
-        productImg: "./images/product_unicorn.jpg", // 👈 [NEW] 유니콘용 제품 사진
+        productSub: "여행을 위한 기초 체력",
+        productTitle: "진한 쌍화/대보탕 처방",
+        productCopy: "\"부모님의 여행 메이트가 되어줄<br>튼튼한 다리를 선물하세요\"",
+        productImg: "./images/product_unicorn.jpg",
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // 기본값 (에러 방지용)
+    // [Type 6] 낭만+위엄+정신 -> 도인 (기존: sloth)
+    "sloth": {
+        title: "속세를 떠난 \"안빈낙도 도인\"",
+        img: "./images/result_sloth.jpg",
+        desc: "돈보다는 워라밸, 평화주의자시군요. \"건강한 게 최고\"라지만, 부모님의 진짜 위기는 '무기력함'입니다. 도인에게 필요한 건 활기찬 에너지! 축 처진 기분에 생기를 불어넣어 주세요.",
+        
+        productSub: "무기력 타파, 생기 충전",
+        productTitle: "활력 앰플 경옥고",
+        productCopy: "\"축 처진 부모님의 하루에<br>생기 넘치는 에너지를 채워주세요\"",
+        productImg: "./images/product_sloth.jpg",
+        productUrl: "https://thesoo.co/about/gongjindan"
+    },
+
+    // [Type 7] 낭만+다정+육체 -> 풍류왕 (기존: zombie)
+    "zombie": {
+        title: "춤추고 노래하는 \"흥부자 풍류왕\"",
+        img: "./images/result_zombie.jpg",
+        desc: "\"인생 뭐 있어? 즐겨!\" 부모님과 친구 같은 분위기 메이커시군요. 하지만 당신과 놀아주시느라 부모님 체력은 방전 직전! 노는 것도 체력전입니다.",
+        
+        productSub: "밤새 놀아도 지치지 않게",
+        productTitle: "고농축 홍삼 에너지",
+        productCopy: "\"마음은 청춘인 부모님께<br>지치지 않는 강철 체력을!\"",
+        productImg: "./images/product_zombie.jpg",
+        productUrl: "https://thesoo.co/about/gongjindan"
+    },
+
+    // [Type 8] 낭만+다정+정신 -> 감성군주 (기존: sunfish)
+    "sunfish": {
+        title: "눈물 많은 \"유리멘탈 감성 군주\"",
+        img: "./images/result_sunfish.jpg",
+        desc: "부모님 흰머리만 봐도 눈물이 나는 감성파시군요. 감정을 너무 공유하다 보니 부모님의 우울감이 당신에게도 전염됩니다. 두 분 모두에게 마음의 보양이 필요합니다.",
+        
+        productSub: "예민해진 신경을 부드럽게",
+        productTitle: "심신 위로 보양 처방",
+        productCopy: "\"슬픔은 나누고 기쁨은 채우는<br>따뜻한 위로를 선물하세요\"",
+        productImg: "./images/product_sunfish.jpg",
+        productUrl: "https://thesoo.co/about/gongjindan"
+    },
+
+    // [기본값] 에러 방지용
     "default": {
-        title: "2026년 당신의 운세는?",
-        img: "./images/result_quiz.jpg", 
+        title: "2026년 당신의 통치 스타일은?",
+        img: "./images/result_horse.jpg", 
         desc: "테스트 결과를 불러오지 못했습니다. 다시 시도해주세요.",
         productSub: "지친 나를 위한",
         productTitle: "황제 처방",
         productCopy: "\"2026년, 당신에게 가장 귀한<br>기력을 선물하세요\"",
-        productImg: "./images/product_horse.jpg", // 기본 제품 사진
+        productImg: "./images/product_main.jpg",
         productUrl: "https://thesoo.co/about/gongjindan"
     }
 };
@@ -140,7 +140,7 @@ window.onload = function() {
         if(resultImg) resultImg.src = currentData.img;
         if(resultDesc) resultDesc.innerText = currentData.desc;
 
-        // [섹션 2] 처방전 화면 교체 (하단) - ⭐여기가 핵심 수정됨⭐
+        // [섹션 2] 처방전 화면 교체 (하단)
         const productSub = document.getElementById('product-sub');
         const productTitle = document.getElementById('product-title');
         const productCopy = document.getElementById('product-copy');
@@ -150,7 +150,7 @@ window.onload = function() {
         if(productTitle) productTitle.innerHTML = currentData.productTitle;
         if(productCopy) productCopy.innerHTML = currentData.productCopy;
         
-        // 👇 제품 이미지 교체 로직
+        // 제품 이미지 교체 로직
         if(productImgEl) {
             productImgEl.src = currentData.productImg;
         }
