@@ -172,7 +172,20 @@ function goToKakaoChannel() {
     window.open(kakaoChannelLink, "_blank");
 }
 
-// 5. 공유하기
+// 5. 공유하기 (링크 복사 기능)
 function shareKakao() {
-    alert("링크가 복사되었습니다!");
+    // 👇 [수정] 여기에 복사되길 원하는 '사이트 주소'를 입력하세요!
+    // 예: "https://thesoo.co.kr/event" 또는 window.location.href (현재 페이지 주소)
+    const shareUrl = "https://smore.im/quiz/SfDyMyvfkK"; 
+
+    // 클립보드에 주소 복사하기
+    navigator.clipboard.writeText(shareUrl)
+        .then(() => {
+            alert("링크가 복사되었습니다! \n가족, 친구에게 공유해보세요 🔗");
+        })
+        .catch(err => {
+            // 복사 실패 시 (보안 설정 등으로 인해)
+            alert("링크 복사에 실패했습니다. URL을 직접 복사해주세요.");
+            console.error('URL 복사 실패:', err);
+        });
 }
