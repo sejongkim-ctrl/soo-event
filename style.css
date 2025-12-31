@@ -83,6 +83,12 @@ body {
     line-height: 1.3;
 }
 
+/* style.css 파일에 추가 */
+#result-title {
+    word-break: keep-all; /* 단어 중간에 줄바꿈 금지 (한글 최적화) */
+    line-height: 1.3;     /* 줄 간격 살짝 조정 */
+}
+
 .frame-wrapper {
     padding: 8px;
     border: 1px solid rgba(130, 24, 28, 0.1);
