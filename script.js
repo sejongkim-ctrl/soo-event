@@ -1,8 +1,7 @@
-// 1. 결과 데이터 세팅 (제목 줄바꿈 <br> 적용됨)
+// 1. 결과 데이터 세팅 (URL 파라미터 a~h 로 변경)
 const resultData = {
-    // [Type 1] 야망+위엄+육체 -> 불도저
-    "horse": {
-        // ⭐ 수정됨: <br> 태그로 줄바꿈 위치 고정
+    // [a] 불도저 (기존 horse)
+    "a": {
         title: "천하를 평정할<br>\"불도저 정복 군주\"", 
         img: "./images/result_horse.jpg",
         desc: "\"내 사전에 후진은 없다!\" 목표를 향해 돌진하는 스타일이시군요. 하지만 당신이 밖에서 전쟁을 치르는 동안, 부모님의 '무릎과 허리'는 무너지고 있습니다. 정복 전쟁도 체력이 국력! 부모님께 잃어버린 '힘'을 되찾아주세요.",
@@ -14,8 +13,8 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan" 
     },
 
-    // [Type 2] 야망+위엄+정신 -> 전략가
-    "ai": {
+    // [b] 전략가 (기존 ai)
+    "b": {
         title: "차갑지만 완벽한<br>\"냉철한 전략가\"",
         img: "./images/result_ai.jpg",
         desc: "\"감성보단 이성!\" 빈틈없는 계획으로 집안을 일으킬 뇌섹 군주시군요. 하지만 당신의 비상한 두뇌를 물려주신 부모님은 요즘 총기가 예전 같지 않습니다. 전략가에게 필요한 건 맑은 정신입니다.",
@@ -27,8 +26,8 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // [Type 3] 야망+다정+육체 -> 플렉스 황제
-    "eagle": {
+    // [c] 플렉스 (기존 eagle)
+    "c": {
         title: "금은보화 뿌리는<br>\"플렉스(Flex) 황제\"",
         img: "./images/result_eagle.jpg",
         desc: "\"엄마 이거 사!\" 성공의 맛을 함께 나누는 효도왕이시군요. 하지만 부모님은 좋은 옷을 입고 나갈 '기운'이 없으십니다. 명품 가방보다 명품 근육! 겉치장보다 속부터 채워야 할 때입니다.",
@@ -40,8 +39,8 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // [Type 4] 야망+다정+정신 -> 세종대왕
-    "turtle": {
+    // [d] 성군 (기존 turtle)
+    "d": {
         title: "덕으로 다스리는<br>\"성군 세종대왕\"",
         img: "./images/result_turtle.jpg",
         desc: "능력과 인성을 겸비한 완벽한 K-장녀/장남! 자식 걱정은 덜었지만, 부모님은 '노화'라는 섭리 앞에서 작아지십니다. 성군의 덕목은 평온함! 부모님의 불안한 심신을 편안하게 다스려주세요.",
@@ -53,8 +52,8 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // [Type 5] 낭만+위엄+육체 -> 선비
-    "unicorn": {
+    // [e] 선비 (기존 unicorn)
+    "e": {
         title: "바람처럼 자유로운<br>\"독야청청 선비\"",
         img: "./images/result_unicorn.jpg",
         desc: "\"내 인생은 나의 것.\" 독립심 강한 마이웨이 군주시군요. 당신이 자유를 즐기는 사이, 부모님은 '노쇠'와 싸우고 계십니다. 자유롭게 다니시려면 튼튼한 다리가 필수입니다.",
@@ -66,8 +65,8 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // [Type 6] 낭만+위엄+정신 -> 도인
-    "sloth": {
+    // [f] 도인 (기존 sloth)
+    "f": {
         title: "속세를 떠난<br>\"안빈낙도 도인\"",
         img: "./images/result_sloth.jpg",
         desc: "돈보다는 워라밸, 평화주의자시군요. \"건강한 게 최고\"라지만, 부모님의 진짜 위기는 '무기력함'입니다. 도인에게 필요한 건 활기찬 에너지! 축 처진 기분에 생기를 불어넣어 주세요.",
@@ -79,8 +78,8 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // [Type 7] 낭만+다정+육체 -> 풍류왕
-    "zombie": {
+    // [g] 풍류왕 (기존 zombie)
+    "g": {
         title: "춤추고 노래하는<br>\"흥부자 풍류왕\"",
         img: "./images/result_zombie.jpg",
         desc: "\"인생 뭐 있어? 즐겨!\" 부모님과 친구 같은 분위기 메이커시군요. 하지만 당신과 놀아주시느라 부모님 체력은 방전 직전! 노는 것도 체력전입니다.",
@@ -92,8 +91,8 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // [Type 8] 낭만+다정+정신 -> 감성군주
-    "sunfish": {
+    // [h] 감성군주 (기존 sunfish)
+    "h": {
         title: "눈물 많은<br>\"유리멘탈 감성 군주\"",
         img: "./images/result_sunfish.jpg",
         desc: "부모님 흰머리만 봐도 눈물이 나는 감성파시군요. 감정을 너무 공유하다 보니 부모님의 우울감이 당신에게도 전염됩니다. 두 분 모두에게 마음의 보양이 필요합니다.",
@@ -121,7 +120,7 @@ const resultData = {
 // 전역 변수로 현재 데이터를 저장
 let currentData = null;
 
-// 2. 페이지 로드 시 콘텐츠 교체 (이미지 교체 로직 포함)
+// 2. 페이지 로드 시 콘텐츠 교체
 window.onload = function() {
     const params = new URLSearchParams(window.location.search);
     const type = params.get('type'); 
@@ -130,17 +129,17 @@ window.onload = function() {
     currentData = resultData[type] || resultData["default"];
 
     if (currentData) {
-        // [섹션 1] 결과 화면 교체 (상단)
+        // [섹션 1] 결과 화면 교체
         const resultTitle = document.getElementById('result-title');
         const resultImg = document.getElementById('result-img');
         const resultDesc = document.getElementById('result-desc');
 
-        // ⭐ 수정됨: innerText 대신 innerHTML 사용 (<br> 태그 적용을 위해)
+        // innerHTML 사용 (<br> 줄바꿈 적용)
         if(resultTitle) resultTitle.innerHTML = currentData.title; 
         if(resultImg) resultImg.src = currentData.img;
         if(resultDesc) resultDesc.innerText = currentData.desc;
 
-        // [섹션 2] 처방전 화면 교체 (하단)
+        // [섹션 2] 처방전 화면 교체
         const productSub = document.getElementById('product-sub');
         const productTitle = document.getElementById('product-title');
         const productCopy = document.getElementById('product-copy');
@@ -150,7 +149,7 @@ window.onload = function() {
         if(productTitle) productTitle.innerHTML = currentData.productTitle;
         if(productCopy) productCopy.innerHTML = currentData.productCopy;
         
-        // 제품 이미지 교체 로직
+        // 제품 이미지 교체
         if(productImgEl) {
             productImgEl.src = currentData.productImg;
         }
@@ -172,19 +171,16 @@ function goToKakaoChannel() {
     window.open(kakaoChannelLink, "_blank");
 }
 
-// 5. 공유하기 (링크 복사 기능)
+// 5. 공유하기 (현재 보고 있는 페이지 주소 복사)
 function shareKakao() {
-    // 👇 [수정] 여기에 복사되길 원하는 '사이트 주소'를 입력하세요!
-    // 예: "https://thesoo.co.kr/event" 또는 window.location.href (현재 페이지 주소)
-    const shareUrl = "https://smore.im/quiz/SfDyMyvfkK"; 
+    // 현재 주소창의 URL을 가져옴 (예: .../index.html?type=a)
+    const shareUrl = window.location.href; 
 
-    // 클립보드에 주소 복사하기
     navigator.clipboard.writeText(shareUrl)
         .then(() => {
             alert("링크가 복사되었습니다! \n가족, 친구에게 공유해보세요 🔗");
         })
         .catch(err => {
-            // 복사 실패 시 (보안 설정 등으로 인해)
             alert("링크 복사에 실패했습니다. URL을 직접 복사해주세요.");
             console.error('URL 복사 실패:', err);
         });
