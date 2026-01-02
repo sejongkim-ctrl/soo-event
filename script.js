@@ -1,9 +1,9 @@
-// 1. 결과 데이터 세팅 (URL 파라미터 a~h 로 변경)
+// 1. 결과 데이터 세팅 (타입 a~h, 이미지명 result_a~h 로 통일)
 const resultData = {
     // [a] 불도저 (기존 horse)
     "a": {
         title: "천하를 평정할<br>\"불도저 정복 군주\"", 
-        img: "./images/result_horse.jpg",
+        img: "./images/result_a.jpg",  // 👈 파일명 변경됨
         desc: "\"내 사전에 후진은 없다!\" 목표를 향해 돌진하는 스타일이시군요. 하지만 당신이 밖에서 전쟁을 치르는 동안, 부모님의 '무릎과 허리'는 무너지고 있습니다. 정복 전쟁도 체력이 국력! 부모님께 잃어버린 '힘'을 되찾아주세요.",
         
         productSub: "활력 충전이 필요한 순간",
@@ -16,7 +16,7 @@ const resultData = {
     // [b] 전략가 (기존 ai)
     "b": {
         title: "차갑지만 완벽한<br>\"냉철한 전략가\"",
-        img: "./images/result_ai.jpg",
+        img: "./images/result_b.jpg", // 👈 파일명 변경됨
         desc: "\"감성보단 이성!\" 빈틈없는 계획으로 집안을 일으킬 뇌섹 군주시군요. 하지만 당신의 비상한 두뇌를 물려주신 부모님은 요즘 총기가 예전 같지 않습니다. 전략가에게 필요한 건 맑은 정신입니다.",
         
         productSub: "흐릿해진 머리를 맑게",
@@ -29,7 +29,7 @@ const resultData = {
     // [c] 플렉스 (기존 eagle)
     "c": {
         title: "금은보화 뿌리는<br>\"플렉스(Flex) 황제\"",
-        img: "./images/result_eagle.jpg",
+        img: "./images/result_c.jpg", // 👈 파일명 변경됨
         desc: "\"엄마 이거 사!\" 성공의 맛을 함께 나누는 효도왕이시군요. 하지만 부모님은 좋은 옷을 입고 나갈 '기운'이 없으십니다. 명품 가방보다 명품 근육! 겉치장보다 속부터 채워야 할 때입니다.",
         
         productSub: "명품 가방보다 명품 근육",
@@ -42,7 +42,7 @@ const resultData = {
     // [d] 성군 (기존 turtle)
     "d": {
         title: "덕으로 다스리는<br>\"성군 세종대왕\"",
-        img: "./images/result_turtle.jpg",
+        img: "./images/result_d.jpg", // 👈 파일명 변경됨
         desc: "능력과 인성을 겸비한 완벽한 K-장녀/장남! 자식 걱정은 덜었지만, 부모님은 '노화'라는 섭리 앞에서 작아지십니다. 성군의 덕목은 평온함! 부모님의 불안한 심신을 편안하게 다스려주세요.",
         
         productSub: "불안한 심신을 편안하게",
@@ -55,7 +55,7 @@ const resultData = {
     // [e] 선비 (기존 unicorn)
     "e": {
         title: "바람처럼 자유로운<br>\"독야청청 선비\"",
-        img: "./images/result_unicorn.jpg",
+        img: "./images/result_e.jpg", // 👈 파일명 변경됨
         desc: "\"내 인생은 나의 것.\" 독립심 강한 마이웨이 군주시군요. 당신이 자유를 즐기는 사이, 부모님은 '노쇠'와 싸우고 계십니다. 자유롭게 다니시려면 튼튼한 다리가 필수입니다.",
         
         productSub: "여행을 위한 기초 체력",
@@ -68,7 +68,7 @@ const resultData = {
     // [f] 도인 (기존 sloth)
     "f": {
         title: "속세를 떠난<br>\"안빈낙도 도인\"",
-        img: "./images/result_sloth.jpg",
+        img: "./images/result_f.jpg", // 👈 파일명 변경됨
         desc: "돈보다는 워라밸, 평화주의자시군요. \"건강한 게 최고\"라지만, 부모님의 진짜 위기는 '무기력함'입니다. 도인에게 필요한 건 활기찬 에너지! 축 처진 기분에 생기를 불어넣어 주세요.",
         
         productSub: "무기력 타파, 생기 충전",
@@ -81,7 +81,7 @@ const resultData = {
     // [g] 풍류왕 (기존 zombie)
     "g": {
         title: "춤추고 노래하는<br>\"흥부자 풍류왕\"",
-        img: "./images/result_zombie.jpg",
+        img: "./images/result_g.jpg", // 👈 파일명 변경됨
         desc: "\"인생 뭐 있어? 즐겨!\" 부모님과 친구 같은 분위기 메이커시군요. 하지만 당신과 놀아주시느라 부모님 체력은 방전 직전! 노는 것도 체력전입니다.",
         
         productSub: "밤새 놀아도 지치지 않게",
@@ -94,7 +94,7 @@ const resultData = {
     // [h] 감성군주 (기존 sunfish)
     "h": {
         title: "눈물 많은<br>\"유리멘탈 감성 군주\"",
-        img: "./images/result_sunfish.jpg",
+        img: "./images/result_h.jpg", // 👈 파일명 변경됨
         desc: "부모님 흰머리만 봐도 눈물이 나는 감성파시군요. 감정을 너무 공유하다 보니 부모님의 우울감이 당신에게도 전염됩니다. 두 분 모두에게 마음의 보양이 필요합니다.",
         
         productSub: "예민해진 신경을 부드럽게",
@@ -104,10 +104,10 @@ const resultData = {
         productUrl: "https://thesoo.co/about/gongjindan"
     },
 
-    // [기본값] 에러 방지용
+    // [기본값]
     "default": {
         title: "2026년 당신의<br>통치 스타일은?",
-        img: "./images/result_horse.jpg", 
+        img: "./images/result_a.jpg",  // 👈 기본값도 a로 변경
         desc: "테스트 결과를 불러오지 못했습니다. 다시 시도해주세요.",
         productSub: "지친 나를 위한",
         productTitle: "황제 처방",
@@ -173,7 +173,6 @@ function goToKakaoChannel() {
 
 // 5. 공유하기 (현재 보고 있는 페이지 주소 복사)
 function shareKakao() {
-    // 현재 주소창의 URL을 가져옴 (예: .../index.html?type=a)
     const shareUrl = window.location.href; 
 
     navigator.clipboard.writeText(shareUrl)
