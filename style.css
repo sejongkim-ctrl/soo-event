@@ -507,8 +507,10 @@ footer {
    ============================================== */
 #product-copy {
     display: block;
-    width: 90%;                 /* 너비 설정 */
-    margin: 15px auto 40px auto; /* ⭐ 핵심: 아래쪽 여백(40px)을 넉넉하게 줌 */
+    width: 90%;                 
+    
+    /* 👇 위쪽 여백을 0으로 수정했습니다 */
+    margin: 0 auto 40px auto;
     
     padding: 20px;              /* 안쪽 여백 */
     background-color: #F8F8F8;  /* 회색 배경 */
