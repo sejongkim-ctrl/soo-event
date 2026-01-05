@@ -379,3 +379,54 @@ footer {
         padding-right: 14px !important;
     }
 }
+/* [수정] 2번 박스 통합 디자인 */
+.product-mini {
+    position: relative; /* 뱃지 위치 기준 */
+    border: 2px solid #EAEAEA; /* 기본 테두리 */
+    background: #fff;
+    overflow: visible; /* 뱃지가 밖으로 튀어나오게 */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    /* 박스 전체가 살짝 두근거리는 효과 */
+    animation: gentlePulse 2s infinite; 
+}
+
+/* 마우스 올렸을 때 더 명확하게 */
+.product-mini:hover {
+    border-color: #C5A059;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+}
+
+/* 상단 강조 뱃지 (기존 하단 버튼 문구 통합) */
+.chance-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FF4B4B; /* 주목도 높은 빨간색 */
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    box-shadow: 0 4px 10px rgba(255, 75, 75, 0.3);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* 두근거리는 애니메이션 정의 */
+@keyframes gentlePulse {
+    0% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    50% { transform: scale(1.02); box-shadow: 0 8px 15px rgba(197, 160, 89, 0.15); border-color: #D4AF70; }
+    100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+}
+
+/* 내부 텍스트 강조 */
+.click-guide {
+    color: #C5A059 !important;
+    font-weight: 700 !important;
+    text-decoration: underline;
+    margin-top: 5px;
+    display: block;
+}
