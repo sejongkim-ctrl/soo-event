@@ -8,115 +8,115 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* 이벤트 페이지 전용 스타일 */
-        .form-box { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: left; margin-bottom: 24px; }
-        .section-label { font-size: 12px; font-weight: 700; color: #82181C; margin-bottom: 8px; display: block; letter-spacing: 1px; }
+        /* [스타일] 기본 레이아웃 및 폰트 설정 */
+        body { margin: 0; padding: 0; background: #3d0e10; font-family: 'Noto Sans KR', sans-serif; }
+        .container { max-width: 480px; margin: 0 auto; background: #3d0e10; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        
+        /* 헤더 스타일 */
+        .page-header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
+        .brand-logo { color: #fff; font-family: 'Noto Serif KR', serif; font-size: 14px; letter-spacing: 2px; border-bottom: 1px solid #C5A059; padding-bottom: 5px; }
 
-        /* 약관 스크롤 박스 */
-        .agree-box { background: #F9F9F9; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
-        .agree-scroll-box {
-            height: 120px; overflow-y: scroll; background: #fff; border: 1px solid #ddd;
-            padding: 12px; font-size: 12px; color: #555; line-height: 1.6; border-radius: 6px; margin-bottom: 15px;
-            -webkit-overflow-scrolling: touch;
+        /* 흰색 컨텐츠 박스 (폼 전체 감싸기) */
+        .content-box { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: left; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+
+        /* 타이틀 스타일 */
+        .title-serif { font-family: 'Noto Serif KR', serif; color: #82181C; text-align: center; line-height: 1.4; font-weight: 700; }
+
+        /* =========================================
+           [수정됨] 1. 약관 스크롤 박스 스타일 (핵심!) 
+           ========================================= */
+        .agreement-box { 
+            background: #F9F9F9; 
+            padding: 10px; 
+            border-radius: 8px; 
+            border: 1px solid #eee; 
+            margin-bottom: 15px; 
         }
+        /* 👇 스크롤이 생기게 하는 핵심 클래스 */
+        .agree-scroll-box {
+            height: 150px;           /* 높이 고정 */
+            overflow-y: scroll;      /* 세로 스크롤 생성 */
+            background: #fff; 
+            border: 1px solid #ddd;
+            padding: 15px; 
+            font-size: 12px; 
+            color: #555; 
+            line-height: 1.6; 
+            border-radius: 6px; 
+            text-align: left;        /* 텍스트 왼쪽 정렬 */
+            -webkit-overflow-scrolling: touch; /* 모바일 터치감 개선 */
+        }
+        .agree-scroll-box h4 { font-size: 14px; color: #333; margin-bottom: 10px; }
+        .agree-scroll-box h5 { font-size: 13px; color: #333; margin: 15px 0 5px 0; }
+        .agree-list { margin: 0; padding-left: 15px; list-style-type: disc; }
+        .agree-list li { margin-bottom: 4px; }
 
         /* 라디오 버튼 그룹 */
-        .radio-group { 
-            display: flex; 
-            gap: 8px; 
-            width: 100%; 
-            box-sizing: border-box; 
-        }
-
-        /* 개별 버튼 디자인 */
+        .radio-group { display: flex; gap: 8px; width: 100%; box-sizing: border-box; }
         .radio-label { 
-            flex: 1; 
-            padding: 14px 0; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            text-align: center; 
-            font-size: 12px; 
-            letter-spacing: -0.5px; 
-            white-space: nowrap;    
-            cursor: pointer; 
-            background: #fff; 
-            transition: all 0.2s; 
-            display: block; 
-            width: 100%; 
+            flex: 1; padding: 14px 0; border: 1px solid #ddd; border-radius: 8px; 
+            text-align: center; font-size: 12px; letter-spacing: -0.5px; white-space: nowrap;    
+            cursor: pointer; background: #fff; transition: all 0.2s; display: block; width: 100%; 
         }
-
-        /* 라디오 버튼 숨김 */
         input[type="radio"] { display: none; }
-
-        /* 선택되었을 때 스타일 */
         input[type="radio"]:checked + .radio-label { 
-            border-color: #82181C; 
-            background: #FFF5F5; 
-            color: #82181C; 
-            font-weight: 700; 
-            box-shadow: 0 0 0 1px #82181C; 
+            border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; 
         }
         
-        /* 입력 폼 */
+        /* 입력 폼 공통 */
         .input-group { margin-bottom: 15px; }
         .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #333; }
         .input-field { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
         .input-field:focus { outline: none; border-color: #C5A059; box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2); }
 
-        /* 2번 박스: 상품 소개 및 클릭 유도 디자인 */
+        /* [수정됨] 2번 박스 통합 디자인 (심장박동 효과) */
         .product-mini {
-            display: flex; align-items: center; gap: 15px; padding: 15px;
-            border-radius: 12px;
-            /* 클릭 가능한 버튼 스타일 */
-            cursor: pointer; border: 2px solid #EAEAEA; transition: all 0.3s ease; background: #fff;
-            position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            position: relative; border: 2px solid #EAEAEA; background: #fff;
+            overflow: visible; transition: all 0.3s ease; cursor: pointer;
+            display: flex; align-items: center; gap: 15px; padding: 15px; border-radius: 12px;
+            animation: gentlePulse 2s infinite; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
-        .product-mini:active, .product-mini:hover {
-            border-color: #C5A059; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(197, 160, 89, 0.2);
+        .product-mini:hover { border-color: #C5A059; transform: translateY(-3px); }
+        
+        .chance-badge {
+            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: #FF4B4B; color: #fff; padding: 6px 14px; border-radius: 20px;
+            font-size: 12px; font-weight: 800; box-shadow: 0 4px 10px rgba(255, 75, 75, 0.3);
+            white-space: nowrap; z-index: 10;
         }
+
+        @keyframes gentlePulse {
+            0% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+            50% { transform: scale(1.02); box-shadow: 0 8px 15px rgba(197, 160, 89, 0.15); border-color: #D4AF70; }
+            100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        }
+
         .mini-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(0,0,0,0.1); }
         .mini-text h4 { margin: 0 0 5px 0; font-size: 15px; color: #1A1A1A; font-family: 'Noto Serif KR', serif; }
         .mini-text p { margin: 0; font-size: 12px; color: #666; line-height: 1.4; word-break: keep-all; }
         .click-guide { display: block; margin-top: 6px; font-size: 11px; color: #82181C; font-weight: 700; text-decoration: underline; }
 
-        /* 배지 디자인 */
-        .badge-container { text-align: center; margin-top: 20px; margin-bottom: 10px; }
-        .chance-badge {
-            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            background: #FFFBF0; border: 1px solid #C5A059; color: #333;
-            padding: 8px 16px; border-radius: 50px; font-size: 13px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.05); animation: bounce-badge 2s infinite;
+        /* 섹션 번호 스타일 */
+        .section-header-group { margin-bottom: 20px; text-align: center; }
+        .step-num { display: block; font-size: 14px; font-weight: 700; color: #C5A059; margin-bottom: 5px; font-family: 'Noto Serif KR', serif; }
+        .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; line-height: 1.4; }
+
+        /* 버튼 스타일 */
+        .btn-golden {
+            width: 100%; background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70);
+            background-size: 200% auto; color: #1a1a1a; font-weight: 800;
+            border: none; border-radius: 50px; padding: 18px 0; font-size: 18px;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(212, 175, 112, 0.3);
+            margin-top: 30px; transition: 0.3s;
         }
-        .chance-badge strong { color: #D32F2F; font-weight: 800; }
-        @keyframes bounce-badge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        
-        /* 섹션 헤더 스타일 */
-        .section-header-group {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .step-num {
-            display: block; 
-            font-size: 14px;
-            font-weight: 700;
-            color: #C5A059; 
-            margin-bottom: 5px;
-            font-family: 'Noto Serif KR', serif;
-        }
-        .step-title {
-            display: block; 
-            font-size: 20px; 
-            font-weight: 700;
-            color: #1A1A1A;
-            line-height: 1.4;
-        }
+        .footer-notice { font-size: 11px; color: #888; text-align: center; margin-bottom: 0; }
+        footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding-bottom: 40px; }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="page-header">
             <span class="brand-logo">THE SOO</span>
-            <span class="header-line"></span>
         </header>
 
         <form id="submit-form" class="content-box">
@@ -129,9 +129,8 @@
                 </div>
 
                 <div class="agreement-box">
-                    <div class="scroll-box">
+                    <div class="agree-scroll-box">
                         <h4 style="margin-top:0;">[개인정보 수집/이용 및 마케팅 정보 수신 동의]</h4>
-                        
                         <p>수 브랜드(이하 '회사')는 본 이벤트를 위하여 다음과 같이 고객님의 개인정보를 수집 및 이용합니다.</p>
 
                         <h5>1. 수집 및 이용 목적 (마케팅 활용 포함)</h5>
@@ -172,13 +171,13 @@
                         <input type="radio" name="agree" value="yes">
                         <div class="radio-label">예, 동의합니다</div>
                     </label>
-                    
                     <label style="flex: 1;">
                         <input type="radio" name="agree" value="no">
                         <div class="radio-label">아니오, 동의하지 않습니다</div>
                     </label>
                 </div>
-            </div> 
+            </div>
+
             <div class="input-group" style="margin-top: 35px;">
                 <div class="section-header-group">
                     <span class="step-num">02.</span>
@@ -186,25 +185,14 @@
                 </div>
                 
                 <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
-                <div class="product-mini" onclick="openProductPage()" style="margin-top: 25px;">
 
+                <div class="product-mini" onclick="trackClickAndGo()" style="margin-top: 20px;">
                     <div class="chance-badge">🍀 클릭 시 당첨확률 200% UP!</div>
-                
-                    <img id="recommend-img" src="./images/product_main.jpg" class="mini-img" alt="제품이미지">
-                    
+                    <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
                     <div class="mini-text">
-                        <h4 id="product-title">황제의 보약, 공진단</h4>
-                        <p id="product-copy">전문 한의사의 1:1 밀착 상담<br>내 몸에 맞는 처방 받기</p>
-                        
+                        <h4>황제의 보약, 공진단</h4>
+                        <p>처방 받았던 제품! 전문 한의사의<br>1:1 밀착 상담을 받아보세요.</p>
                         <span class="click-guide">👆 터치하여 홈페이지 바로가기</span>
-                    </div>
-                
-                </div>
-
-                <div class="badge-container">
-                    <div class="chance-badge">
-                        <span class="badge-icon">🍀</span>
-                        <span>박스를 클릭하면 <strong>당첨확률 UP!</strong></span>
                     </div>
                 </div>
             </div>
@@ -227,18 +215,14 @@
 
                 <div class="input-group">
                     <label class="input-label">주소</label>
-                    
                     <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                         <input type="text" id="postcode" class="input-field" placeholder="우편번호" style="width: 100px; background: #f5f5f5;" readonly>
                         <button type="button" onclick="execDaumPostcode()" style="background: #333; color: #fff; border: none; padding: 0 15px; border-radius: 8px; font-size: 13px; cursor: pointer; flex: 1; height: 46px;">
                             🔍 주소 검색하기
                         </button>
                     </div>
-            
                     <input type="text" id="roadAddress" class="input-field" placeholder="검색 버튼을 눌러 주소를 입력하세요" style="margin-bottom: 8px; background: #f5f5f5;" readonly>
-                    
                     <input type="text" id="detailAddress" class="input-field" placeholder="상세주소 입력 (예: 101동 1203호)">
-                    
                     <input type="hidden" name="address" id="real-address">
                 </div>
             </div>
@@ -268,7 +252,7 @@
         const productLink = "https://thesoo.co/promotion/26seol"; 
 
 
-        // [기능 1] 주소 검색 팝업 열기 (카카오 API)
+        // [기능 1] 주소 검색 팝업 열기
         function execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -285,7 +269,7 @@
             }).open();
         }
 
-        // [기능 2] 상품 클릭 추적 및 이동 (누락되었던 기능 복구)
+        // [기능 2] 상품 클릭 추적 및 이동
         function trackClickAndGo() {
             var input = document.getElementById('is_clicked_input');
             if(input) { input.value = "O"; }
