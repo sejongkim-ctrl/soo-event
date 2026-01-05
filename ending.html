@@ -192,59 +192,89 @@
         // 👇 [수정 1] 구글 앱스 스크립트 배포 주소를 여기에 넣으세요
         // ============================================================
         const scriptURL = "https://script.google.com/macros/s/AKfycbx7ZUQ_ImrhKiGTEPbX2G9cbGMOCvSr0V8V4gsrtOscwjgdEwjlVgoYtnHns--wdjg4FQ/exec"; 
+        
+        // 👇 [필수] 2번 박스 클릭 시 이동할 랜딩 페이지 주소
+        const productLink = "https://thesoo.co.kr/product/detail.html"; 
 
 
-        // ============================================================
-        // 👇 [수정 2] 2번 박스 클릭 시 이동할 '랜딩 페이지 주소'를 넣으세요
-        // ============================================================
-        const productLink = "https://thesoo.co/"; 
+        // [기능 1] 카카오 주소 검색 API (새로 추가됨)
+        function execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                    var addr = ''; // 주소 변수
 
+                    // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 도로명 주소
+                        addr = data.roadAddress;
+                    } else { // 지번 주소
+                        addr = data.jibunAddress;
+                    }
 
-        // [기능 1] 2번 박스 클릭 시 실행되는 함수
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("roadAddress").value = addr;
+                    
+                    // 커서를 상세주소 필드로 이동한다.
+                    document.getElementById("detailAddress").focus();
+                }
+            }).open();
+        }
+
+        // [기능 2] 상품 클릭 시 이동
         function trackClickAndGo() {
-            // 클릭 데이터 기록 (X -> O)
             var input = document.getElementById('is_clicked_input');
             if(input) { input.value = "O"; }
-            
-            // 설정한 주소로 새 창 열기
             window.open(productLink, "_blank");
         }
 
-        // [기능 2] '응모 완료하기' 버튼 클릭 시 실행되는 함수
+        // [기능 3] 폼 제출 (주소 합치기 기능 추가됨)
         function handleSubmit() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
 
-            // 1. 동의 여부 검사 (가장 먼저 체크!)
+            // 1. 동의 여부 검사
             const agreeInput = document.querySelector('input[name="agree"]:checked');
-
-            // 동의를 안 했거나(null), '동의하지 않음'인 경우
             if (!agreeInput || agreeInput.value === 'no') {
                 alert("1. 안내사항 동의가 필요합니다.");
-                
-                // 1번 섹션 위치로 스크롤 이동
-                const target = document.getElementById('section-1-target');
-                if(target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const target = document.getElementById('section-1-target'); // 1번 섹션으로 이동
+                if(target) { target.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+                else { // 타겟이 없으면 제목으로라도 이동
+                    document.querySelector('.title-serif').scrollIntoView({ behavior: 'smooth' });
                 }
-                return; // ✋ 여기서 멈춤 (전송 안 함)
+                return; 
             }
 
             // 2. 필수 입력값 체크
             const name = form.querySelector('input[name="name"]').value;
             const phone = form.querySelector('input[name="phone"]').value;
-            const address = form.querySelector('input[name="address"]').value;
-
-            if(!name || !phone || !address) {
-                alert("이름, 연락처, 주소를 모두 입력해주세요.");
+            
+            // [중요] 주소 합치기 (기본주소 + 상세주소)
+            const roadAddr = document.getElementById('roadAddress').value;
+            const detailAddr = document.getElementById('detailAddress').value;
+            
+            if(!roadAddr) {
+                alert("주소 검색을 눌러 주소를 입력해주세요.");
+                return;
+            }
+            if(!detailAddr) {
+                alert("상세주소(동/호수)를 입력해주세요.");
+                document.getElementById('detailAddress').focus();
                 return;
             }
 
-            // 3. 전송 시작 (버튼 비활성화)
+            // 숨겨진 input에 합친 주소 넣기 (이게 구글시트로 감)
+            document.getElementById('real-address').value = roadAddr + " " + detailAddr;
+
+            if(!name || !phone) {
+                alert("이름과 연락처를 모두 입력해주세요.");
+                return;
+            }
+
+            // 3. 전송 시작
             btn.innerHTML = "접수 중입니다...";
             btn.disabled = true;
 
-            // 4. 구글 시트로 데이터 전송
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
@@ -266,5 +296,3 @@
             });
         }
     </script>
-</body>
-</html>
