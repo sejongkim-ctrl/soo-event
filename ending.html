@@ -20,24 +20,24 @@
             -webkit-overflow-scrolling: touch;
         }
 
-/* 라디오 버튼 그룹 */
+        /* 라디오 버튼 그룹 */
         .radio-group { 
             display: flex; 
-            gap: 8px; /* 간격을 조금 좁힘 (10px -> 8px) */
+            gap: 8px; 
             width: 100%; 
             box-sizing: border-box; 
         }
 
-        /* 개별 버튼 디자인 (글자 크기 축소됨) */
+        /* 개별 버튼 디자인 */
         .radio-label { 
             flex: 1; 
             padding: 14px 0; 
             border: 1px solid #ddd; 
             border-radius: 8px; 
             text-align: center; 
-            font-size: 12px; /* 👈 14px에서 12px로 수정 */
-            letter-spacing: -0.5px; /* 👈 자간을 좁혀서 더 잘 들어가게 함 */
-            white-space: nowrap;    /* 👈 강제로 줄바꿈 금지 */
+            font-size: 12px; 
+            letter-spacing: -0.5px; 
+            white-space: nowrap;    
             cursor: pointer; 
             background: #fff; 
             transition: all 0.2s; 
@@ -45,10 +45,10 @@
             width: 100%; 
         }
 
-        /* 라디오 버튼 숨김 (유지) */
+        /* 라디오 버튼 숨김 */
         input[type="radio"] { display: none; }
 
-        /* 선택되었을 때 스타일 (유지) */
+        /* 선택되었을 때 스타일 */
         input[type="radio"]:checked + .radio-label { 
             border-color: #82181C; 
             background: #FFF5F5; 
@@ -57,7 +57,6 @@
             box-shadow: 0 0 0 1px #82181C; 
         }
         
-        }
         /* 입력 폼 */
         .input-group { margin-bottom: 15px; }
         .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #333; }
@@ -90,26 +89,23 @@
         }
         .chance-badge strong { color: #D32F2F; font-weight: 800; }
         @keyframes bounce-badge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        /* [NEW] 01. 02. 03. 번호와 제목 꾸미기 */
+        
+        /* 섹션 헤더 스타일 */
         .section-header-group {
             margin-bottom: 20px;
             text-align: center;
         }
-        
-        /* 번호 스타일 (금색, 작게) */
         .step-num {
-            display: block; /* 줄바꿈 기능 */
+            display: block; 
             font-size: 14px;
             font-weight: 700;
-            color: #C5A059; /* 브랜드 골드색 */
+            color: #C5A059; 
             margin-bottom: 5px;
             font-family: 'Noto Serif KR', serif;
         }
-
-        /* 제목 스타일 (검정, 크고 진하게) */
         .step-title {
-            display: block; /* 줄바꿈 기능 */
-            font-size: 20px; /* 폰트 크기 키움 */
+            display: block; 
+            font-size: 20px; 
             font-weight: 700;
             color: #1A1A1A;
             line-height: 1.4;
@@ -126,7 +122,7 @@
         <form id="submit-form" class="content-box">
             <h2 class="title-serif" style="font-size: 22px; margin-bottom: 30px;">수[壽] 한약<br>순금 1돈 이벤트 응모</h2>
 
-<div id="section-1-target" style="text-align: center; margin-bottom: 40px;">
+            <div id="section-1-target" style="text-align: center; margin-bottom: 40px;">
                 <div class="section-header-group">
                     <span class="step-num">01.</span>
                     <span class="step-title">안내사항 확인</span>
@@ -182,15 +178,12 @@
                         <div class="radio-label">아니오, 동의하지 않습니다</div>
                     </label>
                 </div>
-            </div>
-                </div>
-            </div>
-
+            </div> 
             <div class="input-group" style="margin-top: 35px;">
                 <div class="section-header-group">
-                <span class="step-num">02.</span>
-                <span class="step-title">2026 적토마를 위한<br>활력 선물 제안</span>
-            </div>
+                    <span class="step-num">02.</span>
+                    <span class="step-title">2026 적토마를 위한<br>활력 선물 제안</span>
+                </div>
                 
                 <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
 
@@ -213,9 +206,9 @@
 
             <div class="input-group" style="margin-top: 30px;">
                 <div class="section-header-group">
-                <span class="step-num">03.</span>
-                <span class="step-title">응모자 정보 입력</span>
-            </div>
+                    <span class="step-num">03.</span>
+                    <span class="step-title">응모자 정보 입력</span>
+                </div>
                 
                 <div class="input-group">
                     <label class="input-label">이름</label>
@@ -227,22 +220,22 @@
                     <input type="tel" name="phone" class="input-field" placeholder="010-0000-0000" required>
                 </div>
 
-            <div class="input-group">
-                <label class="input-label">주소</label>
-                
-                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                    <input type="text" id="postcode" class="input-field" placeholder="우편번호" style="width: 100px; background: #f5f5f5;" readonly>
-                    <button type="button" onclick="execDaumPostcode()" style="background: #333; color: #fff; border: none; padding: 0 15px; border-radius: 8px; font-size: 13px; cursor: pointer; flex: 1; height: 46px;">
-                        🔍 주소 검색하기
-                    </button>
-                </div>
+                <div class="input-group">
+                    <label class="input-label">주소</label>
+                    
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <input type="text" id="postcode" class="input-field" placeholder="우편번호" style="width: 100px; background: #f5f5f5;" readonly>
+                        <button type="button" onclick="execDaumPostcode()" style="background: #333; color: #fff; border: none; padding: 0 15px; border-radius: 8px; font-size: 13px; cursor: pointer; flex: 1; height: 46px;">
+                            🔍 주소 검색하기
+                        </button>
+                    </div>
             
-                <input type="text" id="roadAddress" class="input-field" placeholder="검색 버튼을 눌러 주소를 입력하세요" style="margin-bottom: 8px; background: #f5f5f5;" readonly>
-                
-                <input type="text" id="detailAddress" class="input-field" placeholder="상세주소 입력 (예: 101동 1203호)">
-                
-                <input type="hidden" name="address" id="real-address">
-            </div>
+                    <input type="text" id="roadAddress" class="input-field" placeholder="검색 버튼을 눌러 주소를 입력하세요" style="margin-bottom: 8px; background: #f5f5f5;" readonly>
+                    
+                    <input type="text" id="detailAddress" class="input-field" placeholder="상세주소 입력 (예: 101동 1203호)">
+                    
+                    <input type="hidden" name="address" id="real-address">
+                </div>
             </div>
 
             <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">
@@ -256,15 +249,16 @@
             <p>© 2026 SOO BRAND. All rights reserved.</p>
         </footer>
     </div>
+    
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         // ============================================================
-        // 👇 [수정 1] 구글 앱스 스크립트 배포 주소를 여기에 넣으세요
+        // 👇 [필수] 구글 앱스 스크립트 배포 주소 (기존 주소 유지)
         // ============================================================
         const scriptURL = "https://script.google.com/macros/s/AKfycbx7ZUQ_ImrhKiGTEPbX2G9cbGMOCvSr0V8V4gsrtOscwjgdEwjlVgoYtnHns--wdjg4FQ/exec"; 
 
         // ============================================================
-        // 👇 [수정 포인트 2] 응모 후 이동할 페이지 (상품 상세 등)
+        // 👇 [필수] 응모 후 이동할 페이지 (상품 상세)
         // ============================================================
         const productLink = "https://thesoo.co/promotion/26seol"; 
 
@@ -273,27 +267,27 @@
         function execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
-                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드
-                    var addr = ''; // 주소 변수
-
-                    // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                    if (data.userSelectedType === 'R') { // 도로명 주소
+                    var addr = ''; 
+                    if (data.userSelectedType === 'R') { 
                         addr = data.roadAddress;
-                    } else { // 지번 주소
+                    } else { 
                         addr = data.jibunAddress;
                     }
-
-                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     document.getElementById('postcode').value = data.zonecode;
                     document.getElementById("roadAddress").value = addr;
-                    
-                    // 커서를 상세주소 필드로 이동한다.
                     document.getElementById("detailAddress").focus();
                 }
             }).open();
         }
 
-        // [기능 2] 폼 제출 및 데이터 전송
+        // [기능 2] 상품 클릭 추적 및 이동 (누락되었던 기능 복구)
+        function trackClickAndGo() {
+            var input = document.getElementById('is_clicked_input');
+            if(input) { input.value = "O"; }
+            window.open(productLink, "_blank");
+        }
+
+        // [기능 3] 폼 제출 및 데이터 전송
         function handleSubmit() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
@@ -302,13 +296,12 @@
             const agreeInput = document.querySelector('input[name="agree"]:checked');
             if (!agreeInput || agreeInput.value === 'no') {
                 alert("1. 안내사항 동의가 필요합니다.");
-                // 화면 위로 이동
                 const target = document.querySelector('.section-header-group'); 
                 if(target) target.scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
-            // 2. 주소 합치기 (검색주소 + 상세주소)
+            // 2. 주소 합치기
             const roadAddr = document.getElementById('roadAddress').value;
             const detailAddr = document.getElementById('detailAddress').value;
             
@@ -316,13 +309,10 @@
                 alert("['🔍 주소 검색하기'] 버튼을 눌러 주소를 입력해주세요.");
                 return;
             }
-            // 상세주소가 비었으면 그냥 빈칸으로 처리하거나 경고
-            // if(!detailAddr) { alert("상세주소를 입력해주세요."); return; }
 
-            // 숨겨진 input에 '전체 주소' 저장
             document.getElementById('real-address').value = roadAddr + " " + detailAddr;
 
-            // 3. 나머지 필수값 확인
+            // 3. 필수값 확인
             const name = form.querySelector('input[name="name"]').value;
             const phone = form.querySelector('input[name="phone"]').value;
 
@@ -356,3 +346,5 @@
             });
         }
     </script>
+</body>
+</html>
