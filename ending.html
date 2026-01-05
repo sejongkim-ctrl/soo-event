@@ -20,22 +20,24 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* 라디오 버튼 그룹 (가로 꽉 차게 수정됨) */
+/* 라디오 버튼 그룹 */
         .radio-group { 
             display: flex; 
-            gap: 10px; 
-            width: 100%; /* 부모 박스 너비에 맞춤 */
+            gap: 8px; /* 간격을 조금 좁힘 (10px -> 8px) */
+            width: 100%; 
             box-sizing: border-box; 
         }
 
-        /* 개별 버튼 디자인 */
+        /* 개별 버튼 디자인 (글자 크기 축소됨) */
         .radio-label { 
-            flex: 1; /* 남은 공간을 정확히 반반씩 차지 (50:50) */
+            flex: 1; 
             padding: 14px 0; 
             border: 1px solid #ddd; 
             border-radius: 8px; 
             text-align: center; 
-            font-size: 14px; 
+            font-size: 12px; /* 👈 14px에서 12px로 수정 */
+            letter-spacing: -0.5px; /* 👈 자간을 좁혀서 더 잘 들어가게 함 */
+            white-space: nowrap;    /* 👈 강제로 줄바꿈 금지 */
             cursor: pointer; 
             background: #fff; 
             transition: all 0.2s; 
@@ -43,16 +45,18 @@
             width: 100%; 
         }
 
-        /* 라디오 버튼 숨김 (기존 코드 유지) */
+        /* 라디오 버튼 숨김 (유지) */
         input[type="radio"] { display: none; }
 
-        /* 선택되었을 때 스타일 (기존 코드 유지 및 강화) */
+        /* 선택되었을 때 스타일 (유지) */
         input[type="radio"]:checked + .radio-label { 
             border-color: #82181C; 
             background: #FFF5F5; 
             color: #82181C; 
             font-weight: 700; 
             box-shadow: 0 0 0 1px #82181C; 
+        }
+        
         }
         /* 입력 폼 */
         .input-group { margin-bottom: 15px; }
