@@ -153,7 +153,7 @@ body {
 /* 제품 이미지 스테이지 (외곽 금테두리) */
 .product-stage {
     position: relative;
-    margin: 0 auto 30px;
+    margin: 0 auto 10px;
     width: 100%;
     max-width: 280px;
     
