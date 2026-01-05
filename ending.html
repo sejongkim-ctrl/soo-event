@@ -20,12 +20,40 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* 라디오 버튼 */
-        .radio-group { display: flex; gap: 10px; }
-        .radio-label { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-size: 14px; cursor: pointer; background: #fff; transition: all 0.2s; }
-        input[type="radio"] { display: none; }
-        input[type="radio"]:checked + .radio-label { border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; }
+        /* 라디오 버튼 그룹 (가로 꽉 차게 수정됨) */
+        .radio-group { 
+            display: flex; 
+            gap: 10px; 
+            width: 100%; /* 부모 박스 너비에 맞춤 */
+            box-sizing: border-box; 
+        }
 
+        /* 개별 버튼 디자인 */
+        .radio-label { 
+            flex: 1; /* 남은 공간을 정확히 반반씩 차지 (50:50) */
+            padding: 14px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            text-align: center; 
+            font-size: 14px; 
+            cursor: pointer; 
+            background: #fff; 
+            transition: all 0.2s; 
+            display: block; 
+            width: 100%; 
+        }
+
+        /* 라디오 버튼 숨김 (기존 코드 유지) */
+        input[type="radio"] { display: none; }
+
+        /* 선택되었을 때 스타일 (기존 코드 유지 및 강화) */
+        input[type="radio"]:checked + .radio-label { 
+            border-color: #82181C; 
+            background: #FFF5F5; 
+            color: #82181C; 
+            font-weight: 700; 
+            box-shadow: 0 0 0 1px #82181C; 
+        }
         /* 입력 폼 */
         .input-group { margin-bottom: 15px; }
         .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #333; }
@@ -115,16 +143,15 @@
                         - 귀하는 개인정보 수집 및 이용에 거부할 수 있으나, 미동의 시 이벤트 응모가 제한됩니다.
                     </div>
 
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="agree" value="yes">
-                            <div class="radio-label">동의합니다 (예)</div>
-                        </label>
-                        <label>
-                            <input type="radio" name="agree" value="no">
-                            <div class="radio-label">동의하지 않습니다</div>
-                        </label>
-                    </div>
+                <div class="radio-group">
+                    <label style="flex: 1;"> <input type="radio" name="agree" value="yes">
+                        <div class="radio-label">예, 동의합니다</div>
+                    </label>
+                    
+                    <label style="flex: 1;"> <input type="radio" name="agree" value="no">
+                        <div class="radio-label">아니오, 동의하지 않습니다</div>
+                    </label>
+                </div>
                 </div>
             </div>
 
