@@ -436,3 +436,31 @@ footer {
     margin-top: 5px;
     display: block; /* 줄바꿈 됨 */
 }
+/* [추가] 결과 페이지 텍스트 디자인 */
+
+/* 1. 결과 카드 설명 텍스트 */
+#result-desc {
+    font-size: 15px;
+    line-height: 1.6;        /* 줄 간격 넓게 */
+    color: #444;
+    word-break: keep-all;    /* 단어 중간 끊김 방지 */
+    padding: 0 10px;
+}
+
+/* 2. 닥터수 처방전 텍스트 */
+#product-copy {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #555;
+    word-break: keep-all;
+    margin-top: 10px;
+}
+
+/* 3. 공통 강조 효과 (굵게 + 브랜드 컬러) */
+.highlight-txt {
+    color: #82181C;      /* 붉은 계열 포인트 컬러 */
+    font-weight: 700;
+    background: rgba(130, 24, 28, 0.05); /* 살짝 배경색 깔기 */
+    padding: 0 2px;
+    border-radius: 4px;
+}
