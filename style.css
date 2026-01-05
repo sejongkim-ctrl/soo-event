@@ -286,7 +286,7 @@ body {
 .btn-golden {
     width: 100%;
     background: var(--gold-gradient);
-    color: #fff;
+    color: #1a1a1a;
     border: none;
     padding: 18px;
     border-radius: 50px;
@@ -296,7 +296,6 @@ body {
     box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4);
     position: relative;
     overflow: hidden;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
     transition: transform 0.2s;
 }
 .btn-golden:active { transform: scale(0.98); }
