@@ -285,6 +285,7 @@ body {
 /* 버튼 */
 .btn-golden {
     width: 100%;
+    margin-top: 30px;
     background: var(--gold-gradient);
     color: #1a1a1a;
     border: none;
