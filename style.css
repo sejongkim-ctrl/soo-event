@@ -69,7 +69,7 @@ body {
     font-size: 13px;
     padding: 6px 18px;
     border-radius: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     letter-spacing: 0.5px;
     font-weight: 500;
 }
@@ -93,6 +93,7 @@ body {
     padding: 8px;
     border: 1px solid rgba(130, 24, 28, 0.1);
     border-radius: 16px;
+    margin-top: 0;
     margin-bottom: 24px;
     background: #FFFCF5;
 }
@@ -532,4 +533,8 @@ footer {
         padding: 15px; 
         margin-bottom: 30px; /* 모바일에서는 여백을 조금 줄임 */
     }
+}
+/* 파일 맨 아래에 추가하거나 기존 #result-title을 덮어쓰세요 */
+#result-title {
+    display: none !important; /* 👈 영역 자체를 완전히 삭제 */
 }
