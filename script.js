@@ -178,5 +178,15 @@ window.onload = function() {
         }
     }
 };
-
+// 처방전 자세히 보기 버튼 클릭 시 실행되는 함수
+function openProductPage() {
+    // 1. 현재 데이터(currentData)가 있고, 그 안에 설정된 URL이 있는지 확인합니다.
+    if (currentData && currentData.productUrl) {
+        // 2. 데이터에 지정된 URL(https://thesoo.co/promotion/26seol)로 새 창을 엽니다.
+        window.open(currentData.productUrl, "_blank");
+    } else {
+        // 3. 만약 데이터가 없는 예외 상황이라면 기본 주소로 이동합니다.
+        window.open("https://thesoo.co/promotion/26seol", "_blank");
+    }
+}
 // ... 기존 함수들 (openProductPage, goToKakaoChannel, shareKakao) 그대로 유지 ...
