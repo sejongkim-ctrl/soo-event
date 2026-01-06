@@ -15,7 +15,7 @@ const resultData = {
         productCopy: "당신의 지칠 줄 모르는 에너지는 부모님께 물려받은 유산이나, 정작 부모님의 엔진은 서서히 식어가고 있습니다.<br><br>부모님의 체력을 <span class='highlight-txt'>강력하게 끌어올릴 준비</span>를 해보세요.",
         
         productImg: "./images/product_horse.jpg", 
-        productUrl: "https://thesoo.co/about/gongjindan" 
+        productUrl: "https://thesoo.co/promotion/26seol" 
     },
 
     // [Type 2] 전략가 (b)
@@ -31,7 +31,7 @@ const resultData = {
         productCopy: "비상한 두뇌로 당신의 전략이 빛을 발하는 지금, 부모님의 기억은 세월 탓에 점차 흐릿해지고 있습니다.<br><br>막힌 기운을 뚫어주는 <span class='highlight-txt'>'사향'의 힘</span>을 선물해보세요.",
         
         productImg: "./images/product_ai.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     },
 
     // [Type 3] 플렉스 (c)
@@ -47,7 +47,7 @@ const resultData = {
         productCopy: "당신의 귀티 나는 아우라는 부모님의 정성 덕분이나, 정작 부모님의 건강은 세월의 무게로 인해 약해지고 있습니다.<br><br>황제에게 진상하던 <span class='highlight-txt'>최고급 원료의 결정체</span>를 선물해보세요.",
         
         productImg: "./images/product_eagle.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     },
 
     // [Type 4] 성군 (d)
@@ -63,7 +63,7 @@ const resultData = {
         productCopy: "타인을 배려하는 당신의 따뜻한 마음씨는 부모님을 닮았으나, 자식 걱정뿐인 부모님의 속은 지금 까맣게 타들어가고 있을 수 있어요.<br><br>녹용 성분으로 부모님의 <span class='highlight-txt'>꽉 막힌 기운을 부드럽게 순환</span>시켜 드려보세요.",
         
         productImg: "./images/product_turtle.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     },
 
     // [Type 5] 선비 (e)
@@ -79,7 +79,7 @@ const resultData = {
         productCopy: "자유로운 영혼은 부모님을 닮았으나, 당신이 밖을 누비는 동안 부모님의 몸은 찬 바람을 막아낼 힘을 잃어가고 있어요.<br><br>양기를 북돋우고 근골을 튼튼하게 하는 <span class='highlight-txt'>힘의 상징 '녹용'</span>을 부모님에게 선물해보세요.",
         
         productImg: "./images/product_unicorn.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     },
 
     // [Type 6] 도인 (f)
@@ -95,7 +95,7 @@ const resultData = {
         productCopy: "당신의 평온함은 부모님 덕분이나, 노화로 몸속 진액이 마른 부모님의 일상은 평화가 아닌 무기력함일 수 있습니다.<br><br>몸속 부족해진 진액을 보충하여, 메마른 부모님의 건강을 <span class='highlight-txt'>활력으로 채워주세요.</span>",
         
         productImg: "./images/product_sloth.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     },
 
     // [Type 7] 풍류왕 (g)
@@ -111,7 +111,7 @@ const resultData = {
         productCopy: "업무도 노는 것도 '집중력'이 필요할 때!<br><br>피로회복 뿐만 아니라 작업기억 향상에 도움되는 <span class='highlight-txt'>총명공진단</span>을 스스로에게 선물하고 매일 아침 달라지는 가뿐함을 경험해보세요.",
         
         productImg: "./images/product_zombie.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     },
 
     // [Type 8] 감성군주 (h)
@@ -127,7 +127,7 @@ const resultData = {
         productCopy: "섬세한 감수성은 부모님을 닮았으나, 자식 걱정에 입맛마저 잃으신 부모님의 속은 지금 부드러운 위로가 필요합니다.<br><br>쓴맛은 줄이고 효능은 높여, <span class='highlight-txt'>입맛 없는 부모님도 부담 없이</span> 드실 수 있는 건강을 선물해보세요.",
         
         productImg: "./images/product_sunfish.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     },
 
     // [기본값]
@@ -139,7 +139,7 @@ const resultData = {
         productTitle: "황제 처방",
         productCopy: "\"2026년, 당신에게 가장 귀한<br>기력을 선물하세요\"",
         productImg: "./images/product_main.jpg",
-        productUrl: "https://thesoo.co/about/gongjindan"
+        productUrl: "https://thesoo.co/promotion/26seol"
     }
 };
 
