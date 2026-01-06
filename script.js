@@ -189,4 +189,12 @@ function openProductPage() {
         window.open("https://thesoo.co/promotion/26seol", "_blank");
     }
 }
+// 순금 1돈 이벤트 응모 버튼 클릭 시 실행되는 함수
+function goToKakaoChannel() {
+    // 카카오톡 채널 친구추가 주소
+    const kakaoChannelLink = "http://pf.kakao.com/_JReVG/friend"; 
+    
+    // 새 창으로 열기
+    window.open(kakaoChannelLink, "_blank");
+}
 // ... 기존 함수들 (openProductPage, goToKakaoChannel, shareKakao) 그대로 유지 ...
