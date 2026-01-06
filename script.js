@@ -158,7 +158,10 @@ window.onload = function() {
         const resultDesc = document.getElementById('result-desc');
 
         // innerHTML 사용! (<br>, <span> 태그 적용됨)
-        if(resultTitle) resultTitle.innerHTML = currentData.title; 
+        if(resultTitle) {
+                resultTitle.style.display = 'none'; 
+            }
+            
         if(resultImg) resultImg.src = currentData.img;
         if(resultDesc) resultDesc.innerHTML = currentData.desc; // 👈 여기 innerHTML 확인 필수
 
