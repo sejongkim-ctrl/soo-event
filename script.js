@@ -6,7 +6,7 @@ const resultData = {
         img: "./images/result_a.jpg",
         
         // 결과 카드 하단 내용
-        desc: "당신의 관상은 목표를 향해 거침없이 돌진하는 장군의 상입니다.<br><br>2026년은 야망이 폭발하는 해이나, 과도한 열정으로 <span class='highlight-txt'>'엔진 과열'</span>이 우려됩니다. 천하를 얻으려면 무엇보다 <span class='highlight-txt'>'압도적인 에너지'</span>가 뒷받침되어야 합니다.",
+        desc: "당신의 관상은 목표를 향해 거침없이 돌진하는 <span class='highlight-txt'>'뭐든 밀어붙이는 상'</span>입니다.<br><br>2026년은 야망이 폭발하는 해이나, 과도한 열정으로 <span class='highlight-txt'>'엔진 과열'</span>이 우려됩니다. 천하를 얻으려면 무엇보다 <span class='highlight-txt'>'압도적인 에너지'</span>가 뒷받침되어야 합니다.",
         
         productSub: "지친 나를 위한",
         productTitle: "원방공진단 수[壽]", // 닥터 수 처방 제품명
@@ -23,7 +23,7 @@ const resultData = {
         title: "차갑지만 완벽한<br>\"냉철한 전략가\"",
         img: "./images/result_b.jpg",
         
-        desc: "당신의 관상은 예리하고 지적인 책사의 상입니다.<br><br>2026년은 두뇌 회전이 빨라지는 만큼 <span class='highlight-txt'>'뇌 과부하'</span>가 우려됩니다. 머리로 쏠린 열을 내리고 <span class='highlight-txt'>'흐트러짐 없는 총기'</span>를 유지하는 것이 만사형통의 열쇠입니다.",
+        desc: "당신의 관상은 예리하고 지적인 책사이며, <span class='highlight-txt'>'가슴보다 머리가 지배하는 상'</span>입니다.<br><br>2026년은 두뇌 회전이 빨라지는 만큼 <span class='highlight-txt'>'뇌 과부하'</span>가 우려됩니다. 머리로 쏠린 열을 내리고 <span class='highlight-txt'>'흐트러짐 없는 총기'</span>를 유지하는 것이 만사형통의 열쇠입니다.",
         
         productSub: "흐릿해진 머리를 맑게",
         productTitle: "사향공진단 수[壽]",
@@ -39,7 +39,7 @@ const resultData = {
         title: "금은보화 뿌리는<br>\"플렉스(Flex) 황제\"",
         img: "./images/result_c.jpg",
         
-        desc: "당신의 관상은 재물복이 타고난 부호의 상입니다.<br><br>2026년은 더 높은 곳으로 비상할 기회이나, 화려한 겉모습 속에 내실을 놓칠 수 있습니다. <span class='highlight-txt'>'가장 근본적이고 귀한 것'</span>을 챙겨야 롱런할 수 있음을 명심하세요.",
+        desc: "당신의 관상은 재물복이 타고난 <span class='highlight-txt'>'돈도 정, 사람도 정인 상'</span>입니다.<br><br>2026년은 더 높은 곳으로 비상할 기회이나, 화려한 겉모습 속에 내실을 놓칠 수 있습니다. <span class='highlight-txt'>'가장 근본적이고 귀한 것'</span>을 챙겨야 롱런할 수 있음을 명심하세요.",
         
         productSub: "가장 귀한 것을 선물하세요",
         productTitle: "원방공진단 수[壽]",
@@ -55,7 +55,7 @@ const resultData = {
         title: "덕으로 다스리는<br>\"성군 세종대왕\"",
         img: "./images/result_d.jpg",
         
-        desc: "당신의 관상은 인자하고 덕이 넘치는 성군의 상입니다.<br><br>허나 모든 짐을 혼자 짊어지려는 책임감 때문에 2026년에는 <span class='highlight-txt'>'속앓이'</span>를 할 수 있습니다. 답답한 흐름을 뚫고 <span class='highlight-txt'>'마음의 평안'</span>을 찾는 것이 건강의 핵심입니다.",
+        desc: "당신의 관상은 인자하고 덕이 넘치며 <span class='highlight-txt'>'사람을 편하게 만드는 상'</span>입니다.<br><br>허나 모든 짐을 혼자 짊어지려는 책임감 때문에 2026년에는 <span class='highlight-txt'>'속앓이'</span>를 할 수 있습니다. 답답한 흐름을 뚫고 <span class='highlight-txt'>'마음의 평안'</span>을 찾는 것이 건강의 핵심입니다.",
         
         productSub: "답답한 속을 편안하게",
         productTitle: "녹용경옥고 수[壽]",
@@ -71,7 +71,7 @@ const resultData = {
         title: "바람처럼 자유로운<br>\"독야청청 선비\"",
         img: "./images/result_e.jpg",
         
-        desc: "당신의 관상은 구속받지 않는 고고한 학의 상입니다.<br><br>2026년에는 역마살과 함께 이동수가 많습니다. 낯선 환경에서도 탈이 나지 않으려면, 외부 풍파를 막아내는 <span class='highlight-txt'>'단단한 방어막(면역)'</span>이 필수입니다.",
+        desc: "당신의 관상은 구속받지 않는 고고하며 <span class='highlight-txt'>'속세에 발 안 담그는 상'</span>입니다.<br><br>2026년에는 역마살과 함께 이동수가 많습니다. 낯선 환경에서도 탈이 나지 않으려면, 외부 풍파를 막아내는 <span class='highlight-txt'>'단단한 방어막(면역)'</span>이 필수입니다.",
         
         productSub: "면역력과 기초체력",
         productTitle: "녹용경옥고 수[壽]",
@@ -87,7 +87,7 @@ const resultData = {
         title: "속세를 떠난<br>\"안빈낙도 도인\"",
         img: "./images/result_f.jpg",
         
-        desc: "당신의 관상은 욕심 없이 평화로운 신선의 상입니다.<br><br>다 좋으나 2026년에는 물 흐르듯 살다 자칫 활력이 떨어질 수 있습니다. 고인 물이 되지 않으려면 <span class='highlight-txt'>'마르지 않는 진액'</span>과 <span class='highlight-txt'>'생기'</span>를 채우는 것이 급선무입니다.",
+        desc: "당신의 관상은 욕심 없이 평화로우며 <span class='highlight-txt'>'욕심이 빠진 평온한 상'</span>입니다.<br><br>다 좋으나 2026년에는 물 흐르듯 살다 자칫 활력이 떨어질 수 있습니다. 고인 물이 되지 않으려면 <span class='highlight-txt'>'마르지 않는 진액'</span>과 <span class='highlight-txt'>'생기'</span>를 채우는 것이 급선무입니다.",
         
         productSub: "마르지 않는 활력 충전",
         productTitle: "녹용경옥고 수[壽]",
@@ -103,7 +103,7 @@ const resultData = {
         title: "춤추고 노래하는<br>\"흥부자 풍류왕\"",
         img: "./images/result_g.jpg",
         
-        desc: "당신의 관상은 사람을 끌어당기는 도화살 가득한 연예인의 상입니다.<br><br>2026년에도 모임이 끊이지 않겠으나, 간과 체력이 비명을 지를 수 있습니다. <span class='highlight-txt'>노는 것도 집중력이 필수</span>입니다.",
+        desc: "당신의 관상은 사람을 끌어당기는 도화살 가득한 <span class='highlight-txt'>'기운이 새어나오는 상'</span>입니다.<br><br>2026년에도 모임이 끊이지 않겠으나, 간과 체력이 비명을 지를 수 있습니다. <span class='highlight-txt'>노는 것도 집중력이 필수</span>입니다.",
         
         productSub: "번아웃 없는 집중력",
         productTitle: "총명공진단 수[壽]", // 텍스트 내용에 맞춰 제품명 변경
@@ -119,7 +119,7 @@ const resultData = {
         title: "눈물 많은<br>\"유리멘탈 감성 군주\"",
         img: "./images/result_h.jpg",
         
-        desc: "당신의 관상은 감수성이 풍부한 시인의 상입니다.<br><br>2026년, 섬세한 감각으로 성취를 얻겠으나 감정 기복으로 기운이 약해질 수 있습니다. 강한 자극보다는 <span class='highlight-txt'>'부드럽게 스며드는 힘'</span>으로 몸을 보양해야 합니다.",
+        desc: "당신의 관상은 감수성이 풍부한 <span class='highlight-txt'>'마음이 먼저 움직이는 상'</span>입니다.<br><br>2026년, 섬세한 감각으로 성취를 얻겠으나 감정 기복으로 기운이 약해질 수 있습니다. 강한 자극보다는 <span class='highlight-txt'>'부드럽게 스며드는 힘'</span>으로 몸을 보양해야 합니다.",
         
         productSub: "부드럽게 스며드는 보양",
         productTitle: "부드러운 공진단 처방", // 상세 텍스트 맥락 반영
