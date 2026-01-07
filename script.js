@@ -1,3 +1,4 @@
+let currentUserPhone = ""; // 응모 완료한 사용자의 번호를 임시 저장하는 변수
 // 1. 결과 데이터 세팅 (디자인이 적용된 텍스트)
 const resultData = {
     // [Type 1] 불도저 (a)
