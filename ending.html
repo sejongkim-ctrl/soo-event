@@ -60,26 +60,30 @@
             margin-top: 30px;
         }
         footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
+/* 기존 #share-modal 관련 스타일을 삭제하고 아래로 교체 */
         #share-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;   /* 화면 전체 너비 */
-            height: 100vh;  /* 화면 전체 높이 */
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 9999;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0, 0, 0, 0.8) !important;
             display: flex !important;
-            align-items: center !important;   /* 세로 중앙 정렬 */
-            justify-content: center !important; /* 가로 중앙 정렬 */
+            align-items: center !important;   /* 세로 중앙 */
+            justify-content: center !important; /* 가로 중앙 */
+            z-index: 99999 !important;
+            padding: 20px !important;
+            box-sizing: border-box !important;
         }
+        
         #share-modal > div {
-        background: #fff;
-        padding: 30px;
-        border-radius: 16px;
-        text-align: center;
-        width: 85%;
-        max-width: 320px;
-        box-sizing: border-box;
+            background: #fff !important;
+            padding: 30px !important;
+            border-radius: 16px !important;
+            text-align: center !important;
+            width: 100% !important;
+            max-width: 320px !important;
+            position: relative !important; /* 위치 고정 보조 */
         }
     </style>
 </head>
