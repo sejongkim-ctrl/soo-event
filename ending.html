@@ -47,7 +47,9 @@
         .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; }
         
         /* [수정] 버튼 텍스트 색상 및 링크 장식 제거 */
-        .btn-golden { 
+        .btn-golden {
+            position: relative; /* 빛 레이어의 기준점 */
+            overflow: hidden;   /* 빛 레이어가 버튼 밖으로 나가지 않게 */
             width: 100%; 
             background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); 
             border: none; 
@@ -59,6 +61,24 @@
             margin-top: 30px; 
             color: #1a1a1a !important; 
             text-decoration: none !important; 
+        }
+        
+        /* 빛나는 효과 레이어 */
+        .btn-golden .shiny {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
         }
         footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
 
@@ -170,7 +190,9 @@
                 </div>
             </div>
 
-            <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">응모 완료하기</button>
+        <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">
+            <div class="shiny"></div><span id="btn-text">응모 완료하기</span>
+        </button>
         </form>
         <footer><p>© 2026 SOO BRAND. All rights reserved.</p></footer>
     </div>
@@ -229,9 +251,8 @@
             // [수정] 구글 시트 데이터 전송 오류 해결 (전송 방식 보완)
             fetch(scriptURL, { 
                 method: 'POST',
-                mode: 'no-cors', 
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(data)
+                mode: 'no-cors', // 구글 서버 응답 보안 정책 대응
+                body: new FormData(form) // JSON 대신 폼 데이터를 통째로 전송하여 유실 방지
             })
             .then(() => {
                 currentUserPhone = data.phone;
