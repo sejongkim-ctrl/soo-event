@@ -271,10 +271,12 @@
             });
 
             if (currentUserPhone) {
-                fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify({ action: "track_share", phone: currentUserPhone })
+           fetch(scriptURL, { 
+            method: 'POST',
+            mode: 'no-cors', // 구글 시트 전송 시 유효
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // 형식 변경
+            body: new URLSearchParams(data) // 데이터 전송 방식 변경
+        })
                 }).then(() => {
                     alert("공유 완료! 확률이 반영되었습니다.");
                     location.reload();
