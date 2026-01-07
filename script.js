@@ -1,3 +1,4 @@
+let currentUserPhone = ""; // 응모 완료한 사용자의 번호를 임시 저장하는 변수
 // 1. 결과 데이터 세팅 (디자인이 적용된 텍스트)
 const resultData = {
     // [Type 1] 불도저 (a)
@@ -199,5 +200,54 @@ function goToKakaoChannel() {
     
     // 새 창으로 열기
     window.open(kakaoChannelLink, "_blank");
+}
+// 1. 공유 유도 모달창 표시
+function showShareModal() {
+    const modalHtml = `
+        <div id="share-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px;">
+            <div style="background:#fff; padding:30px; border-radius:16px; text-align:center; width:100%; max-width:320px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                <h3 style="margin-bottom:15px; color:#82181C; font-size:20px;">🎉 응모 완료!</h3>
+                <p style="font-size:14px; color:#666; line-height:1.6; word-break:keep-all;">결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!</p>
+                <button onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer; font-size:15px;">
+                    💬 카카오톡으로 공유하기
+                </button>
+                <button onclick="location.reload()" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">
+                    그냥 닫기
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+
+// 2. 카카오톡 공유 실행 및 구글 시트 횟수 전송
+function shareAndTrack() {
+    // 카카오톡 공유 실행
+    if (window.Kakao) {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: "2026 '한 방' 테스트 결과 확인하기",
+                description: "내 관상에 딱 맞는 보약 처방은?",
+                imageUrl: "https://thesoo.co/images/share_thumb.jpg", // 실제 썸네일 경로로 수정 필요
+                link: { mobileWebUrl: 'https://simte.xyz/thesoo', webUrl: 'https://simte.xyz/thesoo' }
+            }
+        });
+    }
+
+    // 구글 시트로 공유 횟수 전송 (트래킹)
+    if (currentUserPhone) {
+        fetch(scriptURL, { // scriptURL은 기존에 정의된 GAS 주소 변수명
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({
+                action: "track_share",
+                phone: currentUserPhone
+            })
+        }).then(() => {
+            alert("공유가 완료되었습니다! 당첨 확률이 올라갑니다.");
+            location.reload(); // 페이지 새로고침하여 모달 닫기
+        });
+    }
 }
 // ... 기존 함수들 (openProductPage, goToKakaoChannel, shareKakao) 그대로 유지 ...
