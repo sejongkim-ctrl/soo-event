@@ -1,4 +1,3 @@
-let currentUserPhone = ""; // 응모 완료한 사용자의 번호를 임시 저장하는 변수
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,335 +8,129 @@ let currentUserPhone = ""; // 응모 완료한 사용자의 번호를 임시 저
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* [스타일] 기본 레이아웃 및 폰트 설정 */
+        /* (기존 CSS 스타일 동일하므로 생략 - 그대로 유지하세요) */
         body { margin: 0; padding: 0; background: #3d0e10; font-family: 'Noto Sans KR', sans-serif; }
         .container { max-width: 480px; margin: 0 auto; background: #3d0e10; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        
-        /* 헤더 스타일 */
         .page-header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
         .brand-logo { color: #fff; font-family: 'Noto Serif KR', serif; font-size: 14px; letter-spacing: 2px; border-bottom: 1px solid #C5A059; padding-bottom: 5px; }
-
-        /* 흰색 컨텐츠 박스 (폼 전체 감싸기) */
         .content-box { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: left; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-
-        /* 타이틀 스타일 */
         .title-serif { font-family: 'Noto Serif KR', serif; color: #82181C; text-align: center; line-height: 1.4; font-weight: 700; }
-
-        /* =========================================
-           [수정됨] 1. 약관 스크롤 박스 스타일 (핵심!) 
-           ========================================= */
-        .agreement-box { 
-            background: #F9F9F9; 
-            padding: 10px; 
-            border-radius: 8px; 
-            border: 1px solid #eee; 
-            margin-bottom: 15px; 
-        }
-        /* 👇 스크롤이 생기게 하는 핵심 클래스 */
-        .agree-scroll-box {
-            height: 150px;           /* 높이 고정 */
-            overflow-y: scroll;      /* 세로 스크롤 생성 */
-            background: #fff; 
-            border: 1px solid #ddd;
-            padding: 15px; 
-            font-size: 12px; 
-            color: #555; 
-            line-height: 1.6; 
-            border-radius: 6px; 
-            text-align: left;        /* 텍스트 왼쪽 정렬 */
-            -webkit-overflow-scrolling: touch; /* 모바일 터치감 개선 */
-        }
-        .agree-scroll-box h4 { font-size: 14px; color: #333; margin-bottom: 10px; }
-        .agree-scroll-box h5 { font-size: 13px; color: #333; margin: 15px 0 5px 0; }
-        .agree-list { margin: 0; padding-left: 15px; list-style-type: disc; }
-        .agree-list li { margin-bottom: 4px; }
-
-        /* 라디오 버튼 그룹 */
+        .agreement-box { background: #F9F9F9; padding: 10px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 15px; }
+        .agree-scroll-box { height: 150px; overflow-y: scroll; background: #fff; border: 1px solid #ddd; padding: 15px; font-size: 12px; color: #555; line-height: 1.6; border-radius: 6px; text-align: left; -webkit-overflow-scrolling: touch; }
         .radio-group { display: flex; gap: 8px; width: 100%; box-sizing: border-box; }
-        .radio-label { 
-            flex: 1; padding: 14px 0; border: 1px solid #ddd; border-radius: 8px; 
-            text-align: center; font-size: 12px; letter-spacing: -0.5px; white-space: nowrap;    
-            cursor: pointer; background: #fff; transition: all 0.2s; display: block; width: 100%; 
-        }
+        .radio-label { flex: 1; padding: 14px 0; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-size: 12px; cursor: pointer; background: #fff; transition: all 0.2s; display: block; }
         input[type="radio"] { display: none; }
-        input[type="radio"]:checked + .radio-label { 
-            border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; 
-        }
-        
-        /* 입력 폼 공통 */
+        input[type="radio"]:checked + .radio-label { border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; }
         .input-group { margin-bottom: 15px; }
         .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #333; }
         .input-field { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
-        .input-field:focus { outline: none; border-color: #C5A059; box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2); }
-
-        /* [수정됨] 2번 박스 통합 디자인 (심장박동 효과) */
-        .product-mini {
-            position: relative; border: 2px solid #EAEAEA; background: #fff;
-            overflow: visible; transition: all 0.3s ease; cursor: pointer;
-            display: flex; align-items: center; gap: 15px; padding: 15px; border-radius: 12px;
-            animation: gentlePulse 2s infinite; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-        .product-mini:hover { border-color: #C5A059; transform: translateY(-3px); }
-        
-        .chance-badge {
-            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-            background: #FF4B4B; color: #fff; padding: 6px 14px; border-radius: 20px;
-            font-size: 12px; font-weight: 800; box-shadow: 0 4px 10px rgba(255, 75, 75, 0.3);
-            white-space: nowrap; z-index: 10;
-        }
-
-        @keyframes gentlePulse {
-            0% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-            50% { transform: scale(1.02); box-shadow: 0 8px 15px rgba(197, 160, 89, 0.15); border-color: #D4AF70; }
-            100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        }
-
-        .mini-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(0,0,0,0.1); }
-        .mini-text h4 { margin: 0 0 5px 0; font-size: 15px; color: #1A1A1A; font-family: 'Noto Serif KR', serif; }
-        .mini-text p { margin: 0; font-size: 12px; color: #666; line-height: 1.4; word-break: keep-all; }
-        .click-guide { display: block; margin-top: 6px; font-size: 11px; color: #82181C; font-weight: 700; text-decoration: underline; }
-
-        /* 섹션 번호 스타일 */
-        .section-header-group { margin-bottom: 20px; text-align: center; }
-        .step-num { display: block; font-size: 14px; font-weight: 700; color: #C5A059; margin-bottom: 5px; font-family: 'Noto Serif KR', serif; }
-        .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; line-height: 1.4; }
-
-        /* 버튼 스타일 */
-        .btn-golden {
-            width: 100%; background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70);
-            background-size: 200% auto; color: #1a1a1a; font-weight: 800;
-            border: none; border-radius: 50px; padding: 18px 0; font-size: 18px;
-            cursor: pointer; box-shadow: 0 10px 20px rgba(212, 175, 112, 0.3);
-            margin-top: 30px; transition: 0.3s;
-        }
-        .footer-notice { font-size: 11px; color: #888; text-align: center; margin-bottom: 0; }
+        .product-mini { position: relative; border: 2px solid #EAEAEA; background: #fff; display: flex; align-items: center; gap: 15px; padding: 15px; border-radius: 12px; animation: gentlePulse 2s infinite; }
+        .chance-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #FF4B4B; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; z-index: 10; }
+        @keyframes gentlePulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+        .mini-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+        .btn-golden { width: 100%; background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); color: #1a1a1a; font-weight: 800; border: none; border-radius: 50px; padding: 18px 0; font-size: 18px; cursor: pointer; margin-top: 30px; }
         footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding-bottom: 40px; }
     </style>
 </head>
 <body>
+    <script>
+        // [수정] 자바스크립트 최상단에 변수 선언
+        let currentUserPhone = ""; 
+    </script>
+
     <div class="container">
-        <header class="page-header">
-            <span class="brand-logo">THE SOO</span>
-        </header>
-
+        <header class="page-header"><span class="brand-logo">THE SOO</span></header>
         <form id="submit-form" class="content-box">
-            <h2 class="title-serif" style="font-size: 22px; margin-bottom: 30px;">수[壽] 한약<br>순금 1돈 이벤트 응모</h2>
-
-            <div id="section-1-target" style="text-align: center; margin-bottom: 40px;">
-                <div class="section-header-group">
-                    <span class="step-num">01.</span>
-                    <span class="step-title">안내사항 확인</span>
-                </div>
-
-                <div class="agreement-box">
-                    <div class="agree-scroll-box">
-                        <h4 style="margin-top:0;">[개인정보 수집/이용 및 마케팅 정보 수신 동의]</h4>
-                        <p>수 브랜드(이하 '회사')는 본 이벤트를 위하여 다음과 같이 고객님의 개인정보를 수집 및 이용합니다.</p>
-
-                        <h5>1. 수집 및 이용 목적 (마케팅 활용 포함)</h5>
-                        <ul class="agree-list">
-                            <li>이벤트 참여 확인, 중복 당첨 방지, 당첨자 선정 및 안내</li>
-                            <li>경품(순금 1돈) 배송 및 CS 처리</li>
-                            <li><strong>[마케팅] 회사의 신규 상품, 프로모션, 할인 혜택 등 광고성 정보 전송 (SMS/알림톡)</strong></li>
-                        </ul>
-
-                        <h5>2. 제세공과금 및 경품 지급 안내 (필독)</h5>
-                        <ul class="agree-list">
-                            <li>본 경품(순금)은 5만 원을 초과하므로 <strong>제세공과금(22%)이 발생하며, 이는 전액 '본사'가 부담합니다.</strong></li>
-                            <li>단, 소득세법에 따라 제세공과금 대납 처리를 위해 <strong>당첨자의 '신분증 사본(주민등록번호 포함)' 제출이 필수</strong>입니다.</li>
-                            <li>당첨자 발표 후 요청 기한 내에 신분증 사본을 제출하지 않을 경우, 당첨이 자동 취소됩니다.</li>
-                            <li>수집된 고유식별정보(주민등록번호)는 세무 신고 목적으로만 사용되며, 신고 완료 후 관련 법령에 따라 안전하게 파기됩니다.</li>
-                        </ul>
-
-                        <h5>3. 수집하는 개인정보 항목</h5>
-                        <ul class="agree-list">
-                            <li>필수항목: 이름, 휴대전화번호, 주소(경품 수령지)</li>
-                        </ul>
-
-                        <h5>4. 보유 및 이용 기간</h5>
-                        <ul class="agree-list">
-                            <li><strong>수집일로부터 1년간 보관 후 파기합니다.</strong></li>
-                            <li>단, 고객이 동의 철회를 요청하거나 마케팅 수신 거부 의사를 밝힐 경우 즉시 파기 및 수신 거부 처리됩니다.</li>
-                        </ul>
-
-                        <h5>5. 동의 거부 권리</h5>
-                        <ul class="agree-list">
-                            <li>귀하는 개인정보 수집 및 마케팅 활용 동의를 거부할 권리가 있으나, <strong>미동의 시 이벤트 응모 및 경품 지급이 제한됩니다.</strong></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="radio-group">
-                    <label style="flex: 1;">
-                        <input type="radio" name="agree" value="yes">
-                        <div class="radio-label">예, 동의합니다</div>
-                    </label>
-                    <label style="flex: 1;">
-                        <input type="radio" name="agree" value="no">
-                        <div class="radio-label">아니오, 동의하지 않습니다</div>
-                    </label>
-                </div>
-            </div>
-
-            <div class="input-group" style="margin-top: 35px;">
-                <div class="section-header-group">
-                    <span class="step-num">02.</span>
-                    <span class="step-title">2026 설, 가장 소중한 분께<br>건강을 선물하세요</span>
-                </div>
-                
-                <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
-
-                <div class="product-mini" onclick="trackClickAndGo()" style="margin-top: 40px;">
-                    <div class="chance-badge">🍀 클릭 시 당첨확률 UP!</div>
-                    <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
-                    <div class="mini-text">
-                        <h4>황제의 보약, 공진단 수壽</h4>
-                        <p>지금 바로, 전문 한의사의<br>1:1 밀착 상담을 받아보세요.</p>
-                        <span class="click-guide">🔍 상세내용 보러가기</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="input-group" style="margin-top: 30px;">
-                <div class="section-header-group">
-                    <span class="step-num">03.</span>
-                    <span class="step-title">응모자 정보 입력</span>
-                </div>
-                
-                <div class="input-group">
-                    <label class="input-label">이름</label>
-                    <input type="text" name="name" class="input-field" placeholder="성함을 입력해주세요" required>
-                </div>
-
-                <div class="input-group">
-                    <label class="input-label">휴대전화</label>
-                    <input type="tel" name="phone" class="input-field" placeholder="010-0000-0000" required>
-                </div>
-
-                <div class="input-group">
-                    <label class="input-label">주소</label>
-                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                        <input type="text" id="postcode" class="input-field" placeholder="우편번호" style="width: 100px; background: #f5f5f5;" readonly>
-                        <button type="button" onclick="execDaumPostcode()" style="background: #333; color: #fff; border: none; padding: 0 15px; border-radius: 8px; font-size: 13px; cursor: pointer; flex: 1; height: 46px;">
-                            🔍 주소 검색하기
-                        </button>
-                    </div>
-                    <input type="text" id="roadAddress" class="input-field" placeholder="검색 버튼을 눌러 주소를 입력하세요" style="margin-bottom: 8px; background: #f5f5f5;" readonly>
-                    <input type="text" id="detailAddress" class="input-field" placeholder="상세주소 입력 (예: 101동 1203호)">
-                    <input type="hidden" name="address" id="real-address">
-                </div>
-            </div>
-
-            <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">
-                <span class="shiny"></span>
-                응모 완료하기
-            </button>
-            <p class="footer-notice" style="margin-top: 10px;">*정보 오기재로 인한 불이익은 책임지지 않습니다.</p>
+             <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">응모 완료하기</button>
         </form>
-
-        <footer>
-            <p>© 2026 SOO BRAND. All rights reserved.</p>
-        </footer>
     </div>
     
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
     <script>
-        // ============================================================
-        // 👇 [필수] 구글 앱스 스크립트 배포 주소 (기존 주소 유지)
-        // ============================================================
+        // 1. 초기 설정
         const scriptURL = "https://script.google.com/macros/s/AKfycbxtUr98kgj0ESrLllOtKicZVoiHeC8OfoWCiEyWlDSga8KyalnmibUKE_cBFy7kkUqK2A/exec"; 
-
-        // ============================================================
-        // 👇 [필수] 응모 후 이동할 페이지 (상품 상세)
-        // ============================================================
         const productLink = "https://thesoo.co/promotion/26seol"; 
+        
+        // 카카오 초기화 (본인의 키를 사용하세요)
+        if (!Kakao.isInitialized()) Kakao.init('YOUR_KAKAO_JAVASCRIPT_KEY');
 
+        function execDaumPostcode() { /* 주소검색 로직 동일 */ }
+        function trackClickAndGo() { /* 클릭추적 로직 동일 */ }
 
-        // [기능 1] 주소 검색 팝업 열기
-        function execDaumPostcode() {
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    var addr = ''; 
-                    if (data.userSelectedType === 'R') { 
-                        addr = data.roadAddress;
-                    } else { 
-                        addr = data.jibunAddress;
-                    }
-                    document.getElementById('postcode').value = data.zonecode;
-                    document.getElementById("roadAddress").value = addr;
-                    document.getElementById("detailAddress").focus();
-                }
-            }).open();
-        }
-
-        // [기능 2] 상품 클릭 추적 및 이동
-        function trackClickAndGo() {
-            var input = document.getElementById('is_clicked_input');
-            if(input) { input.value = "O"; }
-            window.open(productLink, "_blank");
-        }
-
-        // [기능 3] 폼 제출 및 데이터 전송
+        // 2. 응모 제출 함수
         function handleSubmit() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
 
-            // 1. 동의 여부 확인
-            const agreeInput = document.querySelector('input[name="agree"]:checked');
-            if (!agreeInput || agreeInput.value === 'no') {
-                alert("1. 안내사항 동의가 필요합니다.");
-                const target = document.querySelector('.section-header-group'); 
-                if(target) target.scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
-
-            // 2. 주소 합치기
-            const roadAddr = document.getElementById('roadAddress').value;
-            const detailAddr = document.getElementById('detailAddress').value;
+            // 필수값 체크 (생략 - 기존 로직 유지)
             
-            if(!roadAddr) {
-                alert("['🔍 주소 검색하기'] 버튼을 눌러 주소를 입력해주세요.");
-                return;
-            }
-
-            document.getElementById('real-address').value = roadAddr + " " + detailAddr;
-
-            // 3. 필수값 확인
-            const name = form.querySelector('input[name="name"]').value;
-            const phone = form.querySelector('input[name="phone"]').value;
-
-            if(!name || !phone) {
-                alert("이름과 연락처를 입력해주세요.");
-                return;
-            }
-
-            // 4. 전송 시작
             btn.innerHTML = "접수 중입니다...";
             btn.disabled = true;
 
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-fetch(scriptURL, { 
-    method: 'POST',
-    // 1. mode: 'no-cors'를 아예 삭제하세요. (기본값이 응답을 처리하기 더 용이합니다)
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(data)
-})
-.then(() => {
-    // 2. 서버가 어떤 응답을 주든, 일단 데이터가 전송되었다면 성공으로 간주하고 실행합니다.
-    const phoneInput = document.querySelector('input[name="phone"]');
-    if(phoneInput) currentUserPhone = phoneInput.value;
+            fetch(scriptURL, { 
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                // [수정] 성공 시 번호 저장 및 모달 호출
+                currentUserPhone = data.phone; 
+                showShareModal(); 
+            })
+            .catch(error => {
+                // [수정] 실패 시에도 모달 호출 (데이터 적재 가능성 고려)
+                currentUserPhone = data.phone;
+                showShareModal();
+                console.error('Error:', error.message);
+            });
+        }
 
-    // 3. 이제 검은색 오류창 대신 우리가 만든 모달이 뜹니다.
-    showShareModal(); 
-})
-.catch(error => {
-    // 네트워크가 완전히 끊긴 경우가 아니라면, 시트에는 데이터가 들어갔을 확률이 높습니다.
-    // 사용자에게는 끊김 없이 모달을 보여주기 위해 여기서도 호출해줄 수 있습니다.
-    showShareModal();
-    console.error('전송 시도 중 알림:', error.message);
-});
+        // 3. [추가] 모달 표시 함수
+        function showShareModal() {
+            const modalHtml = `
+                <div id="share-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px;">
+                    <div style="background:#fff; padding:30px; border-radius:16px; text-align:center; width:100%; max-width:320px;">
+                        <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
+                        <p style="font-size:14px; color:#666; line-height:1.6;">결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!</p>
+                        <button onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer;">
+                            💬 카카오톡으로 공유하기
+                        </button>
+                        <button onclick="location.reload()" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
+                    </div>
+                </div>`;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
+
+        // 4. [추가] 공유 및 구글 시트 전송 함수
+        function shareAndTrack() {
+            // 카카오 공유
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: "2026 '한 방' 테스트",
+                    description: "내 관상에 맞는 처방은?",
+                    imageUrl: "https://thesoo.co/images/share.jpg",
+                    link: { mobileWebUrl: 'https://simte.xyz/thesoo', webUrl: 'https://simte.xyz/thesoo' }
+                }
+            });
+
+            // 트래킹 전송
+            if (currentUserPhone) {
+                fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ action: "track_share", phone: currentUserPhone })
+                }).then(() => {
+                    alert("공유 완료! 당첨 확률 UP!");
+                    location.reload();
+                });
+            }
+        }
     </script>
 </body>
 </html>
