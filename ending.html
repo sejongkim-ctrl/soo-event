@@ -295,11 +295,14 @@
                     method: 'POST',
                     mode: 'no-cors',
                     body: new URLSearchParams({ action: "track_share", phone: currentUserPhone })
-                }).then(() => {
-                    alert("공유 완료! 당첨확률이 올라갔어요🆙");
-            // 모달 내 버튼 텍스트를 변경하여 재참여 유도
+            }).then(() => {
+                // location.reload(); // 👈 페이지 리셋을 막기 위해 이 줄을 삭제하거나 주석 처리합니다.
+            
+                // 버튼 문구를 변경하여 연속 공유를 유도합니다.
                 const shareBtn = document.querySelector('#share-modal button');
                 if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 확률 높이기";
+            
+                alert("공유가 완료되었습니다! 계속 공유하시면 당첨 확률이 더 올라갑니다.");
             });
             }
         }
