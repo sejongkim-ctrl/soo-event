@@ -45,37 +45,38 @@
         .section-header-group { margin-bottom: 20px; text-align: center; }
         .step-num { display: block; font-size: 14px; font-weight: 700; color: #C5A059; margin-bottom: 5px; }
         .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; }
-        .btn-golden {
-            width: 100%;
-            background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70);
-            color: #1a1a1a !important;   /* 👈 4번 문제: 검은색 강제 고정 */
-            text-underline-position: none;
-            text-decoration: none !important; /* 👈 4번 문제: 파란색 링크 효과 제거 */
-            font-weight: 800;
-            border: none;
-            border-radius: 50px;
-            padding: 18px 0;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 30px;
+        
+        /* [수정] 버튼 텍스트 색상 및 링크 장식 제거 */
+        .btn-golden { 
+            width: 100%; 
+            background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); 
+            border: none; 
+            border-radius: 50px; 
+            padding: 18px 0; 
+            font-size: 18px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            margin-top: 30px; 
+            color: #1a1a1a !important; 
+            text-decoration: none !important; 
         }
         footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
-/* 기존 #share-modal 관련 스타일을 삭제하고 아래로 교체 */
+
+        /* [추가] 모달 정중앙 정렬 */
         #share-modal {
             position: fixed !important;
             top: 0 !important;
             left: 0 !important;
             width: 100% !important;
             height: 100% !important;
-            background: rgba(0, 0, 0, 0.8) !important;
-            display: flex !important;
-            align-items: center !important;   /* 세로 중앙 */
-            justify-content: center !important; /* 가로 중앙 */
+            background: rgba(0,0,0,0.8) !important;
             z-index: 99999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
             padding: 20px !important;
             box-sizing: border-box !important;
         }
-        
         #share-modal > div {
             background: #fff !important;
             padding: 30px !important;
@@ -83,7 +84,6 @@
             text-align: center !important;
             width: 100% !important;
             max-width: 320px !important;
-            position: relative !important; /* 위치 고정 보조 */
         }
     </style>
 </head>
@@ -178,12 +178,12 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-        // 변수 설정
+        // 변수 설정 유지
         let currentUserPhone = ""; 
         const scriptURL = "https://script.google.com/macros/s/AKfycbxtUr98kgj0ESrLllOtKicZVoiHeC8OfoWCiEyWlDSga8KyalnmibUKE_cBFy7kkUqK2A/exec";
         const productLink = "https://thesoo.co/promotion/26seol";
 
-        // 카카오 초기화 (사용자 키 입력 필요)
+        // 카카오 초기화 유지
         if (!Kakao.isInitialized()) Kakao.init('10e7940fa3815a7f872120b57db56100');
 
         function execDaumPostcode() {
@@ -204,19 +204,17 @@
         function handleSubmit() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
-        
-            // 1. 동의 확인 및 스크롤 복구
+
+            // [수정] 1번 동의 미체크 시 스크롤 이동 기능 복구
             const agreeInput = document.querySelector('input[name="agree"]:checked');
             if (!agreeInput || agreeInput.value === 'no') { 
                 alert("안내사항 동의가 필요합니다."); 
-                // 👈 3번 문제: ID 'section-1-target'으로 스크롤 이동
                 const target = document.getElementById('section-1-target');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 return; 
             }
-            // 데이터 정리
+
+            // 주소 필수 확인
             const roadAddr = document.getElementById('roadAddress').value;
             const detailAddr = document.getElementById('detailAddress').value;
             if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
@@ -228,18 +226,18 @@
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            // [수정] 성공/실패 여부와 관계없이 모달을 띄우는 로직
+            // [수정] 구글 시트 데이터 전송 오류 해결 (전송 방식 보완)
             fetch(scriptURL, { 
                 method: 'POST',
-                headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify(data)
+                mode: 'no-cors', 
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(data)
             })
             .then(() => {
                 currentUserPhone = data.phone;
                 showShareModal();
             })
             .catch(error => {
-                // 구글 시트 특유의 응답 지연 시에도 모달을 띄워 사용자 경험 보호
                 currentUserPhone = data.phone;
                 showShareModal();
                 console.error('Error:', error.message);
@@ -248,8 +246,8 @@
 
         function showShareModal() {
             const modalHtml = `
-                <div id="share-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px;">
-                    <div style="background:#fff; padding:30px; border-radius:16px; text-align:center; width:100%; max-width:320px;">
+                <div id="share-modal">
+                    <div>
                         <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
                         <p style="font-size:14px; color:#666; line-height:1.6;">결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!</p>
                         <button onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer;">💬 카카오톡으로 공유하기</button>
@@ -260,6 +258,7 @@
         }
 
         function shareAndTrack() {
+            // [수정] 카카오 공유 기능 정상화
             Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
@@ -271,12 +270,10 @@
             });
 
             if (currentUserPhone) {
-           fetch(scriptURL, { 
-            method: 'POST',
-            mode: 'no-cors', // 구글 시트 전송 시 유효
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // 형식 변경
-            body: new URLSearchParams(data) // 데이터 전송 방식 변경
-        })
+                fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: new URLSearchParams({ action: "track_share", phone: currentUserPhone })
                 }).then(() => {
                     alert("공유 완료! 확률이 반영되었습니다.");
                     location.reload();
