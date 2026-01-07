@@ -173,11 +173,18 @@
         function handleSubmit() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
-
-            // 동의 확인
+        
+            // 1. 동의 확인 및 스크롤 복구
             const agreeInput = document.querySelector('input[name="agree"]:checked');
-            if (!agreeInput || agreeInput.value === 'no') { alert("안내사항 동의가 필요합니다."); return; }
-
+            if (!agreeInput || agreeInput.value === 'no') { 
+                alert("안내사항 동의가 필요합니다."); 
+                // 👈 3번 문제: ID 'section-1-target'으로 스크롤 이동
+                const target = document.getElementById('section-1-target');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                return; 
+            }
             // 데이터 정리
             const roadAddr = document.getElementById('roadAddress').value;
             const detailAddr = document.getElementById('detailAddress').value;
