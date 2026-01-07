@@ -296,9 +296,11 @@
                     mode: 'no-cors',
                     body: new URLSearchParams({ action: "track_share", phone: currentUserPhone })
                 }).then(() => {
-                    alert("공유 완료! 확률이 반영되었습니다.");
-                    location.reload();
-                });
+                    alert("공유 완료! 당첨확률이 올라갔어요🆙");
+            // 모달 내 버튼 텍스트를 변경하여 재참여 유도
+                const shareBtn = document.querySelector('#share-modal button');
+                if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 확률 높이기";
+            });
             }
         }
     </script>
