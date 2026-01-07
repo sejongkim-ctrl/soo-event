@@ -47,6 +47,13 @@
         .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; }
         .btn-golden { width: 100%; background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); border: none; border-radius: 50px; padding: 18px 0; font-size: 18px; font-weight: 800; cursor: pointer; margin-top: 30px; }
         footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
+        #share-modal > div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* 👈 2번 문제: 가로 중앙 정렬 */
+        justify-content: center !important;
+        text-align: center !important;
+    }
     </style>
 </head>
 <body>
