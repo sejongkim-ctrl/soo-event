@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [스타일] 기존 디자인 완벽 유지 */
+        /* [스타일] 기존 디자인 및 빛나는 효과 완벽 유지 */
         body { margin: 0; padding: 0; background: #3d0e10; font-family: 'Noto Sans KR', sans-serif; }
         .container { max-width: 480px; margin: 0 auto; background: #3d0e10; min-height: 100vh; padding: 20px; box-sizing: border-box; }
         .page-header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
@@ -15,7 +15,6 @@
         .content-box { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: left; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .title-serif { font-family: 'Noto Serif KR', serif; color: #82181C; text-align: center; line-height: 1.4; font-weight: 700; }
 
-        /* 01. 스크롤 박스 유지 */
         .agreement-box { background: #F9F9F9; padding: 10px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 15px; }
         .agree-scroll-box { height: 150px; overflow-y: scroll; background: #fff; border: 1px solid #ddd; padding: 15px; font-size: 12px; color: #555; line-height: 1.6; border-radius: 6px; text-align: left; -webkit-overflow-scrolling: touch; }
         .agree-scroll-box h4 { font-size: 14px; color: #333; margin-bottom: 10px; }
@@ -23,13 +22,11 @@
         .agree-list { margin: 0; padding-left: 15px; list-style-type: disc; }
         .agree-list li { margin-bottom: 4px; }
 
-        /* 라디오 버튼 */
         .radio-group { display: flex; gap: 8px; width: 100%; box-sizing: border-box; }
         .radio-label { flex: 1; padding: 14px 0; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-size: 12px; cursor: pointer; background: #fff; transition: all 0.2s; display: block; }
         input[type="radio"] { display: none; }
         input[type="radio"]:checked + .radio-label { border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; }
         
-        /* 02. 이미지 옵션 및 심장박동 효과 유지 */
         .product-mini { position: relative; border: 2px solid #EAEAEA; background: #fff; display: flex; align-items: center; gap: 15px; padding: 15px; border-radius: 12px; animation: gentlePulse 2s infinite; cursor: pointer; }
         @keyframes gentlePulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); border-color: #D4AF70; } 100% { transform: scale(1); } }
         .chance-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #FF4B4B; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; z-index: 10; white-space: nowrap; }
@@ -38,7 +35,6 @@
         .mini-text p { margin: 0; font-size: 12px; color: #666; line-height: 1.4; }
         .click-guide { display: block; margin-top: 6px; font-size: 11px; color: #82181C; font-weight: 700; text-decoration: underline; }
 
-        /* 입력 폼 및 버튼 */
         .input-group { margin-bottom: 15px; }
         .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #333; }
         .input-field { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
@@ -46,65 +42,13 @@
         .step-num { display: block; font-size: 14px; font-weight: 700; color: #C5A059; margin-bottom: 5px; }
         .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; }
         
-        /* [수정] 버튼 텍스트 색상 및 링크 장식 제거 */
-        .btn-golden {
-            position: relative; /* 빛 레이어의 기준점 */
-            overflow: hidden;   /* 빛 레이어가 버튼 밖으로 나가지 않게 */
-            width: 100%; 
-            background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); 
-            border: none; 
-            border-radius: 50px; 
-            padding: 18px 0; 
-            font-size: 18px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            margin-top: 30px; 
-            color: #1a1a1a !important; 
-            text-decoration: none !important; 
-        }
-        
-        /* 빛나는 효과 레이어 */
-        .btn-golden .shiny {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 150%; }
-            100% { left: 150%; }
-        }
+        .btn-golden { position: relative; overflow: hidden; width: 100%; background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); border: none; border-radius: 50px; padding: 18px 0; font-size: 18px; font-weight: 800; cursor: pointer; margin-top: 30px; color: #1a1a1a !important; text-decoration: none !important; }
+        .btn-golden .shiny { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: shine 3s infinite; }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
         footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
 
-        /* [추가] 모달 정중앙 정렬 */
-        #share-modal {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background: rgba(0,0,0,0.8) !important;
-            z-index: 99999 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 20px !important;
-            box-sizing: border-box !important;
-        }
-        #share-modal > div {
-            background: #fff !important;
-            padding: 30px !important;
-            border-radius: 16px !important;
-            text-align: center !important;
-            width: 100% !important;
-            max-width: 320px !important;
-        }
+        #share-modal { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 20px !important; box-sizing: border-box !important; }
+        #share-modal > div { background: #fff !important; padding: 30px !important; border-radius: 16px !important; text-align: center !important; width: 100% !important; max-width: 320px !important; }
     </style>
 </head>
 <body>
@@ -190,9 +134,9 @@
                 </div>
             </div>
 
-        <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">
-            <div class="shiny"></div><span id="btn-text">응모 완료하기</span>
-        </button>
+            <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">
+                <div class="shiny"></div><span id="btn-text">응모 완료하기</span>
+            </button>
         </form>
         <footer><p>© 2026 SOO BRAND. All rights reserved.</p></footer>
     </div>
@@ -202,6 +146,7 @@
     <script>
         // 변수 설정 유지
         let currentUserPhone = ""; 
+        let isWaitingForShare = false; 
         const scriptURL = "https://script.google.com/macros/s/AKfycbxKcD_xyvml3oEueTmFRooDpGOYbxroLgPc296-L0U2FV7fNJbfRsrhNUdczHH5Hnj2sA/exec";
         const productLink = "https://thesoo.co/promotion/26seol";
 
@@ -226,43 +171,28 @@
         function handleSubmit() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
 
-            // [수정] 1번 동의 미체크 시 스크롤 이동 기능 복구
             const agreeInput = document.querySelector('input[name="agree"]:checked');
             if (!agreeInput || agreeInput.value === 'no') { 
                 alert("안내사항 동의가 필요합니다."); 
-                const target = document.getElementById('section-1-target');
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('section-1-target').scrollIntoView({ behavior: 'smooth' });
                 return; 
             }
 
-            // 주소 필수 확인
             const roadAddr = document.getElementById('roadAddress').value;
-            const detailAddr = document.getElementById('detailAddress').value;
             if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
-            document.getElementById('real-address').value = roadAddr + " " + detailAddr;
+            document.getElementById('real-address').value = roadAddr + " " + document.getElementById('detailAddress').value;
 
-            btn.innerHTML = "접수 중입니다...";
+            btnText.innerHTML = "접수 중입니다...";
             btn.disabled = true;
 
             const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            currentUserPhone = form.querySelector('input[name="phone"]').value;
 
-            // [수정] 구글 시트 데이터 전송 오류 해결 (전송 방식 보완)
-            fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors', // 👈 CORS 에러를 방지하지만 응답은 읽지 못함
-                body: new FormData(document.getElementById('submit-form')) // 👈 데이터를 직접 전송
-            })
-            .then(() => {
-                currentUserPhone = data.phone;
-                showShareModal();
-            })
-            .catch(error => {
-                currentUserPhone = data.phone;
-                showShareModal();
-                console.error('Error:', error.message);
-            });
+            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+            .then(() => { showShareModal(); })
+            .catch(() => { showShareModal(); });
         }
 
         function showShareModal() {
@@ -279,7 +209,6 @@
         }
 
         function shareAndTrack() {
-            // 1. 먼저 카카오톡 공유 창을 띄웁니다.
             Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
@@ -287,36 +216,26 @@
                     description: "내 관상에 맞는 처방은?",
                     imageUrl: "https://thesoo.co/images/share.jpg",
                     link: { mobileWebUrl: 'https://simte.xyz/thesoo', webUrl: 'https://simte.xyz/thesoo' }
-                },
-                // 2. 카카오톡 앱으로 성공적으로 넘어갔을 때 실행되는 콜백입니다.
-                callback: function() {
-                    executeTracking();
                 }
             });
-        
-            // 3. 만약 위 콜백이 모바일 환경에서 불안정할 경우를 대비한 직접 실행 함수
-            // (사용자가 공유하기 버튼을 누르고 앱으로 전환된 뒤 수행되도록 구성)
-            if (!window.kakao_callback_check) { 
-                setTimeout(executeTracking, 2000); // 2초 뒤 실행하여 실제 공유 흐름과 맞춤
+            isWaitingForShare = true; 
+        }
+
+        window.addEventListener('focus', function() {
+            if (isWaitingForShare) {
+                isWaitingForShare = false; 
+                const trackData = new FormData();
+                trackData.append('action', 'track_share');
+                trackData.append('phone', currentUserPhone);
+
+                fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData })
+                .then(() => {
+                    alert("축하합니다! 공유가 완료되어 당첨 확률이 올라갔습니다.");
+                    const shareBtn = document.querySelector('#share-modal button');
+                    if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+                });
             }
-        }
-        
-        function executeTracking() {
-            if (!currentUserPhone || window.is_tracked) return;
-        
-            const trackData = new FormData();
-            trackData.append('action', 'track_share');
-            trackData.append('phone', currentUserPhone);
-        
-            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData })
-            .then(() => {
-                window.is_tracked = true; // 중복 실행 방지
-                alert("공유 완료! 당첨 확률이 올라갔어요!"); // 👈 실제 앱 이동 후 발생하도록 위치 조정
-                const shareBtn = document.querySelector('#share-modal button');
-                if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
-            });
-        }
-        }
+        });
     </script>
 </body>
 </html>
