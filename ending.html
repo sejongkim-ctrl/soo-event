@@ -279,7 +279,7 @@
         }
 
         function shareAndTrack() {
-            // [수정] 카카오 공유 기능 정상화
+            // 1. 먼저 카카오톡 공유 창을 띄웁니다.
             Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
@@ -287,24 +287,35 @@
                     description: "내 관상에 맞는 처방은?",
                     imageUrl: "https://thesoo.co/images/share.jpg",
                     link: { mobileWebUrl: 'https://simte.xyz/thesoo', webUrl: 'https://simte.xyz/thesoo' }
+                },
+                // 2. 카카오톡 앱으로 성공적으로 넘어갔을 때 실행되는 콜백입니다.
+                callback: function() {
+                    executeTracking();
                 }
             });
-
-            if (currentUserPhone) {
-                fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: new URLSearchParams({ action: "track_share", phone: currentUserPhone })
-            }).then(() => {
-                // location.reload(); // 👈 페이지 리셋을 막기 위해 이 줄을 삭제하거나 주석 처리합니다.
-            
-                // 버튼 문구를 변경하여 연속 공유를 유도합니다.
-                const shareBtn = document.querySelector('#share-modal button');
-                if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 확률 높이기";
-            
-                alert("공유가 완료되었습니다! 계속 공유하시면 당첨 확률이 더 올라갑니다.");
-            });
+        
+            // 3. 만약 위 콜백이 모바일 환경에서 불안정할 경우를 대비한 직접 실행 함수
+            // (사용자가 공유하기 버튼을 누르고 앱으로 전환된 뒤 수행되도록 구성)
+            if (!window.kakao_callback_check) { 
+                setTimeout(executeTracking, 2000); // 2초 뒤 실행하여 실제 공유 흐름과 맞춤
             }
+        }
+        
+        function executeTracking() {
+            if (!currentUserPhone || window.is_tracked) return;
+        
+            const trackData = new FormData();
+            trackData.append('action', 'track_share');
+            trackData.append('phone', currentUserPhone);
+        
+            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData })
+            .then(() => {
+                window.is_tracked = true; // 중복 실행 방지
+                alert("공유 완료! 당첨 확률이 올라갔어요!"); // 👈 실제 앱 이동 후 발생하도록 위치 조정
+                const shareBtn = document.querySelector('#share-modal button');
+                if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+            });
+        }
         }
     </script>
 </body>
