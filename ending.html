@@ -168,154 +168,157 @@
             window.open(productLink, "_blank");
         }
 
-function handleSubmit() {
-    const form = document.getElementById('submit-form');
-    const btn = document.getElementById('submit-btn');
-    const btnText = document.getElementById('btn-text');
+        function handleSubmit() {
+            const form = document.getElementById('submit-form');
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
 
-    const agreeInput = document.querySelector('input[name="agree"]:checked');
-    if (!agreeInput || agreeInput.value === 'no') { 
-        alert("안내사항 동의가 필요합니다."); 
-        document.getElementById('section-1-target').scrollIntoView({ behavior: 'smooth' });
-        return; 
-    }
-
-    const roadAddr = document.getElementById('roadAddress').value;
-    if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
-    document.getElementById('real-address').value = roadAddr + " " + document.getElementById('detailAddress').value;
-
-    btnText.innerHTML = "접수 중입니다...";
-    btn.disabled = true;
-
-    const formData = new FormData(form);
-    currentUserPhone = form.querySelector('input[name="phone"]').value;
-
-    localStorage.setItem('savedPhone', currentUserPhone); 
-
-fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
-    .then(() => { 
-        showShareModal(); // 모달을 먼저 띄워주고
-        form.reset(); 
-        btn.disabled = false;
-        btnText.innerHTML = "응모 완료하기";
-
-        const userAgent = navigator.userAgent.toLowerCase();
-        if (userAgent.indexOf('kakaotalk') > -1) {
-            // 알림창으로 안내 후 바로 실행 (사용자가 확인을 누를 수밖에 없게 유도)
-            alert("공유 데이터 보호를 위해 사파리/크롬 브라우저로 이동합니다.");
-            openExternal();
-        }
-    })
-        .catch(() => { 
-            showShareModal();
-            // 실패 시에도 사용자 경험을 위해 초기화
-            form.reset();
-            btn.disabled = false;
-            btnText.innerHTML = "응모 완료하기";
-        });
-}
-function showShareModal() {
-    const modalHtml = `
-        <div id="share-modal">
-            <div>
-                <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
-                <p style="font-size:14px; color:#666; line-height:1.6;">잠깐! 카톡 브라우저에서는 오류가 날 수 있습니다.<br><b>안전한 응모 확인</b>을 위해 아래 버튼을 눌러주세요.</p>
-                
-                <button onclick="openExternal()" style="background:#333; color:#fff; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:10px; cursor:pointer;">🌐 사파리 / 크롬으로 열기</button>
-                
-                <hr style="margin:20px 0; border:0; border-top:1px dashed #ccc;">
-                
-                <button id="kakao-share-btn" onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; cursor:pointer;">💬 카카오톡으로 공유하기</button>
-                <button onclick="const m=document.getElementById('share-modal'); if(m)m.remove();" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
-            </div>
-        </div>`;
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-}
-function openExternal() {
-    const targetUrl = window.location.href;
-    const userAgent = navigator.userAgent.toLowerCase();
-    
-    if (userAgent.indexOf('android') > -1) {
-        // 안드로이드: 구글 크롬 앱을 직접 지정하여 실행
-        location.href = 'intent://' + targetUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=https;package=com.android.chrome;end';
-    } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1) {
-        // iOS: 카카오톡 전용 외부 브라우저 호출 프로토콜 (가장 확실함)
-        location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(targetUrl);
-    } else {
-        // 기타 환경
-        window.open(targetUrl, '_blank');
-    }
-}
-/* [수정 후] 공유 버튼 클릭 시 번호가 유실되지 않도록 더 확실하게 처리 */
-function shareAndTrack() {
-    // 폼 초기화 전에 handleSubmit에서 이미 저장했지만, 공유 클릭 시점에 한 번 더 확실히 확인합니다.
-    const phone = localStorage.getItem('savedPhone') || currentUserPhone;
-    
-    if (phone) {
-        localStorage.setItem('savedPhone', phone);
-    }
-    localStorage.setItem('pendingShare', 'true');
-
-    if (window.Kakao) {
-        Kakao.Link.sendDefault({
-            objectType: 'feed',
-            content: {
-                title: "2026 '한 방' 테스트",
-                description: "내 관상에 맞는 처방은?",
-                imageUrl: "https://thesoo.co/images/share.jpg",
-                link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
+            const agreeInput = document.querySelector('input[name="agree"]:checked');
+            if (!agreeInput || agreeInput.value === 'no') { 
+                alert("안내사항 동의가 필요합니다."); 
+                document.getElementById('section-1-target').scrollIntoView({ behavior: 'smooth' });
+                return; 
             }
-        });
-    }
-}
-            
-/* [수정 후] 최종 실행력 보강 버전 */
-function checkShareStatus() {
-    // 1. 데이터 추출 (저장소 우선)
-    const phone = localStorage.getItem('savedPhone') || currentUserPhone;
-    const pending = localStorage.getItem('pendingShare');
 
-    if (pending === 'true' && phone) {
-        // 2. 상태 즉시 삭제 (중복 실행 방지)
-        localStorage.removeItem('pendingShare');
+            const roadAddr = document.getElementById('roadAddress').value;
+            if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
+            document.getElementById('real-address').value = roadAddr + " " + document.getElementById('detailAddress').value;
 
-        // 3. UI 즉시 업데이트 (사용자가 복귀하자마자 변화를 느끼게 함)
-        const shareBtn = document.getElementById('kakao-share-btn');
-        if (shareBtn) {
-            shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
-            shareBtn.style.background = "#ffffff";
-            shareBtn.style.border = "2px solid #FEE500";
-            shareBtn.style.fontWeight = "800";
+            btnText.innerHTML = "접수 중입니다...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            currentUserPhone = form.querySelector('input[name="phone"]').value;
+
+            localStorage.setItem('savedPhone', currentUserPhone); 
+
+            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+                .then(() => { 
+                    showShareModal(); // 모달을 먼저 띄워주고
+                    form.reset(); 
+                    btn.disabled = false;
+                    btnText.innerHTML = "응모 완료하기";
+
+                    const userAgent = navigator.userAgent.toLowerCase();
+                    if (userAgent.indexOf('kakaotalk') > -1) {
+                        // 알림창으로 안내 후 바로 실행 (사용자가 확인을 누를 수밖에 없게 유도)
+                        alert("공유 데이터 보호를 위해 사파리/크롬 브라우저로 이동합니다.");
+                        openExternal();
+                    }
+                })
+                .catch(() => { 
+                    showShareModal();
+                    // 실패 시에도 사용자 경험을 위해 초기화
+                    form.reset();
+                    btn.disabled = false;
+                    btnText.innerHTML = "응모 완료하기";
+                });
         }
 
-        // 4. 데이터 전송 (비동기, 응답 대기 없음)
-        const trackData = new FormData();
-        trackData.append('action', 'track_share');
-        trackData.append('phone', phone);
-        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+        function showShareModal() {
+            const modalHtml = `
+                <div id="share-modal">
+                    <div>
+                        <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
+                        <p style="font-size:14px; color:#666; line-height:1.6;">잠깐! 카톡 브라우저에서는 오류가 날 수 있습니다.<br><b>안전한 응모 확인</b>을 위해 아래 버튼을 눌러주세요.</p>
+                        
+                        <button onclick="openExternal()" style="background:#333; color:#fff; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:10px; cursor:pointer;">🌐 사파리 / 크롬으로 열기</button>
+                        
+                        <hr style="margin:20px 0; border:0; border-top:1px dashed #ccc;">
+                        
+                        <button id="kakao-share-btn" onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; cursor:pointer;">💬 카카오톡으로 공유하기</button>
+                        <button onclick="const m=document.getElementById('share-modal'); if(m)m.remove();" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
+                    </div>
+                </div>`;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
 
-        // 5. 브라우저가 완전히 깨어난 뒤 얼럿 노출 (0.4초 지연)
-        setTimeout(function() {
-            alert("축하합니다! 참여가 완료되었습니다.\n공유 횟수가 기록되어 당첨 확률이 올라갔습니다! 🆙");
-        }, 400);
-    }
-}
+        function openExternal() {
+            const targetUrl = window.location.href;
+            const userAgent = navigator.userAgent.toLowerCase();
+            
+            if (userAgent.indexOf('android') > -1) {
+                // 안드로이드: 구글 크롬 앱을 직접 지정하여 실행
+                location.href = 'intent://' + targetUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+            } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1) {
+                // iOS: 카카오톡 전용 외부 브라우저 호출 프로토콜 (가장 확실함)
+                location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(targetUrl);
+            } else {
+                // 기타 환경
+                window.open(targetUrl, '_blank');
+            }
+        }
 
-/* 통합 리스너: 기기별로 다른 복귀 신호를 하나로 묶어 0.5초 뒤 실행 */
-const triggerShareCheck = () => {
-    setTimeout(checkShareStatus, 500); 
-};
+        /* [수정 후] 공유 버튼 클릭 시 번호가 유실되지 않도록 더 확실하게 처리 */
+        function shareAndTrack() {
+            // 폼 초기화 전에 handleSubmit에서 이미 저장했지만, 공유 클릭 시점에 한 번 더 확실히 확인합니다.
+            const phone = localStorage.getItem('savedPhone') || currentUserPhone;
+            
+            if (phone) {
+                localStorage.setItem('savedPhone', phone);
+            }
+            localStorage.setItem('pendingShare', 'true');
 
-// 화면 가시성 변화(백그라운드->포그라운드) 감지
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible') triggerShareCheck();
-});
+            if (window.Kakao) {
+                Kakao.Link.sendDefault({
+                    objectType: 'feed',
+                    content: {
+                        title: "2026 '한 방' 테스트",
+                        description: "내 관상에 맞는 처방은?",
+                        imageUrl: "https://thesoo.co/images/share.jpg",
+                        link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
+                    }
+                });
+            }
+        }
+                    
+        /* [수정 후] 최종 실행력 보강 버전 */
+        function checkShareStatus() {
+            // 1. 데이터 추출 (저장소 우선)
+            const phone = localStorage.getItem('savedPhone') || currentUserPhone;
+            const pending = localStorage.getItem('pendingShare');
 
-// 페이지 표시(인앱 브라우저 복귀) 감지
-window.addEventListener('pageshow', triggerShareCheck);
+            if (pending === 'true' && phone) {
+                // 2. 상태 즉시 삭제 (중복 실행 방지)
+                localStorage.removeItem('pendingShare');
 
-// 포커스 획득 감지
-window.addEventListener('focus', triggerShareCheck);
+                // 3. UI 즉시 업데이트 (사용자가 복귀하자마자 변화를 느끼게 함)
+                const shareBtn = document.getElementById('kakao-share-btn');
+                if (shareBtn) {
+                    shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+                    shareBtn.style.background = "#ffffff";
+                    shareBtn.style.border = "2px solid #FEE500";
+                    shareBtn.style.fontWeight = "800";
+                }
+
+                // 4. 데이터 전송 (비동기, 응답 대기 없음)
+                const trackData = new FormData();
+                trackData.append('action', 'track_share');
+                trackData.append('phone', phone);
+                fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+
+                // 5. 브라우저가 완전히 깨어난 뒤 얼럿 노출 (0.4초 지연)
+                setTimeout(function() {
+                    alert("축하합니다! 참여가 완료되었습니다.\n공유 횟수가 기록되어 당첨 확률이 올라갔습니다! 🆙");
+                }, 400);
+            }
+        }
+
+        /* 통합 리스너: 기기별로 다른 복귀 신호를 하나로 묶어 0.5초 뒤 실행 */
+        const triggerShareCheck = () => {
+            setTimeout(checkShareStatus, 500); 
+        };
+
+        // 화면 가시성 변화(백그라운드->포그라운드) 감지
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') triggerShareCheck();
+        });
+
+        // 페이지 표시(인앱 브라우저 복귀) 감지
+        window.addEventListener('pageshow', triggerShareCheck);
+
+        // 포커스 획득 감지
+        window.addEventListener('focus', triggerShareCheck);
     </script>
 </body>
 </html>
