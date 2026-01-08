@@ -208,34 +208,38 @@
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
 
-        function shareAndTrack() {
-            Kakao.Link.sendDefault({
-                objectType: 'feed',
-                content: {
-                    title: "2026 '한 방' 테스트",
-                    description: "내 관상에 맞는 처방은?",
-                    imageUrl: "https://thesoo.co/images/share.jpg",
-                    link: { mobileWebUrl: 'https://simte.xyz/thesoo', webUrl: 'https://simte.xyz/thesoo' }
-                }
-            });
-            isWaitingForShare = true; 
-        }
-
-        window.addEventListener('focus', function() {
-            if (isWaitingForShare) {
-                isWaitingForShare = false; 
-                const trackData = new FormData();
-                trackData.append('action', 'track_share');
-                trackData.append('phone', currentUserPhone);
-
-                fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData })
-                .then(() => {
-                    alert("축하합니다! 공유가 완료되어 당첨 확률이 올라갔습니다.");
-                    const shareBtn = document.querySelector('#share-modal button');
-                    if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+            function shareAndTrack() {
+                Kakao.Link.sendDefault({
+                    objectType: 'feed',
+                    content: {
+                        title: "2026 '한 방' 테스트",
+                        description: "내 관상에 맞는 처방은?",
+                        imageUrl: "https://thesoo.co/images/share.jpg",
+                        link: { mobileWebUrl: 'https://simte.xyz/thesoo', webUrl: 'https://simte.xyz/thesoo' }
+                    }
                 });
+                // 👈 세션 저장소에 상태를 박제하여 앱 전환 후에도 데이터가 유지되게 합니다.
+                sessionStorage.setItem('pendingShare', 'true'); 
             }
-        });
+            
+            // 👈 window.onfocus를 사용하여 브라우저 복귀 감지 확률을 높입니다.
+            window.onfocus = function() {
+                const pending = sessionStorage.getItem('pendingShare');
+                if (pending === 'true') {
+                    sessionStorage.removeItem('pendingShare'); // 즉시 삭제
+            
+                    const trackData = new FormData();
+                    trackData.append('action', 'track_share');
+                    trackData.append('phone', currentUserPhone);
+            
+                    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData })
+                    .then(() => {
+                        alert("축하합니다! 공유가 완료되어 당첨 확률이 올라갔습니다.");
+                        const shareBtn = document.querySelector('#share-modal button');
+                        if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+                    });
+                }
+            };
     </script>
 </body>
 </html>
