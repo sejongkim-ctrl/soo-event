@@ -207,53 +207,51 @@
                 </div>`;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
-            function shareAndTrack() {
-                // [수정] 모바일에서 더 확실한 보존을 위해 localStorage를 사용하고 번호를 즉시 박제합니다.
+        function shareAndTrack() {
+                // 1. 번호와 상태를 로컬스토리지에 즉시 저장 (유실 방지)
                 if (currentUserPhone) {
                     localStorage.setItem('savedPhone', currentUserPhone);
                 }
                 localStorage.setItem('pendingShare', 'true');
             
-                Kakao.Link.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                        title: "2026 '한 방' 테스트",
-                        description: "내 관상에 맞는 처방은?",
-                        imageUrl: "https://thesoo.co/images/share.jpg",
-                        link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
-                    }
-                });
+                if (window.Kakao) {
+                    Kakao.Link.sendDefault({
+                        objectType: 'feed',
+                        content: {
+                            title: "2026 '한 방' 테스트",
+                            description: "내 관상에 맞는 처방은?",
+                            imageUrl: "https://thesoo.co/images/share.jpg",
+                            link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
+                        }
+                    });
+                }
             }
             
-            // [개선] 중복 실행을 완벽히 차단하고 비동기 순서를 보장합니다.
-            async function checkShareStatus() {
+            function checkShareStatus() {
                 const pending = localStorage.getItem('pendingShare');
                 const phone = localStorage.getItem('savedPhone') || currentUserPhone;
             
                 if (pending === 'true' && phone) {
-                    // [중요] fetch를 보내기 전에 즉시 상태를 삭제하여 중복 카운팅을 방지합니다.
+                    // 즉시 상태 제거 (중복 실행 방지)
                     localStorage.removeItem('pendingShare');
             
                     const trackData = new FormData();
                     trackData.append('action', 'track_share');
                     trackData.append('phone', phone);
             
-                    try {
-                        // 비동기 실행으로 시트 전송 후 UI 업데이트 순서를 보장합니다.
-                        await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+                    // [중요] fetch 응답을 기다리지 않고 비동기로 전송 (모바일 차단 회피)
+                    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
             
-                        // 1번 & 2번 해결: UI 문구 변경 및 얼럿창 띄우기
-                        const shareBtn = document.querySelector('#share-modal button');
-                        if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
-            
-                        alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
-                    } catch (e) {
-                        console.error("공유 트래킹 실패:", e);
+                    // UI 업데이트 및 얼럿 즉시 실행
+                    const shareBtn = document.querySelector('#share-modal button');
+                    if(shareBtn) {
+                        shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
                     }
+                    alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
                 }
             }
-
-            // 모바일 및 PC 브라우저 복귀 감지 이벤트 리스너 통합 (중복 제거 완료)
+            
+            // 이벤트 리스너 통합 등록
             window.addEventListener('focus', checkShareStatus);
             document.addEventListener('visibilitychange', function() {
                 if (document.visibilityState === 'visible') {
