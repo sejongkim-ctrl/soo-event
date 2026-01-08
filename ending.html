@@ -208,9 +208,11 @@
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
             function shareAndTrack() {
-                // [추가] 모바일 변수 유실 방지를 위해 번호도 세션에 저장
-                sessionStorage.setItem('savedPhone', currentUserPhone);
-                sessionStorage.setItem('pendingShare', 'true');
+                // [수정] 모바일에서 더 확실한 보존을 위해 localStorage를 사용하고 번호를 즉시 박제합니다.
+                if (currentUserPhone) {
+                    localStorage.setItem('savedPhone', currentUserPhone);
+                }
+                localStorage.setItem('pendingShare', 'true');
             
                 Kakao.Link.sendDefault({
                     objectType: 'feed',
@@ -223,34 +225,40 @@
                 });
             }
             
-            // [개선] onfocus와 visibilitychange를 동시에 감시하여 모바일 대응력 극대화
-            function checkShareStatus() {
-                const pending = sessionStorage.getItem('pendingShare');
-                const phone = sessionStorage.getItem('savedPhone') || currentUserPhone;
+            // [개선] 중복 실행을 완벽히 차단하고 비동기 순서를 보장합니다.
+            async function checkShareStatus() {
+                const pending = localStorage.getItem('pendingShare');
+                const phone = localStorage.getItem('savedPhone') || currentUserPhone;
             
                 if (pending === 'true' && phone) {
-                    sessionStorage.removeItem('pendingShare'); // 중복 방지 위해 즉시 삭제
+                    // [중요] fetch를 보내기 전에 즉시 상태를 삭제하여 중복 카운팅을 방지합니다.
+                    localStorage.removeItem('pendingShare');
             
                     const trackData = new FormData();
                     trackData.append('action', 'track_share');
                     trackData.append('phone', phone);
             
-                    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData })
-                    .then(() => {
-                        // UI 업데이트 (문구 변경)
+                    try {
+                        // 비동기 실행으로 시트 전송 후 UI 업데이트 순서를 보장합니다.
+                        await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+            
+                        // 1번 & 2번 해결: UI 문구 변경 및 얼럿창 띄우기
                         const shareBtn = document.querySelector('#share-modal button');
                         if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
             
-                        // 얼럿 메시지
-                        alert("축하합니다! 공유가 완료되어 당첨 확률이 올라갔습니다.");
-                    });
+                        alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
+                    } catch (e) {
+                        console.error("공유 트래킹 실패:", e);
+                    }
                 }
             }
-            
-            // 모바일 브라우저 복귀 감지 이벤트 리스너 통합
+
+            // 모바일 및 PC 브라우저 복귀 감지 이벤트 리스너 통합 (중복 제거 완료)
             window.addEventListener('focus', checkShareStatus);
             document.addEventListener('visibilitychange', function() {
-                if (document.visibilityState === 'visible') checkShareStatus();
+                if (document.visibilityState === 'visible') {
+                    checkShareStatus();
+                }
             });
     </script>
 </body>
