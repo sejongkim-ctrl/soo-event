@@ -192,21 +192,20 @@ function handleSubmit() {
 
     localStorage.setItem('savedPhone', currentUserPhone); 
 
-    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
-        .then(() => { 
-            showShareModal(); 
-            // 응모 완료 후 폼 초기화 및 버튼 복구 (PC UI 고착 해결)
-            form.reset(); 
-            btn.disabled = false;
-            btnText.innerHTML = "응모 완료하기";
-            // [추가] 카톡 유저에게 사파리/크롬 이동 권장 얼럿
+fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+    .then(() => { 
+        showShareModal(); // 모달을 먼저 띄워주고
+        form.reset(); 
+        btn.disabled = false;
+        btnText.innerHTML = "응모 완료하기";
+
         const userAgent = navigator.userAgent.toLowerCase();
         if (userAgent.indexOf('kakaotalk') > -1) {
-            if(confirm("안전한 공유 확인을 위해 사파리/크롬 브라우저로 이동하시겠습니까?")) {
-                openExternal();
-            }
+            // 알림창으로 안내 후 바로 실행 (사용자가 확인을 누를 수밖에 없게 유도)
+            alert("공유 데이터 보호를 위해 사파리/크롬 브라우저로 이동합니다.");
+            openExternal();
         }
-        })
+    })
         .catch(() => { 
             showShareModal();
             // 실패 시에도 사용자 경험을 위해 초기화
@@ -236,11 +235,15 @@ function openExternal() {
     const targetUrl = window.location.href;
     const userAgent = navigator.userAgent.toLowerCase();
     
-    // 안드로이드라면 크롬 패키지 호출, iOS라면 외부 앱 연결 주소 호출
     if (userAgent.indexOf('android') > -1) {
-        location.href = 'intent://' + targetUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=http;package=com.android.chrome;end';
-    } else {
+        // 안드로이드: 구글 크롬 앱을 직접 지정하여 실행
+        location.href = 'intent://' + targetUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+    } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1) {
+        // iOS: 카카오톡 전용 외부 브라우저 호출 프로토콜 (가장 확실함)
         location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(targetUrl);
+    } else {
+        // 기타 환경
+        window.open(targetUrl, '_blank');
     }
 }
 /* [수정 후] 공유 버튼 클릭 시 번호가 유실되지 않도록 더 확실하게 처리 */
