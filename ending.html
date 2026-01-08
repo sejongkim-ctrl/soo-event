@@ -198,18 +198,18 @@ fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
             .catch(() => { showShareModal(); });
         }
 
-        function showShareModal() {
-            const modalHtml = `
-                <div id="share-modal">
-                    <div>
-                        <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
-                        <p style="font-size:14px; color:#666; line-height:1.6;">결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!</p>
-                        <button onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer;">💬 카카오톡으로 공유하기</button>
-                        <button onclick="location.reload()" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
-                    </div>
-                </div>`;
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-        }
+function showShareModal() {
+    const modalHtml = `
+        <div id="share-modal">
+            <div>
+                <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
+                <p style="font-size:14px; color:#666; line-height:1.6;">결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!</p>
+                <button id="kakao-share-btn" onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer;">💬 카카오톡으로 공유하기</button>
+                <button onclick="const m=document.getElementById('share-modal'); if(m)m.remove();" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
+            </div>
+        </div>`;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
         function shareAndTrack() {
                 // 1. 번호와 상태를 로컬스토리지에 즉시 저장 (유실 방지)
                 if (currentUserPhone) {
@@ -246,22 +246,25 @@ async function checkShareStatus() {
         // 2. 데이터 전송 (await를 빼서 응답 대기 없이 비동기로 실행)
         fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
 
-        // 3. UI 업데이트 및 얼럿 즉시 실행 (모바일 차단 회피)
-        const shareBtn = document.querySelector('#share-modal button');
-        if(shareBtn) {
-            shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
-        }
-        alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
+// [수정] 쿼리 셀렉터 대신 부여한 ID로 정확하게 버튼을 찾습니다.
+const shareBtn = document.getElementById('kakao-share-btn');
+if(shareBtn) {
+    shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+    // 시각적 변화를 위해 배경색을 살짝 바꿔주면 더 좋습니다.
+    shareBtn.style.background = "#ffffff";
+    shareBtn.style.border = "2px solid #FEE500";
+}
+alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
     }
 }
             
-// [수정사항 a] 일반 브라우저용 포커스 감지
 window.addEventListener('focus', checkShareStatus);
 
-// [수정사항 a] 카톡 인앱 브라우저 및 특정 모바일 환경에서 더 확실하게 반응하는 리스너
-window.addEventListener('pageshow', checkShareStatus); 
+// [수정] 카톡 인앱 브라우저 대응: 0.1초 지연 실행으로 브라우저가 잠 깨는 시간을 벌어줌
+window.addEventListener('pageshow', function() {
+    setTimeout(checkShareStatus, 100); 
+});
 
-// [수정사항 a] 탭 전환 감지
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'visible') {
         checkShareStatus();
