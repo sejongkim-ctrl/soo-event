@@ -168,36 +168,46 @@
             window.open(productLink, "_blank");
         }
 
-        function handleSubmit() {
-            const form = document.getElementById('submit-form');
-            const btn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
+function handleSubmit() {
+    const form = document.getElementById('submit-form');
+    const btn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
 
-            const agreeInput = document.querySelector('input[name="agree"]:checked');
-            if (!agreeInput || agreeInput.value === 'no') { 
-                alert("안내사항 동의가 필요합니다."); 
-                document.getElementById('section-1-target').scrollIntoView({ behavior: 'smooth' });
-                return; 
-            }
+    const agreeInput = document.querySelector('input[name="agree"]:checked');
+    if (!agreeInput || agreeInput.value === 'no') { 
+        alert("안내사항 동의가 필요합니다."); 
+        document.getElementById('section-1-target').scrollIntoView({ behavior: 'smooth' });
+        return; 
+    }
 
-            const roadAddr = document.getElementById('roadAddress').value;
-            if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
-            document.getElementById('real-address').value = roadAddr + " " + document.getElementById('detailAddress').value;
+    const roadAddr = document.getElementById('roadAddress').value;
+    if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
+    document.getElementById('real-address').value = roadAddr + " " + document.getElementById('detailAddress').value;
 
-            btnText.innerHTML = "접수 중입니다...";
-            btn.disabled = true;
+    btnText.innerHTML = "접수 중입니다...";
+    btn.disabled = true;
 
-const formData = new FormData(form);
-currentUserPhone = form.querySelector('input[name="phone"]').value;
+    const formData = new FormData(form);
+    currentUserPhone = form.querySelector('input[name="phone"]').value;
 
-// [수정사항 b] 카톡 인앱 브라우저의 변수 초기화 대비, 번호를 로컬스토리지에 즉시 저장
-localStorage.setItem('savedPhone', currentUserPhone); 
+    localStorage.setItem('savedPhone', currentUserPhone); 
 
-fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
-            .then(() => { showShareModal(); })
-            .catch(() => { showShareModal(); });
-        }
-
+    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+        .then(() => { 
+            showShareModal(); 
+            // 응모 완료 후 폼 초기화 및 버튼 복구 (PC UI 고착 해결)
+            form.reset(); 
+            btn.disabled = false;
+            btnText.innerHTML = "응모 완료하기";
+        })
+        .catch(() => { 
+            showShareModal();
+            // 실패 시에도 사용자 경험을 위해 초기화
+            form.reset();
+            btn.disabled = false;
+            btnText.innerHTML = "응모 완료하기";
+        });
+}
 function showShareModal() {
     const modalHtml = `
         <div id="share-modal">
@@ -260,9 +270,9 @@ async function checkShareStatus() {
             
 window.addEventListener('focus', checkShareStatus);
 
-// [수정] 카톡 인앱 브라우저 대응: 0.1초 지연 실행으로 브라우저가 잠 깨는 시간을 벌어줌
-window.addEventListener('pageshow', function() {
-    setTimeout(checkShareStatus, 100); 
+// 카톡 인앱 브라우저 환경은 복귀 직후 실행력이 불안정하므로 0.3초의 안정적인 지연 시간을 둡니다.
+window.addEventListener('pageshow', function(event) {
+    setTimeout(checkShareStatus, 300); 
 });
 
 document.addEventListener('visibilitychange', function() {
