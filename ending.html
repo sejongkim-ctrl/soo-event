@@ -243,45 +243,53 @@ function shareAndTrack() {
     }
 }
             
-/* [수정 후] 더 견고한 데이터 추출 방식 */
 async function checkShareStatus() {
-    // 1. 저장소에서 번호를 먼저 찾고, 없으면 전역 변수에서 가져옵니다.
+    // 1. 저장소에서 번호를 먼저 찾고, 없으면 변수에서 가져옵니다 (유실 방지)
     const phone = localStorage.getItem('savedPhone') || currentUserPhone;
     const pending = localStorage.getItem('pendingShare');
 
-    // [디버깅용 얼럿] 테스트 시 아래 줄의 주석을 해제하여 값이 들어오는지 확인해 보세요.
-    // alert("데이터 확인 - 번호: " + phone + " / 상태: " + pending);
-
     if (pending === 'true' && phone) {
+        // 즉시 상태 삭제 (중복 실행 방지)
         localStorage.removeItem('pendingShare');
 
         const trackData = new FormData();
         trackData.append('action', 'track_share');
         trackData.append('phone', phone);
 
+        // 2. [개선] 데이터 전송 (응답을 기다리지 않고 비동기로 즉시 던짐)
         fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
 
+        // 3. UI 업데이트 (모달 내 버튼 문구 변경)
         const shareBtn = document.getElementById('kakao-share-btn');
         if(shareBtn) {
             shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
             shareBtn.style.background = "#ffffff";
             shareBtn.style.border = "2px solid #FEE500";
         }
-        alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
+
+        // 4. [개선] 0.1초의 미세한 지연 후 얼럿 실행 (모바일 브라우저 인식 보장)
+        setTimeout(() => {
+            alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
+        }, 100);
     }
 }
             
-window.addEventListener('focus', checkShareStatus);
-
-// 카톡 인앱 브라우저 환경은 복귀 직후 실행력이 불안정하므로 0.3초의 안정적인 지연 시간을 둡니다.
-window.addEventListener('pageshow', function(event) {
-    setTimeout(checkShareStatus, 300); 
-});
-
+// 1. 화면의 가시성 변화 감지 (가장 빠르고 확실한 트리거)
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'visible') {
-        checkShareStatus();
+        // 복귀 시 브라우저가 안정을 찾을 시간을 0.5초로 넉넉히 줍니다.
+        setTimeout(checkShareStatus, 500); 
     }
+});
+
+// 2. 페이지 로드/복구 시 감지 (카톡 인앱 특화 리스너)
+window.addEventListener('pageshow', function() {
+    setTimeout(checkShareStatus, 500); 
+});
+
+// 3. 브라우저 포커스 획득 시 감지
+window.addEventListener('focus', function() {
+    setTimeout(checkShareStatus, 200);
 });
     </script>
 </body>
