@@ -1,3 +1,11 @@
+<script>
+    // 카카오톡 인앱 브라우저인지 확인
+    var userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf('kakaotalk') > -1) {
+        // 안드로이드는 intent, iOS는 주소 체계를 이용해 외부 브라우저 호출
+        location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(window.location.href);
+    }
+</script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -243,54 +251,53 @@ function shareAndTrack() {
     }
 }
             
-async function checkShareStatus() {
-    // 1. 저장소에서 번호를 먼저 찾고, 없으면 변수에서 가져옵니다 (유실 방지)
+/* [수정 후] 최종 실행력 보강 버전 */
+function checkShareStatus() {
+    // 1. 데이터 추출 (저장소 우선)
     const phone = localStorage.getItem('savedPhone') || currentUserPhone;
     const pending = localStorage.getItem('pendingShare');
 
     if (pending === 'true' && phone) {
-        // 즉시 상태 삭제 (중복 실행 방지)
+        // 2. 상태 즉시 삭제 (중복 실행 방지)
         localStorage.removeItem('pendingShare');
 
-        const trackData = new FormData();
-        trackData.append('action', 'track_share');
-        trackData.append('phone', phone);
-
-        // 2. [개선] 데이터 전송 (응답을 기다리지 않고 비동기로 즉시 던짐)
-        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
-
-        // 3. UI 업데이트 (모달 내 버튼 문구 변경)
+        // 3. UI 즉시 업데이트 (사용자가 복귀하자마자 변화를 느끼게 함)
         const shareBtn = document.getElementById('kakao-share-btn');
-        if(shareBtn) {
+        if (shareBtn) {
             shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
             shareBtn.style.background = "#ffffff";
             shareBtn.style.border = "2px solid #FEE500";
+            shareBtn.style.fontWeight = "800";
         }
 
-        // 4. [개선] 0.1초의 미세한 지연 후 얼럿 실행 (모바일 브라우저 인식 보장)
-        setTimeout(() => {
-            alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
-        }, 100);
+        // 4. 데이터 전송 (비동기, 응답 대기 없음)
+        const trackData = new FormData();
+        trackData.append('action', 'track_share');
+        trackData.append('phone', phone);
+        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+
+        // 5. 브라우저가 완전히 깨어난 뒤 얼럿 노출 (0.4초 지연)
+        setTimeout(function() {
+            alert("축하합니다! 참여가 완료되었습니다.\n공유 횟수가 기록되어 당첨 확률이 올라갔습니다! 🆙");
+        }, 400);
     }
 }
-            
-// 1. 화면의 가시성 변화 감지 (가장 빠르고 확실한 트리거)
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible') {
-        // 복귀 시 브라우저가 안정을 찾을 시간을 0.5초로 넉넉히 줍니다.
-        setTimeout(checkShareStatus, 500); 
-    }
-});
 
-// 2. 페이지 로드/복구 시 감지 (카톡 인앱 특화 리스너)
-window.addEventListener('pageshow', function() {
+/* 통합 리스너: 기기별로 다른 복귀 신호를 하나로 묶어 0.5초 뒤 실행 */
+const triggerShareCheck = () => {
     setTimeout(checkShareStatus, 500); 
+};
+
+// 화면 가시성 변화(백그라운드->포그라운드) 감지
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') triggerShareCheck();
 });
 
-// 3. 브라우저 포커스 획득 시 감지
-window.addEventListener('focus', function() {
-    setTimeout(checkShareStatus, 200);
-});
+// 페이지 표시(인앱 브라우저 복귀) 감지
+window.addEventListener('pageshow', triggerShareCheck);
+
+// 포커스 획득 감지
+window.addEventListener('focus', triggerShareCheck);
     </script>
 </body>
 </html>
