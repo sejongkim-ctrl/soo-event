@@ -1,324 +1,295 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>THE SOO : 이벤트 응모</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* [스타일] 기존 디자인 및 빛나는 효과 완벽 유지 */
-        body { margin: 0; padding: 0; background: #3d0e10; font-family: 'Noto Sans KR', sans-serif; }
-        .container { max-width: 480px; margin: 0 auto; background: #3d0e10; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .page-header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
-        .brand-logo { color: #fff; font-family: 'Noto Serif KR', serif; font-size: 14px; letter-spacing: 2px; border-bottom: 1px solid #C5A059; padding-bottom: 5px; }
-        .content-box { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: left; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .title-serif { font-family: 'Noto Serif KR', serif; color: #82181C; text-align: center; line-height: 1.4; font-weight: 700; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>THE SOO : 이벤트 응모</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* [스타일] 기존 디자인 및 빛나는 효과 완벽 유지 */
+        body { margin: 0; padding: 0; background: #3d0e10; font-family: 'Noto Sans KR', sans-serif; }
+        .container { max-width: 480px; margin: 0 auto; background: #3d0e10; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        .page-header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
+        .brand-logo { color: #fff; font-family: 'Noto Serif KR', serif; font-size: 14px; letter-spacing: 2px; border-bottom: 1px solid #C5A059; padding-bottom: 5px; }
+        .content-box { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: left; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .title-serif { font-family: 'Noto Serif KR', serif; color: #82181C; text-align: center; line-height: 1.4; font-weight: 700; }
 
-        .agreement-box { background: #F9F9F9; padding: 10px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 15px; }
-        .agree-scroll-box { height: 150px; overflow-y: scroll; background: #fff; border: 1px solid #ddd; padding: 15px; font-size: 12px; color: #555; line-height: 1.6; border-radius: 6px; text-align: left; -webkit-overflow-scrolling: touch; }
-        .agree-scroll-box h4 { font-size: 14px; color: #333; margin-bottom: 10px; }
-        .agree-scroll-box h5 { font-size: 13px; color: #333; margin: 15px 0 5px 0; }
-        .agree-list { margin: 0; padding-left: 15px; list-style-type: disc; }
-        .agree-list li { margin-bottom: 4px; }
+        .agreement-box { background: #F9F9F9; padding: 10px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 15px; }
+        .agree-scroll-box { height: 150px; overflow-y: scroll; background: #fff; border: 1px solid #ddd; padding: 15px; font-size: 12px; color: #555; line-height: 1.6; border-radius: 6px; text-align: left; -webkit-overflow-scrolling: touch; }
+        .agree-scroll-box h4 { font-size: 14px; color: #333; margin-bottom: 10px; }
+        .agree-scroll-box h5 { font-size: 13px; color: #333; margin: 15px 0 5px 0; }
+        .agree-list { margin: 0; padding-left: 15px; list-style-type: disc; }
+        .agree-list li { margin-bottom: 4px; }
 
-        .radio-group { display: flex; gap: 8px; width: 100%; box-sizing: border-box; }
-        .radio-label { flex: 1; padding: 14px 0; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-size: 12px; cursor: pointer; background: #fff; transition: all 0.2s; display: block; }
-        input[type="radio"] { display: none; }
-        input[type="radio"]:checked + .radio-label { border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; }
-        
-        .product-mini { position: relative; border: 2px solid #EAEAEA; background: #fff; display: flex; align-items: center; gap: 15px; padding: 15px; border-radius: 12px; animation: gentlePulse 2s infinite; cursor: pointer; }
-        @keyframes gentlePulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); border-color: #D4AF70; } 100% { transform: scale(1); } }
-        .chance-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #FF4B4B; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; z-index: 10; white-space: nowrap; }
-        .mini-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
-        .mini-text h4 { margin: 0 0 5px 0; font-size: 15px; color: #1A1A1A; font-family: 'Noto Serif KR', serif; }
-        .mini-text p { margin: 0; font-size: 12px; color: #666; line-height: 1.4; }
-        .click-guide { display: block; margin-top: 6px; font-size: 11px; color: #82181C; font-weight: 700; text-decoration: underline; }
+        .radio-group { display: flex; gap: 8px; width: 100%; box-sizing: border-box; }
+        .radio-label { flex: 1; padding: 14px 0; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-size: 12px; cursor: pointer; background: #fff; transition: all 0.2s; display: block; }
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + .radio-label { border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; }
+        
+        .product-mini { position: relative; border: 2px solid #EAEAEA; background: #fff; display: flex; align-items: center; gap: 15px; padding: 15px; border-radius: 12px; animation: gentlePulse 2s infinite; cursor: pointer; }
+        @keyframes gentlePulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); border-color: #D4AF70; } 100% { transform: scale(1); } }
+        .chance-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #FF4B4B; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; z-index: 10; white-space: nowrap; }
+        .mini-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+        .mini-text h4 { margin: 0 0 5px 0; font-size: 15px; color: #1A1A1A; font-family: 'Noto Serif KR', serif; }
+        .mini-text p { margin: 0; font-size: 12px; color: #666; line-height: 1.4; }
+        .click-guide { display: block; margin-top: 6px; font-size: 11px; color: #82181C; font-weight: 700; text-decoration: underline; }
 
-        .input-group { margin-bottom: 15px; }
-        .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #333; }
-        .input-field { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
-        .section-header-group { margin-bottom: 20px; text-align: center; }
-        .step-num { display: block; font-size: 14px; font-weight: 700; color: #C5A059; margin-bottom: 5px; }
-        .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; }
-        
-        .btn-golden { position: relative; overflow: hidden; width: 100%; background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); border: none; border-radius: 50px; padding: 18px 0; font-size: 18px; font-weight: 800; cursor: pointer; margin-top: 30px; color: #1a1a1a !important; text-decoration: none !important; }
-        .btn-golden .shiny { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: shine 3s infinite; }
-        @keyframes shine { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
-        footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
+        .input-group { margin-bottom: 15px; }
+        .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #333; }
+        .input-field { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+        .section-header-group { margin-bottom: 20px; text-align: center; }
+        .step-num { display: block; font-size: 14px; font-weight: 700; color: #C5A059; margin-bottom: 5px; }
+        .step-title { display: block; font-size: 20px; font-weight: 700; color: #1A1A1A; }
+        
+        .btn-golden { position: relative; overflow: hidden; width: 100%; background: linear-gradient(to right, #D4AF70, #F2D69D, #D4AF70); border: none; border-radius: 50px; padding: 18px 0; font-size: 18px; font-weight: 800; cursor: pointer; margin-top: 30px; color: #1a1a1a !important; text-decoration: none !important; }
+        .btn-golden .shiny { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: shine 3s infinite; }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
+        footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
 
-        #share-modal { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 20px !important; box-sizing: border-box !important; }
-        #share-modal > div { background: #fff !important; padding: 30px !important; border-radius: 16px !important; text-align: center !important; width: 100% !important; max-width: 320px !important; }
-    </style>
+        #share-modal { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 20px !important; box-sizing: border-box !important; }
+        #share-modal > div { background: #fff !important; padding: 30px !important; border-radius: 16px !important; text-align: center !important; width: 100% !important; max-width: 320px !important; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header class="page-header"><span class="brand-logo">THE SOO</span></header>
+    <div class="container">
+        <header class="page-header"><span class="brand-logo">THE SOO</span></header>
 
-        <form id="submit-form" class="content-box">
-            <h2 class="title-serif" style="font-size: 22px; margin-bottom: 30px;">수[壽] 한약<br>순금 1돈 이벤트 응모</h2>
+        <form id="submit-form" class="content-box">
+            <h2 class="title-serif" style="font-size: 22px; margin-bottom: 30px;">수[壽] 한약<br>순금 1돈 이벤트 응모</h2>
 
-            <div id="section-1-target">
-                <div class="section-header-group">
-                    <span class="step-num">01.</span>
-                    <span class="step-title">안내사항 확인</span>
-                </div>
-                <div class="agreement-box">
-                    <div class="agree-scroll-box">
-                        <h4>[개인정보 수집/이용 및 마케팅 동의]</h4>
-                        <p>수 브랜드는 본 이벤트를 위하여 다음과 같이 개인정보를 수집합니다.</p>
-                       <h5>1. 수집 및 이용 목적 (마케팅 활용 포함)</h5>
-                        <ul class="agree-list">
-                            <li>이벤트 참여 확인, 중복 당첨 방지, 당첨자 선정 및 안내</li>
-                            <li>경품(순금 1돈) 배송 및 CS 처리</li>
-                            <li><strong>[마케팅] 회사의 신규 상품, 프로모션, 할인 혜택 등 광고성 정보 전송 (SMS/알림톡)</strong></li>
-                        </ul>
-                        <h5>2. 제세공과금 및 경품 지급 안내 (필독)</h5>
-                        <ul class="agree-list">
-                            <li>본 경품(순금)은 5만 원을 초과하므로 <strong>제세공과금(22%)이 발생하며, 이는 전액 '본사'가 부담합니다.</strong></li>
-                            <li>단, 소득세법에 따라 제세공과금 대납 처리를 위해 <strong>당첨자의 '신분증 사본(주민등록번호 포함)' 제출이 필수</strong>입니다.</li>
-                            <li>당첨자 발표 후 요청 기한 내에 신분증 사본을 제출하지 않을 경우, 당첨이 자동 취소됩니다.</li>
-                            <li>수집된 고유식별정보(주민등록번호)는 세무 신고 목적으로만 사용되며, 신고 완료 후 관련 법령에 따라 안전하게 파기됩니다.</li>
-                        </ul>
-                        <h5>3. 수집하는 개인정보 항목</h5>
-                        <ul class="agree-list">
-                            <li>필수항목: 이름, 휴대전화번호, 주소(경품 수령지)</li>
-                        </ul>
-                        <h5>4. 보유 및 이용 기간</h5>
-                        <ul class="agree-list">
-                            <li><strong>수집일로부터 1년간 보관 후 파기합니다.</strong></li>
-                            <li>단, 고객이 동의 철회를 요청하거나 마케팅 수신 거부 의사를 밝힐 경우 즉시 파기 및 수신 거부 처리됩니다.</li>
-                        </ul>
-                        <h5>5. 동의 거부 권리</h5>
-                        <ul class="agree-list">
-                            <li>귀하는 개인정보 수집 및 마케팅 활용 동의를 거부할 권리가 있으나, <strong>미동의 시 이벤트 응모 및 경품 지급이 제한됩니다.</strong></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="radio-group">
-                    <label style="flex: 1;"><input type="radio" name="agree" value="yes"><div class="radio-label">예, 동의합니다</div></label>
-                    <label style="flex: 1;"><input type="radio" name="agree" value="no"><div class="radio-label">아니오, 동의하지 않습니다</div></label>
-                </div>
-            </div>
+            <div id="section-1-target">
+                <div class="section-header-group">
+                    <span class="step-num">01.</span>
+                    <span class="step-title">안내사항 확인</span>
+                </div>
+                <div class="agreement-box">
+                    <div class="agree-scroll-box">
+                        <h4>[개인정보 수집/이용 및 마케팅 동의]</h4>
+                        <p>수 브랜드는 본 이벤트를 위하여 다음과 같이 개인정보를 수집합니다.</p>
+                       <h5>1. 수집 및 이용 목적 (마케팅 활용 포함)</h5>
+                        <ul class="agree-list">
+                            <li>이벤트 참여 확인, 중복 당첨 방지, 당첨자 선정 및 안내</li>
+                            <li>경품(순금 1돈) 배송 및 CS 처리</li>
+                            <li><strong>[마케팅] 회사의 신규 상품, 프로모션, 할인 혜택 등 광고성 정보 전송 (SMS/알림톡)</strong></li>
+                        </ul>
+                        <h5>2. 제세공과금 및 경품 지급 안내 (필독)</h5>
+                        <ul class="agree-list">
+                            <li>본 경품(순금)은 5만 원을 초과하므로 <strong>제세공과금(22%)이 발생하며, 이는 전액 '본사'가 부담합니다.</strong></li>
+                            <li>단, 소득세법에 따라 제세공과금 대납 처리를 위해 <strong>당첨자의 '신분증 사본(주민등록번호 포함)' 제출이 필수</strong>입니다.</li>
+                            <li>당첨자 발표 후 요청 기한 내에 신분증 사본을 제출하지 않을 경우, 당첨이 자동 취소됩니다.</li>
+                            <li>수집된 고유식별정보(주민등록번호)는 세무 신고 목적으로만 사용되며, 신고 완료 후 관련 법령에 따라 안전하게 파기됩니다.</li>
+                        </ul>
+                        <h5>3. 수집하는 개인정보 항목</h5>
+                        <ul class="agree-list">
+                            <li>필수항목: 이름, 휴대전화번호, 주소(경품 수령지)</li>
+                        </ul>
+                        <h5>4. 보유 및 이용 기간</h5>
+                        <ul class="agree-list">
+                            <li><strong>수집일로부터 1년간 보관 후 파기합니다.</strong></li>
+                            <li>단, 고객이 동의 철회를 요청하거나 마케팅 수신 거부 의사를 밝힐 경우 즉시 파기 및 수신 거부 처리됩니다.</li>
+                        </ul>
+                        <h5>5. 동의 거부 권리</h5>
+                        <ul class="agree-list">
+                            <li>귀하는 개인정보 수집 및 마케팅 활용 동의를 거부할 권리가 있으나, <strong>미동의 시 이벤트 응모 및 경품 지급이 제한됩니다.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="radio-group">
+                    <label style="flex: 1;"><input type="radio" name="agree" value="yes"><div class="radio-label">예, 동의합니다</div></label>
+                    <label style="flex: 1;"><input type="radio" name="agree" value="no"><div class="radio-label">아니오, 동의하지 않습니다</div></label>
+                </div>
+            </div>
 
-            <div class="input-group" style="margin-top: 40px;">
-                <div class="section-header-group">
-                    <span class="step-num">02.</span>
-                    <span class="step-title">가장 소중한 분께<br>건강을 선물하세요</span>
-                </div>
-                <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
-                <div class="product-mini" onclick="trackClickAndGo()">
-                    <div class="chance-badge">🍀 클릭 시 당첨확률 UP!</div>
-                    <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
-                    <div class="mini-text">
-                        <h4>황제의 보약, 공진단 수壽</h4>
-                        <p>지금 바로, 전문 한의사의<br>1:1 밀착 상담을 받아보세요.</p>
-                        <span class="click-guide">🔍 상세내용 보러가기</span>
-                    </div>
-                </div>
-            </div>
+            <div class="input-group" style="margin-top: 40px;">
+                <div class="section-header-group">
+                    <span class="step-num">02.</span>
+                    <span class="step-title">가장 소중한 분께<br>건강을 선물하세요</span>
+                </div>
+                <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
+                <div class="product-mini" onclick="trackClickAndGo()">
+                    <div class="chance-badge">🍀 클릭 시 당첨확률 UP!</div>
+                    <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
+                    <div class="mini-text">
+                        <h4>황제의 보약, 공진단 수壽</h4>
+                        <p>지금 바로, 전문 한의사의<br>1:1 밀착 상담을 받아보세요.</p>
+                        <span class="click-guide">🔍 상세내용 보러가기</span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="input-group" style="margin-top: 40px;">
-                <div class="section-header-group"><span class="step-num">03.</span><span class="step-title">응모자 정보 입력</span></div>
-                <div class="input-group"><label class="input-label">이름</label><input type="text" name="name" class="input-field" placeholder="성함을 입력해주세요" required></div>
-                <div class="input-group"><label class="input-label">휴대전화</label><input type="tel" name="phone" class="input-field" placeholder="010-0000-0000" required></div>
-                <div class="input-group">
-                    <label class="input-label">주소</label>
-                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                        <input type="text" id="postcode" class="input-field" placeholder="우편번호" style="width: 100px;" readonly>
-                        <button type="button" onclick="execDaumPostcode()" style="background:#333; color:#fff; border:none; padding:0 10px; border-radius:8px; cursor:pointer; flex:1;">🔍 주소 검색</button>
-                    </div>
-                    <input type="text" id="roadAddress" class="input-field" placeholder="검색 버튼을 눌러주세요" style="margin-bottom:8px;" readonly>
-                    <input type="text" id="detailAddress" class="input-field" placeholder="상세주소 입력">
-                    <input type="hidden" name="address" id="real-address">
-                </div>
-            </div>
+            <div class="input-group" style="margin-top: 40px;">
+                <div class="section-header-group"><span class="step-num">03.</span><span class="step-title">응모자 정보 입력</span></div>
+                <div class="input-group"><label class="input-label">이름</label><input type="text" name="name" class="input-field" placeholder="성함을 입력해주세요" required></div>
+                <div class="input-group"><label class="input-label">휴대전화</label><input type="tel" name="phone" class="input-field" placeholder="010-0000-0000" required></div>
+                <div class="input-group">
+                    <label class="input-label">주소</label>
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <input type="text" id="postcode" class="input-field" placeholder="우편번호" style="width: 100px;" readonly>
+                        <button type="button" onclick="execDaumPostcode()" style="background:#333; color:#fff; border:none; padding:0 10px; border-radius:8px; cursor:pointer; flex:1;">🔍 주소 검색</button>
+                    </div>
+                    <input type="text" id="roadAddress" class="input-field" placeholder="검색 버튼을 눌러주세요" style="margin-bottom:8px;" readonly>
+                    <input type="text" id="detailAddress" class="input-field" placeholder="상세주소 입력">
+                    <input type="hidden" name="address" id="real-address">
+                </div>
+            </div>
 
-            <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">
-                <div class="shiny"></div><span id="btn-text">응모 완료하기</span>
-            </button>
-        </form>
-        <footer><p>© 2026 SOO BRAND. All rights reserved.</p></footer>
-    </div>
+            <button type="button" class="btn-golden" id="submit-btn" onclick="handleSubmit()">
+                <div class="shiny"></div><span id="btn-text">응모 완료하기</span>
+            </button>
+        </form>
+        <footer><p>© 2026 SOO BRAND. All rights reserved.</p></footer>
+    </div>
 
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script>
-        // 변수 설정 유지
-        let currentUserPhone = ""; 
-        let isWaitingForShare = false; 
-        const scriptURL = "https://script.google.com/macros/s/AKfycbzLXHxGuL_NQHbzNAcIAtFUKTaDC3naz-sLoG3WzkaOykBjlAojdNuMMIhVXA9kIXOkZw/exec";
-        const productLink = "https://thesoo.co/promotion/26seol";
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        // 변수 설정 유지
+        let currentUserPhone = ""; 
+        let isWaitingForShare = false; 
+        const scriptURL = "https://script.google.com/macros/s/AKfycbzLXHxGuL_NQHbzNAcIAtFUKTaDC3naz-sLoG3WzkaOykBjlAojdNuMMIhVXA9kIXOkZw/exec";
+        const productLink = "https://thesoo.co/promotion/26seol";
 
-        // 카카오 초기화 유지
-        if (!Kakao.isInitialized()) Kakao.init('10e7940fa3815a7f872120b57db56100');
+        // 카카오 초기화 유지
+        if (!Kakao.isInitialized()) Kakao.init('10e7940fa3815a7f872120b57db56100');
 
-        function execDaumPostcode() {
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    document.getElementById('postcode').value = data.zonecode;
-                    document.getElementById("roadAddress").value = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
-                    document.getElementById("detailAddress").focus();
-                }
-            }).open();
-        }
+        function execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("roadAddress").value = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+                    document.getElementById("detailAddress").focus();
+                }
+            }).open();
+        }
 
-        function trackClickAndGo() {
-            document.getElementById('is_clicked_input').value = "O";
-            window.open(productLink, "_blank");
-        }
+        function trackClickAndGo() {
+            document.getElementById('is_clicked_input').value = "O";
+            window.open(productLink, "_blank");
+        }
 
-        function handleSubmit() {
-            const form = document.getElementById('submit-form');
-            const btn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
+function handleSubmit() {
+    const form = document.getElementById('submit-form');
+    const btn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
 
-            const agreeInput = document.querySelector('input[name="agree"]:checked');
-            if (!agreeInput || agreeInput.value === 'no') { 
-                alert("안내사항 동의가 필요합니다."); 
-                document.getElementById('section-1-target').scrollIntoView({ behavior: 'smooth' });
-                return; 
-            }
+    const agreeInput = document.querySelector('input[name="agree"]:checked');
+    if (!agreeInput || agreeInput.value === 'no') { 
+        alert("안내사항 동의가 필요합니다."); 
+        document.getElementById('section-1-target').scrollIntoView({ behavior: 'smooth' });
+        return; 
+    }
 
-            const roadAddr = document.getElementById('roadAddress').value;
-            if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
-            document.getElementById('real-address').value = roadAddr + " " + document.getElementById('detailAddress').value;
+    const roadAddr = document.getElementById('roadAddress').value;
+    if(!roadAddr) { alert("주소 검색을 완료해주세요."); return; }
+    document.getElementById('real-address').value = roadAddr + " " + document.getElementById('detailAddress').value;
 
-            btnText.innerHTML = "접수 중입니다...";
-            btn.disabled = true;
+    btnText.innerHTML = "접수 중입니다...";
+    btn.disabled = true;
 
-            const formData = new FormData(form);
-            currentUserPhone = form.querySelector('input[name="phone"]').value;
+    const formData = new FormData(form);
+    currentUserPhone = form.querySelector('input[name="phone"]').value;
 
-            localStorage.setItem('savedPhone', currentUserPhone); 
+    localStorage.setItem('savedPhone', currentUserPhone); 
 
-            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
-                .then(() => { 
-                    showShareModal(); // 모달을 먼저 띄워주고
-                    form.reset(); 
-                    btn.disabled = false;
-                    btnText.innerHTML = "응모 완료하기";
+    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+        .then(() => { 
+            showShareModal(); 
+            // 응모 완료 후 폼 초기화 및 버튼 복구 (PC UI 고착 해결)
+            form.reset(); 
+            btn.disabled = false;
+            btnText.innerHTML = "응모 완료하기";
+        })
+        .catch(() => { 
+            showShareModal();
+            // 실패 시에도 사용자 경험을 위해 초기화
+            form.reset();
+            btn.disabled = false;
+            btnText.innerHTML = "응모 완료하기";
+        });
+}
+function showShareModal() {
+    const modalHtml = `
+        <div id="share-modal">
+            <div>
+                <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
+                <p style="font-size:14px; color:#666; line-height:1.6;">결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!</p>
+                <button id="kakao-share-btn" onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer;">💬 카카오톡으로 공유하기</button>
+                <button onclick="const m=document.getElementById('share-modal'); if(m)m.remove();" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
+            </div>
+        </div>`;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+/* [수정 후] 공유 버튼 클릭 시 번호가 유실되지 않도록 더 확실하게 처리 */
+function shareAndTrack() {
+    // 폼 초기화 전에 handleSubmit에서 이미 저장했지만, 공유 클릭 시점에 한 번 더 확실히 확인합니다.
+    const phone = localStorage.getItem('savedPhone') || currentUserPhone;
+    
+    if (phone) {
+        localStorage.setItem('savedPhone', phone);
+    }
+    localStorage.setItem('pendingShare', 'true');
 
-                    const userAgent = navigator.userAgent.toLowerCase();
-                    if (userAgent.indexOf('kakaotalk') > -1) {
-                        // 알림창으로 안내 후 바로 실행 (사용자가 확인을 누를 수밖에 없게 유도)
-                        alert("공유 데이터 보호를 위해 사파리/크롬 브라우저로 이동합니다.");
-                        openExternal();
-                    }
-                })
-                .catch(() => { 
-                    showShareModal();
-                    // 실패 시에도 사용자 경험을 위해 초기화
-                    form.reset();
-                    btn.disabled = false;
-                    btnText.innerHTML = "응모 완료하기";
-                });
-        }
+    if (window.Kakao) {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: "2026 '한 방' 테스트",
+                description: "내 관상에 맞는 처방은?",
+                imageUrl: "https://thesoo.co/images/share.jpg",
+                link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
+            }
+        });
+    }
+}
+            
+/* [수정 후] 최종 실행력 보강 버전 */
+function checkShareStatus() {
+    // 1. 데이터 추출 (저장소 우선)
+    const phone = localStorage.getItem('savedPhone') || currentUserPhone;
+    const pending = localStorage.getItem('pendingShare');
 
-        function showShareModal() {
-            const modalHtml = `
-                <div id="share-modal">
-                    <div>
-                        <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
-                        <p style="font-size:14px; color:#666; line-height:1.6;">잠깐! 카톡 브라우저에서는 오류가 날 수 있습니다.<br><b>안전한 응모 확인</b>을 위해 아래 버튼을 눌러주세요.</p>
-                        
-                        <button onclick="openExternal()" style="background:#333; color:#fff; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:10px; cursor:pointer;">🌐 사파리 / 크롬으로 열기</button>
-                        
-                        <hr style="margin:20px 0; border:0; border-top:1px dashed #ccc;">
-                        
-                        <button id="kakao-share-btn" onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; cursor:pointer;">💬 카카오톡으로 공유하기</button>
-                        <button onclick="const m=document.getElementById('share-modal'); if(m)m.remove();" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
-                    </div>
-                </div>`;
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-        }
+    if (pending === 'true' && phone) {
+        // 2. 상태 즉시 삭제 (중복 실행 방지)
+        localStorage.removeItem('pendingShare');
 
-        function openExternal() {
-            const targetUrl = window.location.href;
-            const userAgent = navigator.userAgent.toLowerCase();
-            
-            if (userAgent.indexOf('android') > -1) {
-                // 안드로이드: 구글 크롬 앱을 직접 지정하여 실행
-                location.href = 'intent://' + targetUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=https;package=com.android.chrome;end';
-            } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1) {
-                // iOS: 카카오톡 전용 외부 브라우저 호출 프로토콜 (가장 확실함)
-                location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(targetUrl);
-            } else {
-                // 기타 환경
-                window.open(targetUrl, '_blank');
-            }
-        }
+        // 3. UI 즉시 업데이트 (사용자가 복귀하자마자 변화를 느끼게 함)
+        const shareBtn = document.getElementById('kakao-share-btn');
+        if (shareBtn) {
+            shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+            shareBtn.style.background = "#ffffff";
+            shareBtn.style.border = "2px solid #FEE500";
+            shareBtn.style.fontWeight = "800";
+        }
 
-        /* [수정 후] 공유 버튼 클릭 시 번호가 유실되지 않도록 더 확실하게 처리 */
-        function shareAndTrack() {
-            // 폼 초기화 전에 handleSubmit에서 이미 저장했지만, 공유 클릭 시점에 한 번 더 확실히 확인합니다.
-            const phone = localStorage.getItem('savedPhone') || currentUserPhone;
-            
-            if (phone) {
-                localStorage.setItem('savedPhone', phone);
-            }
-            localStorage.setItem('pendingShare', 'true');
+        // 4. 데이터 전송 (비동기, 응답 대기 없음)
+        const trackData = new FormData();
+        trackData.append('action', 'track_share');
+        trackData.append('phone', phone);
+        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
 
-            if (window.Kakao) {
-                Kakao.Link.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                        title: "2026 '한 방' 테스트",
-                        description: "내 관상에 맞는 처방은?",
-                        imageUrl: "https://thesoo.co/images/share.jpg",
-                        link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
-                    }
-                });
-            }
-        }
-                    
-        /* [수정 후] 최종 실행력 보강 버전 */
-        function checkShareStatus() {
-            // 1. 데이터 추출 (저장소 우선)
-            const phone = localStorage.getItem('savedPhone') || currentUserPhone;
-            const pending = localStorage.getItem('pendingShare');
+        // 5. 브라우저가 완전히 깨어난 뒤 얼럿 노출 (0.4초 지연)
+        setTimeout(function() {
+            alert("축하합니다! 참여가 완료되었습니다.\n공유 횟수가 기록되어 당첨 확률이 올라갔습니다! 🆙");
+        }, 400);
+    }
+}
 
-            if (pending === 'true' && phone) {
-                // 2. 상태 즉시 삭제 (중복 실행 방지)
-                localStorage.removeItem('pendingShare');
+/* 통합 리스너: 기기별로 다른 복귀 신호를 하나로 묶어 0.5초 뒤 실행 */
+const triggerShareCheck = () => {
+    setTimeout(checkShareStatus, 500); 
+};
 
-                // 3. UI 즉시 업데이트 (사용자가 복귀하자마자 변화를 느끼게 함)
-                const shareBtn = document.getElementById('kakao-share-btn');
-                if (shareBtn) {
-                    shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
-                    shareBtn.style.background = "#ffffff";
-                    shareBtn.style.border = "2px solid #FEE500";
-                    shareBtn.style.fontWeight = "800";
-                }
+// 화면 가시성 변화(백그라운드->포그라운드) 감지
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') triggerShareCheck();
+});
 
-                // 4. 데이터 전송 (비동기, 응답 대기 없음)
-                const trackData = new FormData();
-                trackData.append('action', 'track_share');
-                trackData.append('phone', phone);
-                fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+// 페이지 표시(인앱 브라우저 복귀) 감지
+window.addEventListener('pageshow', triggerShareCheck);
 
-                // 5. 브라우저가 완전히 깨어난 뒤 얼럿 노출 (0.4초 지연)
-                setTimeout(function() {
-                    alert("축하합니다! 참여가 완료되었습니다.\n공유 횟수가 기록되어 당첨 확률이 올라갔습니다! 🆙");
-                }, 400);
-            }
-        }
-
-        /* 통합 리스너: 기기별로 다른 복귀 신호를 하나로 묶어 0.5초 뒤 실행 */
-        const triggerShareCheck = () => {
-            setTimeout(checkShareStatus, 500); 
-        };
-
-        // 화면 가시성 변화(백그라운드->포그라운드) 감지
-        document.addEventListener('visibilitychange', function() {
-            if (document.visibilityState === 'visible') triggerShareCheck();
-        });
-
-        // 페이지 표시(인앱 브라우저 복귀) 감지
-        window.addEventListener('pageshow', triggerShareCheck);
-
-        // 포커스 획득 감지
-        window.addEventListener('focus', triggerShareCheck);
-    </script>
+// 포커스 획득 감지
+window.addEventListener('focus', triggerShareCheck);
+    </script>
 </body>
 </html>
