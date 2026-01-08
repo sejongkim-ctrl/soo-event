@@ -187,10 +187,13 @@
             btnText.innerHTML = "접수 중입니다...";
             btn.disabled = true;
 
-            const formData = new FormData(form);
-            currentUserPhone = form.querySelector('input[name="phone"]').value;
+const formData = new FormData(form);
+currentUserPhone = form.querySelector('input[name="phone"]').value;
 
-            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+// [수정사항 b] 카톡 인앱 브라우저의 변수 초기화 대비, 번호를 로컬스토리지에 즉시 저장
+localStorage.setItem('savedPhone', currentUserPhone); 
+
+fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
             .then(() => { showShareModal(); })
             .catch(() => { showShareModal(); });
         }
@@ -252,13 +255,18 @@ async function checkShareStatus() {
     }
 }
             
-            // 이벤트 리스너 통합 등록
-            window.addEventListener('focus', checkShareStatus);
-            document.addEventListener('visibilitychange', function() {
-                if (document.visibilityState === 'visible') {
-                    checkShareStatus();
-                }
-            });
+// [수정사항 a] 일반 브라우저용 포커스 감지
+window.addEventListener('focus', checkShareStatus);
+
+// [수정사항 a] 카톡 인앱 브라우저 및 특정 모바일 환경에서 더 확실하게 반응하는 리스너
+window.addEventListener('pageshow', checkShareStatus); 
+
+// [수정사항 a] 탭 전환 감지
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+        checkShareStatus();
+    }
+});
     </script>
 </body>
 </html>
