@@ -227,29 +227,30 @@
                 }
             }
             
-            function checkShareStatus() {
-                const pending = localStorage.getItem('pendingShare');
-                const phone = localStorage.getItem('savedPhone') || currentUserPhone;
-            
-                if (pending === 'true' && phone) {
-                    // 즉시 상태 제거 (중복 실행 방지)
-                    localStorage.removeItem('pendingShare');
-            
-                    const trackData = new FormData();
-                    trackData.append('action', 'track_share');
-                    trackData.append('phone', phone);
-            
-                    // [중요] fetch 응답을 기다리지 않고 비동기로 전송 (모바일 차단 회피)
-                    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
-            
-                    // UI 업데이트 및 얼럿 즉시 실행
-                    const shareBtn = document.querySelector('#share-modal button');
-                    if(shareBtn) {
-                        shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
-                    }
-                    alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
-                }
-            }
+// [수정 후] 모바일 대응을 위해 await를 제거하고 UI를 즉시 실행합니다.
+async function checkShareStatus() {
+    const pending = localStorage.getItem('pendingShare');
+    const phone = localStorage.getItem('savedPhone') || currentUserPhone;
+
+    if (pending === 'true' && phone) {
+        // 1. 상태 즉시 삭제 (중복 방지)
+        localStorage.removeItem('pendingShare');
+
+        const trackData = new FormData();
+        trackData.append('action', 'track_share');
+        trackData.append('phone', phone);
+
+        // 2. 데이터 전송 (await를 빼서 응답 대기 없이 비동기로 실행)
+        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+
+        // 3. UI 업데이트 및 얼럿 즉시 실행 (모바일 차단 회피)
+        const shareBtn = document.querySelector('#share-modal button');
+        if(shareBtn) {
+            shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+        }
+        alert("축하해요. 공유가 완료되어 당첨확률이 올라갔어요🆙");
+    }
+}
             
             // 이벤트 리스너 통합 등록
             window.addEventListener('focus', checkShareStatus);
