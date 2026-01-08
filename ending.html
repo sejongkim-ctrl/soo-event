@@ -1,21 +1,9 @@
 <script>
+    // 카카오톡 인앱 브라우저 감지 시 안내 메시지 출력
     (function() {
         var userAgent = navigator.userAgent.toLowerCase();
-        var targetUrl = window.location.href;
-
         if (userAgent.indexOf('kakaotalk') > -1) {
-            // 1. 안드로이드 대응 (인텐트 방식)
-            if (userAgent.indexOf('android') > -1) {
-                location.href = 'intent://' + targetUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=http;package=com.android.chrome;end';
-            } 
-            // 2. iOS 대응 (iOS는 인앱 브라우저 내부 기능 이용)
-            else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
-                location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(targetUrl);
-            }
-            // 3. 기타 환경 대응
-            else {
-                location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(targetUrl);
-            }
+            alert("⚠️ 카카오톡 브라우저에서는 공유 확인이 불안정할 수 있습니다.\n\n정확한 응모를 위해 우측 상단 [⋮] 버튼을 눌러\n'다른 브라우저로 열기'를 선택해 주세요!");
         }
     })();
 </script>
