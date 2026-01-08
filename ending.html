@@ -220,25 +220,28 @@ function showShareModal() {
         </div>`;
     document.body.insertAdjacentHTML('beforeend', modalHtml);
 }
-        function shareAndTrack() {
-                // 1. 번호와 상태를 로컬스토리지에 즉시 저장 (유실 방지)
-                if (currentUserPhone) {
-                    localStorage.setItem('savedPhone', currentUserPhone);
-                }
-                localStorage.setItem('pendingShare', 'true');
-            
-                if (window.Kakao) {
-                    Kakao.Link.sendDefault({
-                        objectType: 'feed',
-                        content: {
-                            title: "2026 '한 방' 테스트",
-                            description: "내 관상에 맞는 처방은?",
-                            imageUrl: "https://thesoo.co/images/share.jpg",
-                            link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
-                        }
-                    });
-                }
+/* [수정 후] 공유 버튼 클릭 시 번호가 유실되지 않도록 더 확실하게 처리 */
+function shareAndTrack() {
+    // 폼 초기화 전에 handleSubmit에서 이미 저장했지만, 공유 클릭 시점에 한 번 더 확실히 확인합니다.
+    const phone = localStorage.getItem('savedPhone') || currentUserPhone;
+    
+    if (phone) {
+        localStorage.setItem('savedPhone', phone);
+    }
+    localStorage.setItem('pendingShare', 'true');
+
+    if (window.Kakao) {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: "2026 '한 방' 테스트",
+                description: "내 관상에 맞는 처방은?",
+                imageUrl: "https://thesoo.co/images/share.jpg",
+                link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
             }
+        });
+    }
+}
             
 /* [수정 후] 더 견고한 데이터 추출 방식 */
 async function checkShareStatus() {
