@@ -208,6 +208,13 @@ function handleSubmit() {
             form.reset(); 
             btn.disabled = false;
             btnText.innerHTML = "응모 완료하기";
+            // [추가] 카톡 유저에게 사파리/크롬 이동 권장 얼럿
+        const userAgent = navigator.userAgent.toLowerCase();
+        if (userAgent.indexOf('kakaotalk') > -1) {
+            if(confirm("안전한 공유 확인을 위해 사파리/크롬 브라우저로 이동하시겠습니까?")) {
+                openExternal();
+            }
+        }
         })
         .catch(() => { 
             showShareModal();
@@ -233,6 +240,17 @@ function showShareModal() {
             </div>
         </div>`;
     document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+function openExternal() {
+    const targetUrl = window.location.href;
+    const userAgent = navigator.userAgent.toLowerCase();
+    
+    // 안드로이드라면 크롬 패키지 호출, iOS라면 외부 앱 연결 주소 호출
+    if (userAgent.indexOf('android') > -1) {
+        location.href = 'intent://' + targetUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=http;package=com.android.chrome;end';
+    } else {
+        location.href = 'kakaotalk://web/openExternalApp?link=' + encodeURIComponent(targetUrl);
+    }
 }
 /* [수정 후] 공유 버튼 클릭 시 번호가 유실되지 않도록 더 확실하게 처리 */
 function shareAndTrack() {
