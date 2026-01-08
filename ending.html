@@ -207,39 +207,51 @@
                 </div>`;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
-
             function shareAndTrack() {
+                // [추가] 모바일 변수 유실 방지를 위해 번호도 세션에 저장
+                sessionStorage.setItem('savedPhone', currentUserPhone);
+                sessionStorage.setItem('pendingShare', 'true');
+            
                 Kakao.Link.sendDefault({
                     objectType: 'feed',
                     content: {
                         title: "2026 '한 방' 테스트",
                         description: "내 관상에 맞는 처방은?",
                         imageUrl: "https://thesoo.co/images/share.jpg",
-                        link: { mobileWebUrl: 'https://simte.xyz/thesoo', webUrl: 'https://simte.xyz/thesoo' }
+                        link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
                     }
                 });
-                // 👈 세션 저장소에 상태를 박제하여 앱 전환 후에도 데이터가 유지되게 합니다.
-                sessionStorage.setItem('pendingShare', 'true'); 
             }
             
-            // 👈 window.onfocus를 사용하여 브라우저 복귀 감지 확률을 높입니다.
-            window.onfocus = function() {
+            // [개선] onfocus와 visibilitychange를 동시에 감시하여 모바일 대응력 극대화
+            function checkShareStatus() {
                 const pending = sessionStorage.getItem('pendingShare');
-                if (pending === 'true') {
-                    sessionStorage.removeItem('pendingShare'); // 즉시 삭제
+                const phone = sessionStorage.getItem('savedPhone') || currentUserPhone;
+            
+                if (pending === 'true' && phone) {
+                    sessionStorage.removeItem('pendingShare'); // 중복 방지 위해 즉시 삭제
             
                     const trackData = new FormData();
                     trackData.append('action', 'track_share');
-                    trackData.append('phone', currentUserPhone);
+                    trackData.append('phone', phone);
             
                     fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData })
                     .then(() => {
-                        alert("축하합니다! 공유가 완료되어 당첨 확률이 올라갔습니다.");
+                        // UI 업데이트 (문구 변경)
                         const shareBtn = document.querySelector('#share-modal button');
                         if(shareBtn) shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
+            
+                        // 얼럿 메시지
+                        alert("축하합니다! 공유가 완료되어 당첨 확률이 올라갔습니다.");
                     });
                 }
-            };
+            }
+            
+            // 모바일 브라우저 복귀 감지 이벤트 리스너 통합
+            window.addEventListener('focus', checkShareStatus);
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'visible') checkShareStatus();
+            });
     </script>
 </body>
 </html>
