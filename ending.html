@@ -146,7 +146,6 @@
     <script>
         // 변수 설정
         let currentUserPhone = ""; 
-        let isWaitingForShare = false; 
         const scriptURL = "https://script.google.com/macros/s/AKfycbzLXHxGuL_NQHbzNAcIAtFUKTaDC3naz-sLoG3WzkaOykBjlAojdNuMMIhVXA9kIXOkZw/exec";
         const productLink = "https://thesoo.co/promotion/26seol";
 
@@ -168,6 +167,7 @@
             window.open(productLink, "_blank");
         }
 
+        /* 1. 제출 함수 */
         function handleSubmit() {
             const form = document.getElementById('submit-form');
             const btn = document.getElementById('submit-btn');
@@ -194,8 +194,7 @@
 
             fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
                 .then(() => { 
-                    showShareModal(); 
-                    // 폼 초기화 및 버튼 복구
+                    showShareModal(); // 모달 띄우기
                     form.reset(); 
                     btn.disabled = false;
                     btnText.innerHTML = "응모 완료하기";
@@ -208,27 +207,34 @@
                 });
         }
 
+        /* 2. 모달 띄우기 (초기 상태) */
         function showShareModal() {
             const modalHtml = `
                 <div id="share-modal">
                     <div>
-                        <h3 style="margin-bottom:15px; color:#82181C;">🎉 응모 완료!</h3>
-                        <p style="font-size:14px; color:#666; line-height:1.6;">결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!</p>
-                        <button id="kakao-share-btn" onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer;">💬 카카오톡으로 공유하기</button>
+                        <h3 id="modal-title" style="margin-bottom:15px; color:#82181C;">🎉 응모 접수 완료!</h3>
+                        <p id="modal-desc" style="font-size:14px; color:#666; line-height:1.6;">
+                            결과가 만족스러우셨나요?<br><b>친구에게 공유</b>하고 당첨 확률을 높여보세요!
+                        </p>
+                        
+                        <button id="kakao-share-btn" onclick="shareAndTrack()" style="background:#FEE500; color:#3C1E1E; border:none; width:100%; padding:15px; border-radius:8px; font-weight:700; margin-top:20px; cursor:pointer;">
+                            💬 카카오톡으로 공유하기
+                        </button>
+                        
                         <button onclick="const m=document.getElementById('share-modal'); if(m)m.remove();" style="background:none; border:none; color:#999; margin-top:15px; font-size:12px; text-decoration:underline; cursor:pointer;">그냥 닫기</button>
                     </div>
                 </div>`;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
 
-        /* 공유 버튼 클릭 시 데이터 저장 및 공유 실행 */
+        /* 3. 공유 실행 함수 */
         function shareAndTrack() {
             const phone = localStorage.getItem('savedPhone') || currentUserPhone;
             
             if (phone) {
                 localStorage.setItem('savedPhone', phone);
             }
-            localStorage.setItem('pendingShare', 'true');
+            localStorage.setItem('pendingShare', 'true'); // 공유 대기 상태 설정
 
             if (window.Kakao) {
                 Kakao.Link.sendDefault({
@@ -243,52 +249,62 @@
             }
         }
                     
-        /* 복귀 시 공유 여부 확인 함수 */
+        /* 4. 복귀 감지 및 CTA 변경 함수 (핵심 로직) */
         function checkShareStatus() {
-            // 1. 데이터 추출 (저장소 우선)
             const phone = localStorage.getItem('savedPhone') || currentUserPhone;
             const pending = localStorage.getItem('pendingShare');
 
+            // 공유를 누르고 돌아온 상태라면
             if (pending === 'true' && phone) {
-                // 2. 상태 즉시 삭제 (중복 실행 방지)
-                localStorage.removeItem('pendingShare');
-
-                // 3. UI 즉시 업데이트 (사용자가 복귀하자마자 변화를 느끼게 함)
+                
+                // 버튼 UI를 [공유 완료 확인]으로 변경 (사용자 터치 유도)
                 const shareBtn = document.getElementById('kakao-share-btn');
                 if (shareBtn) {
-                    shareBtn.innerText = "💬 한 번 더 공유하고 당첨 확률 높이기";
-                    shareBtn.style.background = "#ffffff";
-                    shareBtn.style.border = "2px solid #FEE500";
+                    shareBtn.innerText = "✅ 공유 완료 확인하기 (클릭)";
+                    shareBtn.style.background = "#82181C"; // 눈에 띄는 빨간색
+                    shareBtn.style.color = "#ffffff";
                     shareBtn.style.fontWeight = "800";
+                    
+                    // 버튼 클릭 시의 동작을 '데이터 전송 + 퍼널 연장'으로 재정의
+                    shareBtn.onclick = function() {
+                        // (1) 상태 초기화 및 데이터 전송
+                        localStorage.removeItem('pendingShare');
+                        const trackData = new FormData();
+                        trackData.append('action', 'track_share');
+                        trackData.append('phone', phone);
+                        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
+
+                        // (2) 완료 얼럿 띄우기
+                        alert("🎉 응모가 정상적으로 완료되었습니다!");
+
+                        // (3) 모달 내용 변경 (퍼널 연장)
+                        const modalTitle = document.getElementById('modal-title');
+                        const modalDesc = document.getElementById('modal-desc');
+
+                        if(modalTitle) modalTitle.innerText = "🍯 당첨 확률 높이는 꿀팁!";
+                        if(modalDesc) modalDesc.innerHTML = "친구에게 <b>한 번 더 공유</b>하면<br>당첨 확률이 2배로 올라갑니다! 🆙";
+
+                        // (4) 버튼을 다시 '공유하기' 상태로 복구
+                        shareBtn.innerText = "💬 한 번 더 공유하기";
+                        shareBtn.style.background = "#FEE500";
+                        shareBtn.style.color = "#3C1E1E";
+                        
+                        // 클릭 이벤트를 원래 공유 함수로 되돌림 (무한 공유 가능)
+                        shareBtn.onclick = shareAndTrack;
+                    };
                 }
-
-                // 4. 데이터 전송 (비동기, 응답 대기 없음)
-                const trackData = new FormData();
-                trackData.append('action', 'track_share');
-                trackData.append('phone', phone);
-                fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: trackData });
-
-                // 5. 브라우저가 완전히 깨어난 뒤 얼럿 노출 (0.4초 지연)
-                setTimeout(function() {
-                    alert("축하합니다! 참여가 완료되었습니다.\n공유 횟수가 기록되어 당첨 확률이 올라갔습니다! 🆙");
-                }, 400);
             }
         }
 
-        /* 통합 리스너: 기기별로 다른 복귀 신호를 하나로 묶어 0.5초 뒤 실행 */
+        /* 5. 통합 리스너: 브라우저 복귀 시 버튼 변경 실행 (0.5초 지연) */
         const triggerShareCheck = () => {
             setTimeout(checkShareStatus, 500); 
         };
 
-        // 화면 가시성 변화(백그라운드->포그라운드) 감지
         document.addEventListener('visibilitychange', function() {
             if (document.visibilityState === 'visible') triggerShareCheck();
         });
-
-        // 페이지 표시(인앱 브라우저 복귀) 감지
         window.addEventListener('pageshow', triggerShareCheck);
-
-        // 포커스 획득 감지
         window.addEventListener('focus', triggerShareCheck);
     </script>
 </body>
