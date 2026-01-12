@@ -227,42 +227,54 @@
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
 
-        /* 3. 공유 실행 함수 (핵심: 공유창 띄우기 전에 버튼을 미리 바꿔놓음) */
-        function shareAndTrack() {
-            const phone = localStorage.getItem('savedPhone') || currentUserPhone;
-            
-            // 1. 공유 대기 상태 저장
-            if (phone) {
-                localStorage.setItem('savedPhone', phone);
-            }
-            localStorage.setItem('pendingShare', 'true'); 
+/* 3. 공유 실행 함수 (링크 변경 적용됨) */
+function shareAndTrack() {
+    const phone = localStorage.getItem('savedPhone') || currentUserPhone;
+    
+    // 1. 공유 대기 상태 저장
+    if (phone) {
+        localStorage.setItem('savedPhone', phone);
+    }
+    localStorage.setItem('pendingShare', 'true'); 
 
-            // 2. [선제적 UI 변경] 공유 시트가 뜨기 전에 버튼을 '확인 버튼'으로 미리 바꿈
-            const shareBtn = document.getElementById('kakao-share-btn');
-            if (shareBtn) {
-                shareBtn.innerText = "✅ 공유 완료 시 여기를 클릭하세요!";
-                shareBtn.style.background = "#82181C"; // 강렬한 빨간색
-                shareBtn.style.color = "#ffffff";
-                shareBtn.style.fontWeight = "800";
-                
-                // 버튼 클릭 이벤트를 '완료 확인' 함수로 교체
-                shareBtn.onclick = confirmShareCompletion;
-            }
+    // 2. [선제적 UI 변경] 공유 시트가 뜨기 전에 버튼을 '확인 버튼'으로 미리 바꿈
+    const shareBtn = document.getElementById('kakao-share-btn');
+    if (shareBtn) {
+        shareBtn.innerText = "✅ 공유 완료 시 여기를 클릭하세요!";
+        shareBtn.style.background = "#82181C"; // 강렬한 빨간색
+        shareBtn.style.color = "#ffffff";
+        shareBtn.style.fontWeight = "800";
+        
+        // 버튼 클릭 이벤트를 '완료 확인' 함수로 교체
+        shareBtn.onclick = confirmShareCompletion;
+    }
 
-            // 3. 카카오 공유창 실행
-            if (window.Kakao) {
-                Kakao.Link.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                        title: "2026 '한 방' 테스트",
-                        description: "내 관상에 맞는 처방은?",
-                        imageUrl: "https://thesoo.co/images/share.jpg",
-                        link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
-                    }
-                });
-            }
-        }
-
+    // 3. 카카오 공유창 실행
+    if (window.Kakao) {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: "2026 '한 방' 테스트",
+                description: "내 관상에 맞는 처방은?",
+                imageUrl: "https://thesoo.co/images/share.jpg",
+                link: { 
+                    // [수정됨] 친구가 클릭하면 테스트 메인으로 이동
+                    mobileWebUrl: 'https://simte.xyz/thesoo', 
+                    webUrl: 'https://simte.xyz/thesoo' 
+                }
+            },
+            buttons: [
+                {
+                    title: '테스트 하러 가기',
+                    link: {
+                        mobileWebUrl: 'https://simte.xyz/thesoo',
+                        webUrl: 'https://simte.xyz/thesoo'
+                    },
+                },
+            ],
+        });
+    }
+}
         /* 4. 완료 확인 및 퍼널 연장 함수 (빨간 버튼 클릭 시 실행) */
         function confirmShareCompletion() {
             const phone = localStorage.getItem('savedPhone') || currentUserPhone;
