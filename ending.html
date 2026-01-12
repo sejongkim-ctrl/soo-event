@@ -227,29 +227,27 @@
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
 
-/* 3. 공유 실행 함수 (링크 수정 완료) */
+/* 디버깅용 공유 함수 */
 function shareAndTrack() {
     const phone = localStorage.getItem('savedPhone') || currentUserPhone;
     
-    // 1. 공유 대기 상태 저장
-    if (phone) {
-        localStorage.setItem('savedPhone', phone);
-    }
+    if (phone) localStorage.setItem('savedPhone', phone);
     localStorage.setItem('pendingShare', 'true'); 
 
-    // 2. [선제적 UI 변경] 공유 시트가 뜨기 전에 버튼을 '확인 버튼'으로 미리 바꿈
+    // UI 변경 로직
     const shareBtn = document.getElementById('kakao-share-btn');
     if (shareBtn) {
         shareBtn.innerText = "✅ 공유 완료 시 여기를 클릭하세요!";
-        shareBtn.style.background = "#82181C"; // 강렬한 빨간색
+        shareBtn.style.background = "#82181C"; 
         shareBtn.style.color = "#ffffff";
         shareBtn.style.fontWeight = "800";
-        
-        // 버튼 클릭 이벤트를 '완료 확인' 함수로 교체
         shareBtn.onclick = confirmShareCompletion;
     }
 
-    // 3. 카카오 공유창 실행
+    // [중요] 눈으로 확인하는 코드
+    // 버튼을 눌렀을 때 이 얼럿이 뜹니다. 내용을 확인하세요.
+    alert("지금 공유되는 주소: https://simte.xyz/thesoo"); 
+
     if (window.Kakao) {
         Kakao.Link.sendDefault({
             objectType: 'feed',
@@ -257,17 +255,16 @@ function shareAndTrack() {
                 title: "2026 '한 방' 테스트",
                 description: "내 관상에 맞는 처방은?",
                 imageUrl: "https://thesoo.co/images/share.jpg",
+                // 여기가 진짜 핵심입니다.
                 link: { 
-                    // [수정] 친구가 이미지를 클릭하면 메인으로 이동
                     mobileWebUrl: 'https://simte.xyz/thesoo', 
                     webUrl: 'https://simte.xyz/thesoo' 
                 }
             },
             buttons: [
                 {
-                    title: '테스트 하러 가기', // [추가] 명확한 버튼명
+                    title: '테스트 하러 가기',
                     link: {
-                        // [수정] 친구가 버튼을 클릭하면 메인으로 이동
                         mobileWebUrl: 'https://simte.xyz/thesoo',
                         webUrl: 'https://simte.xyz/thesoo'
                     },
@@ -275,7 +272,7 @@ function shareAndTrack() {
             ],
         });
     }
-}
+}        
         
         /* 4. 완료 확인 및 퍼널 연장 함수 (빨간 버튼 클릭 시 실행) */
         function confirmShareCompletion() {
