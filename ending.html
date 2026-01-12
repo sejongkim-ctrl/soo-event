@@ -245,9 +245,10 @@ function shareAndTrack() {
 
     if (window.Kakao) {
         Kakao.Link.sendCustom({
-            templateId: 127842, // ⚠️ 복사한 템플릿 ID 6자리를 여기에 넣으세요
+            templateId: 127842, // ⚠️ 사용자님의 템플릿 ID (숫자)로 꼭 바꿔주세요!
             templateArgs: {
-                // 여기서 주소를 강제로 꽂아줍니다 (설정 무시하고 이게 적용됨)
+                // 여기서 주소를 강제로 꽂아줍니다.
+                // 템플릿 설정을 ${url}로 해뒀기 때문에, 이 주소가 무조건 적용됩니다.
                 'url': 'https://simte.xyz/thesoo'
             }
         });
