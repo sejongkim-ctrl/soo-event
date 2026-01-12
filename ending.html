@@ -227,7 +227,7 @@
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
 
-/* 3. 공유 실행 함수 (링크 변경 적용됨) */
+/* 3. 공유 실행 함수 (링크 수정 완료) */
 function shareAndTrack() {
     const phone = localStorage.getItem('savedPhone') || currentUserPhone;
     
@@ -258,15 +258,16 @@ function shareAndTrack() {
                 description: "내 관상에 맞는 처방은?",
                 imageUrl: "https://thesoo.co/images/share.jpg",
                 link: { 
-                    // [수정됨] 친구가 클릭하면 테스트 메인으로 이동
+                    // [수정] 친구가 이미지를 클릭하면 메인으로 이동
                     mobileWebUrl: 'https://simte.xyz/thesoo', 
                     webUrl: 'https://simte.xyz/thesoo' 
                 }
             },
             buttons: [
                 {
-                    title: '테스트 하러 가기',
+                    title: '테스트 하러 가기', // [추가] 명확한 버튼명
                     link: {
+                        // [수정] 친구가 버튼을 클릭하면 메인으로 이동
                         mobileWebUrl: 'https://simte.xyz/thesoo',
                         webUrl: 'https://simte.xyz/thesoo'
                     },
@@ -275,6 +276,7 @@ function shareAndTrack() {
         });
     }
 }
+        
         /* 4. 완료 확인 및 퍼널 연장 함수 (빨간 버튼 클릭 시 실행) */
         function confirmShareCompletion() {
             const phone = localStorage.getItem('savedPhone') || currentUserPhone;
