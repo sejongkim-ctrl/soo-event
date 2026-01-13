@@ -465,32 +465,37 @@ footer {
 }
 /* [수정] 긴 텍스트 정렬 및 디자인 최적화 */
 
-/* 1. 결과 설명 (1번 문단) & 처방전 설명 (2번 문단) 공통 스타일 */
+/* [수정 후] padding을 줄이고 word-break 속성을 변경합니다 */
 #result-desc, #product-copy {
     display: block;
-    width: 90%;                 /* 전체 폭의 90%만 사용 (여백 확보) */
-    margin: 15px auto;          /* 가운데 정렬 */
-    padding: 20px;              /* 박스 안쪽 여백 */
+    width: 90%;
+    margin: 15px auto;
     
-    background-color: #F8F8F8;  /* 연한 회색 배경 (카드 느낌) */
-    border-radius: 12px;        /* 둥근 모서리 */
-    border: 1px solid #EEEEEE;  /* 아주 연한 테두리 */
+    padding: 15px;          /* [변경 1] 여백을 20px -> 15px로 축소 */
     
-    text-align: left;           /* ⭐ 핵심: 왼쪽 정렬로 변경 */
-    font-size: 14px;            /* 글자 크기 적당히 */
-    line-height: 1.65;          /* 줄 간격을 넓혀서 시원하게 */
-    color: #444;                /* 진한 회색 */
-    word-break: keep-all;       /* 단어 중간에 끊기지 않게 함 */
-    letter-spacing: -0.03em;    /* 자간을 살짝 좁혀서 단단해 보이게 */
+    background-color: #F8F8F8;
+    border-radius: 12px;
+    border: 1px solid #EEEEEE;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #444;
+    
+    word-break: break-word; /* [변경 2] keep-all 대신 break-word 사용 (자연스러운 줄바꿈) */
+    
+    letter-spacing: -0.03em;
 }
 
-/* 2. 텍스트 내부 강조 부분 디자인 (기존 highlight-txt 보강) */
+/* [수정 후] white-space: nowrap 속성 추가 */
 .highlight-txt {
-    color: #82181C;             /* 브랜드 레드 컬러 */
-    font-weight: 700;           /* 두껍게 */
-    background: rgba(130, 24, 28, 0.08); /* 강조 텍스트 뒤에 연한 배경 */
-    padding: 2px 4px;           /* 배경 색이 글자를 살짝 감싸도록 */
+    color: #82181C;
+    font-weight: 700;
+    background: rgba(130, 24, 28, 0.08);
+    padding: 2px 4px;
     border-radius: 4px;
+    
+    white-space: nowrap;    /* [핵심 추가] 이 부분은 절대 줄바꿈하지 않음 */
+    display: inline-block;  /* [추가] nowrap이 잘 적용되도록 블록 속성 부여 */
 }
 
 /* 3. 모바일 화면에서 답답하지 않게 조정 */
