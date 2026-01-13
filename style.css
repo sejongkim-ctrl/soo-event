@@ -296,13 +296,15 @@ footer {
 }
 
 /* =========================================
-   7. 버튼 스타일 (버건디 + 빛 애니메이션)
+   [최종] 고급스러운 버건디 + 샤프한 광택(Sheen) 효과
    ========================================= */
 .btn-burgundy-glow {
     width: 100%;
     margin-top: 30px;
-    /* 고급스러운 버건디 그라데이션 */
-    background: linear-gradient(135deg, #5D1013 0%, #3d0e10 100%);
+    
+    /* 1. 배경: 깊이감 있는 버건디 (위쪽은 밝고 아래는 어둡게) */
+    background: linear-gradient(180deg, #9E2A2F 0%, #82181C 100%);
+    
     color: #ffffff !important;
     border: none;
     padding: 18px;
@@ -310,36 +312,60 @@ footer {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(61, 14, 16, 0.4);
+    
+    /* 2. 그림자: 버튼이 떠있는 느낌 */
+    box-shadow: 0 10px 20px rgba(130, 24, 28, 0.3);
+    
     position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden; /* 중요: 빛이 버튼 밖으로 튀어나가지 않게 */
+    z-index: 1;
 }
 
+/* 클릭 시 눌리는 효과 */
 .btn-burgundy-glow:active {
     transform: scale(0.98);
-    box-shadow: 0 5px 15px rgba(61, 14, 16, 0.5);
+    box-shadow: 0 5px 10px rgba(130, 24, 28, 0.4);
 }
 
-/* 빛이 지나가는 효과 */
+/* 3. [핵심] 영상과 동일한 '샤프한 빛' 만들기 */
 .btn-burgundy-glow::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -150%;
-    width: 150%;
+    left: -100%; /* 시작 위치 */
+    width: 60%;  /* 빛의 너비 (너무 넓으면 멍해 보임) */
     height: 100%;
-    /* 불투명도 0.4로 흰색 배경에서도 잘 보이게 설정 */
-    background: linear-gradient(to right, transparent 20%, rgba(255, 255, 255, 0.4) 50%, transparent 80%);
-    transform: skewX(-25deg);
-    animation: glow-sweep 3.5s infinite ease-in-out;
+    
+    /* 4. 그라데이션: 가운데가 쨍하게 밝은 하얀색 (유리 광택 느낌) */
+    background: linear-gradient(
+        to right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.1) 30%, 
+        rgba(255,255,255,0.7) 50%, /* 가운데 핵심 광택 */
+        rgba(255,255,255,0.1) 70%,
+        rgba(255,255,255,0) 100%
+    );
+    
+    /* 빛을 30도 정도 기울임 */
+    transform: skewX(-30deg);
+    
+    /* 3초마다 반복 (빠르게 지나가고 쉼) */
+    animation: luxury-shine 3s infinite;
 }
 
-@keyframes glow-sweep {
-    0% { left: -150%; opacity: 0.5; }
-    50% { left: 150%; opacity: 1; }
-    100% { left: 150%; opacity: 0.5; }
+/* 5. 애니메이션 타이밍 조절 */
+@keyframes luxury-shine {
+    0% {
+        left: -100%; /* 왼쪽 화면 밖 */
+    }
+    20% {
+        left: 200%; /* 오른쪽 화면 밖으로 빠르게 이동 (0.6초만에 슉!) */
+    }
+    100% {
+        left: 200%; /* 나머지 2.4초 동안은 대기 (반복 텀을 줌) */
+    }
 }
+
 
 /* =========================================
    8. 모바일 최적화 (작은 화면 대응)
