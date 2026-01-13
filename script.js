@@ -8,7 +8,7 @@ const resultData = {
         // 결과 카드 하단 내용
         desc: "당신의 관상은 목표를 향해 거침없이 돌진하는 <span class='highlight-txt'>'뭐든 밀어붙이는 상'</span>입니다.<br><br>2026년은 야망이 폭발하는 해이나, 과도한 열정으로 <span class='highlight-txt'>'엔진 과열'</span>이 우려됩니다. 천하를 얻으려면 무엇보다 <span class='highlight-txt'>'압도적인 에너지'</span>가 뒷받침되어야 합니다.",
         
-        productSub: "지친 나를 위한",
+        productSub: "지친 부모님을 위한",
         productTitle: "원방공진단 수壽", // 닥터 수 처방 제품명
         
         // 닥터 수의 처방
