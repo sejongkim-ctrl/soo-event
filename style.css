@@ -568,3 +568,43 @@ footer {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(5px); }
 }
+
+/* [긴급 수정] 2번 박스 중앙 정렬 강제 적용 */
+
+/* 1. 기존 방해꾼 스타일 초기화 (배경, 정렬 제거) */
+.product-details {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
+/* 2. 1번(결과), 2번(처방전) 박스 디자인 및 폰트 완벽 통일 */
+#result-desc, #product-copy {
+    display: block !important;
+    width: 90% !important;
+    margin: 15px auto !important;
+    
+    padding: 20px 15px !important; /* 상하 20px, 좌우 15px */
+    background-color: #F8F8F8 !important; /* 연한 회색 */
+    border-radius: 12px !important;
+    border: 1px solid #EEEEEE !important;
+    
+    /* [핵심] 중앙 정렬 및 폰트 강제 적용 */
+    text-align: center !important; 
+    font-family: 'Noto Sans KR', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important; /* 일반 굵기 */
+    line-height: 1.65 !important;
+    color: #444 !important;
+    
+    word-break: keep-all !important; /* 단어 끊김 방지 */
+    letter-spacing: -0.03em !important;
+}
+
+/* 3. 제목(h3) 스타일도 강제로 덮어쓰기 (혹시 태그가 남아있을 경우 대비) */
+.detail-title {
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
