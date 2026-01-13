@@ -1,12 +1,12 @@
-/* 1. 기본 세팅 및 컬러 변수 */
+/* =========================================
+   1. 기본 세팅 및 레이아웃
+   ========================================= */
 :root {
-    --bg-deep: #3d0e10; /* [변경] 응모 페이지와 동일한 진한 갈색 */
+    --bg-deep: #3d0e10; /* 배경색: 진한 갈색 (통일됨) */
     --brand-red: #82181C;
     --brand-gold: #C5A059;
-    --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F5DEB3 50%, #C5A059 100%);
     --text-black: #1A1A1A;
-    --text-gray: #555555;
-    /* [변경] 그림자를 조금 더 은은하게 (응모 페이지 스타일) */
+    --text-gray: #444444;
     --shadow-card: 0 4px 15px rgba(0,0,0,0.3); 
 }
 
@@ -14,21 +14,23 @@ body {
     background: var(--bg-deep);
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
-    padding: 0; /* [변경] flex 제거하고 기본 흐름 따름 */
+    padding: 0;
     min-height: 100vh;
     color: var(--text-black);
 }
 
 .container {
     width: 100%;
-    max-width: 480px; /* [변경] 420px -> 480px (응모 페이지와 크기 통일) */
-    background: var(--bg-deep); /* 배경색 연결 */
-    padding: 20px; /* 상하좌우 패딩 통일 */
+    max-width: 480px; /* 응모 페이지와 동일한 너비 */
+    background: var(--bg-deep);
+    padding: 20px;
     margin: 0 auto; /* 중앙 정렬 */
     box-sizing: border-box;
 }
 
-/* 상단 헤더 (THE SOO 스타일 - 응모 페이지와 100% 일치) */
+/* =========================================
+   2. 헤더 (THE SOO 로고)
+   ========================================= */
 .page-header {
     text-align: center;
     margin-bottom: 30px;
@@ -38,19 +40,19 @@ body {
 .brand-logo {
     color: #fff;
     font-family: 'Noto Serif KR', serif;
-    font-size: 14px; /* [변경] 사이즈 조정 */
+    font-size: 14px;
     letter-spacing: 2px;
-    border-bottom: 1px solid #C5A059; /* [핵심] 글자 바로 밑에 금색 줄 */
+    border-bottom: 1px solid #C5A059; /* 로고 하단 금색 줄 */
     padding-bottom: 5px;
-    display: inline-block; /* 줄을 글자 너비에 맞춤 */
+    display: inline-block;
 }
 
-/* .header-line 클래스는 삭제했으므로 CSS에서도 제거됨 */
-
-/* 콘텐츠 박스 공통 */
+/* =========================================
+   3. 콘텐츠 박스 공통 스타일
+   ========================================= */
 .content-box {
     background: #fff;
-    padding: 30px 20px; /* [변경] 패딩 조정 */
+    padding: 30px 20px;
     text-align: center;
     border-radius: 16px;
     box-shadow: var(--shadow-card);
@@ -59,7 +61,9 @@ body {
     overflow: hidden;
 }
 
-/* 섹션 1: 결과 카드 */
+/* =========================================
+   4. 섹션 1: 결과 및 텍스트 스타일 (통합됨)
+   ========================================= */
 .result-badge {
     display: inline-block;
     background: #5D1013;
@@ -72,6 +76,11 @@ body {
     font-weight: 500;
 }
 
+/* 결과 타이틀(H1)은 화면에서 숨김 처리 */
+#result-title {
+    display: none !important;
+}
+
 .title-serif {
     font-family: 'Noto Serif KR', serif;
     font-size: 26px;
@@ -81,17 +90,11 @@ body {
     line-height: 1.3;
 }
 
-/* style.css 파일에 추가 */
-#result-title {
-    word-break: keep-all; /* 단어 중간에 줄바꿈 금지 (한글 최적화) */
-    line-height: 1.3;     /* 줄 간격 살짝 조정 */
-}
-
+/* 이미지 프레임 */
 .frame-wrapper {
     padding: 8px;
     border: 1px solid rgba(130, 24, 28, 0.1);
     border-radius: 16px;
-    margin-top: 0;
     margin-bottom: 24px;
     background: #FFFCF5;
 }
@@ -103,29 +106,64 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.desc-text {
-    font-size: 15px;
-    line-height: 1.6;
+/* [핵심] 텍스트 박스 통합 스타일 (결과 설명 + 처방전 설명) */
+/* 중앙 정렬, 박스 디자인, 폰트 통일 */
+#result-desc, #product-copy {
+    display: block;
+    width: 90%;
+    margin: 15px auto 30px auto; /* 하단 여백 확보 */
+    
+    padding: 20px 15px;
+    background-color: #F8F8F8; /* 연한 회색 박스 */
+    border-radius: 12px;
+    border: 1px solid #EEEEEE;
+    
+    text-align: center; /* 가운데 정렬 */
+    font-size: 14px;
+    line-height: 1.65;
     color: var(--text-gray);
-    margin-bottom: 20px;
-    word-break: keep-all;
+    
+    word-break: keep-all; /* 단어 끊김 방지 */
+    letter-spacing: -0.03em;
 }
 
-.btn-text-only {
-    background: none;
-    border: none;
-    color: #999;
-    font-size: 13px;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-position: under;
-    transition: color 0.3s;
+/* 강조 텍스트 (줄바꿈 방지) */
+.highlight-txt {
+    color: var(--brand-red);
+    font-weight: 700;
+    background: rgba(130, 24, 28, 0.08);
+    padding: 2px 4px;
+    border-radius: 4px;
+    white-space: nowrap; /* 한 덩어리로 유지 */
+    display: inline-block;
 }
-.btn-text-only:hover { color: var(--brand-red); }
 
-/* 섹션 2: 프리미엄 처방 */
+/* 하단 스크롤 가이드 (화살표 박스) */
+.scroll-guide-box {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 10px;
+    padding: 10px 20px;
+    border: 1.5px solid var(--brand-red);
+    border-radius: 50px;
+    background-color: #FFF5F5;
+    color: var(--brand-red);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.5px;
+    animation: moveDown 1.5s infinite;
+}
+
+@keyframes moveDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+/* =========================================
+   5. 섹션 2: 제품(처방전) 섹션
+   ========================================= */
 .premium-box {
-    background: #fff;
     border: 2px solid var(--brand-gold);
     padding-top: 40px;
 }
@@ -149,104 +187,65 @@ body {
     background: linear-gradient(to top, #FEE5E5 40%, transparent 40%);
 }
 
-/* 제품 이미지 스테이지 (외곽 금테두리) */
+/* 제품 이미지 스테이지 */
 .product-stage {
     position: relative;
     margin: 0 auto 10px;
     width: 100%;
     max-width: 280px;
-    
-    /* 둥근 모서리와 외곽의 두꺼운 금색 테두리 */
     border-radius: 24px;
     border: 3px solid var(--brand-gold);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 
                 inset 0 0 15px rgba(197, 160, 89, 0.2);
     overflow: hidden;
     background: #fff;
-    transform: translateZ(0);
+    cursor: pointer;
 }
 
 .product-img {
     width: 100%;
     display: block;
-    transition: transform 0.5s ease;
 }
 
-/* [수정됨] 힌트 버튼 (강력한 깜빡임 적용) */
+/* 돋보기 버튼 (깜빡임 효과) */
 .hint-tag {
     position: absolute;
     bottom: 15px; right: 15px;
-    background: #82181C; /* 기본 레드 */
+    background: var(--brand-red);
     color: #fff;
     border: 1px solid var(--brand-gold);
     padding: 9px 18px;
     border-radius: 30px;
     font-size: 12px;
     z-index: 10;
-    cursor: pointer;
-    backdrop-filter: blur(4px);
     font-weight: 700;
-    
-    /* 애니메이션 속도를 1.5초로 당겨서 더 눈에 띄게 변경 */
     animation: pulse-gold 1.5s infinite;
 }
 
-/* [수정됨] 강력해진 깜빡임 효과 */
 @keyframes pulse-gold {
-    0% {
-        box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);
-        transform: scale(1);
-    }
-    50% {
-        /* 그림자를 훨씬 크고 진하게 */
-        box-shadow: 0 0 25px 8px rgba(197, 160, 89, 0.8);
-        /* 크기도 더 커지게 (1.03 -> 1.1) */
-        transform: scale(1.1);
-        background: #A62126; /* 색상도 살짝 밝아지며 강조 */
-        border-color: #fff;
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
-        transform: scale(1);
-    }
+    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); transform: scale(1); }
+    50% { box-shadow: 0 0 25px 8px rgba(197, 160, 89, 0.8); transform: scale(1.1); background: #A62126; border-color: #fff; }
+    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); transform: scale(1); }
 }
 
+/* 기존 방해 요소 초기화 */
 .product-details {
-    background: #F9F9F9;
-    padding: 24px 16px;
-    border-radius: 12px;
-    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: center;
 }
-
 .detail-title {
     font-family: 'Noto Serif KR', serif;
     font-size: 16px;
     color: var(--brand-red);
-    margin: 0 0 16px 0;
+    margin: 0 0 10px 0;
     text-align: center;
-    line-height: 1.5;
 }
 
-.check-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.check-list li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #444;
-    line-height: 1.5;
-}
-.check-icon {
-    color: var(--brand-red);
-    margin-right: 8px;
-    font-weight: bold;
-}
-
-/* 섹션 3: 이벤트 */
+/* =========================================
+   6. 섹션 3: 이벤트 배너
+   ========================================= */
 .last-box {
     padding-bottom: 30px;
     background: linear-gradient(180deg, #FFFFFF 0%, #FFF8E7 100%);
@@ -274,48 +273,13 @@ body {
     font-size: 19px;
     color: var(--text-black);
     font-weight: 800;
+    word-break: keep-all;
 }
 .event-banner p {
     margin: 0;
     font-size: 13px;
     color: #777;
-}
-
-/* 버튼 */
-.btn-golden {
-    width: 100%;
-    margin-top: 30px;
-    background: var(--gold-gradient);
-    color: #1a1a1a;
-    border: none;
-    padding: 18px;
-    border-radius: 50px;
-    font-size: 17px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
-.btn-golden:active { transform: scale(0.98); }
-
-/* [수정됨] 반짝이는 효과 주기 단축 (6s -> 2.5s) */
-.shiny {
-    position: absolute;
-    top: 0; left: -100%;
-    width: 50%; height: 100%;
-    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
-    transform: skewX(-20deg);
-    
-    /* 자주 반짝이도록 시간 단축 */
-    animation: shine 2.5s infinite;
-}
-
-@keyframes shine {
-    0% { left: -100%; }
-    40% { left: 200%; } /* 빛이 지나가는 속도 */
-    100% { left: 200%; } /* 휴식 시간 */
+    word-break: keep-all;
 }
 
 .footer-notice {
@@ -329,282 +293,72 @@ footer {
     font-size: 11px;
     color: rgba(255, 255, 255, 0.5);
     padding-bottom: 40px;
-    letter-spacing: 1px;
 }
+
 /* =========================================
-   모바일 최적화 및 텍스트 줄바꿈 방지 패치 (업데이트 완료)
+   7. 버튼 스타일 (버건디 + 빛 애니메이션)
    ========================================= */
-
-/* 1. 한국어 단어 단위 줄바꿈 설정 (글자가 중간에 뚝 끊기는 것 방지) */
-.check-list li,
-.event-banner p,
-.desc-text,
-.detail-title,
-.event-banner h3 { /* h3(이벤트 타이틀) 추가 */
-    word-break: keep-all; /* 단어 중간에 줄바꿈 금지 */
-    word-wrap: break-word;
+.btn-burgundy-glow {
+    width: 100%;
+    margin-top: 30px;
+    /* 고급스러운 버건디 그라데이션 */
+    background: linear-gradient(135deg, #5D1013 0%, #3d0e10 100%);
+    color: #ffffff !important;
+    border: none;
+    padding: 18px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(61, 14, 16, 0.4);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* 2. 체크 아이콘 찌그러짐 방지 */
-.check-icon {
-    flex-shrink: 0;
+.btn-burgundy-glow:active {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px rgba(61, 14, 16, 0.5);
 }
 
-/* 3. 작은 화면(아이폰 미니, SE 등) 전용 맞춤 설정 */
+/* 빛이 지나가는 효과 */
+.btn-burgundy-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    /* 불투명도 0.4로 흰색 배경에서도 잘 보이게 설정 */
+    background: linear-gradient(to right, transparent 20%, rgba(255, 255, 255, 0.4) 50%, transparent 80%);
+    transform: skewX(-25deg);
+    animation: glow-sweep 3.5s infinite ease-in-out;
+}
+
+@keyframes glow-sweep {
+    0% { left: -150%; opacity: 0.5; }
+    50% { left: 150%; opacity: 1; }
+    100% { left: 150%; opacity: 0.5; }
+}
+
+/* =========================================
+   8. 모바일 최적화 (작은 화면 대응)
+   ========================================= */
 @media screen and (max-width: 380px) {
-    
-    /* [수정 1] 체크리스트 폰트 축소 */
-    .check-list li {
-        font-size: 13px !important;
-        letter-spacing: -0.5px;
-    }
-
-    /* [수정 2] 트로피 타이틀 한 줄로 맞추기 (폰트 대폭 축소) */
-    .event-banner h3 {
-        font-size: 15px !important; /* 기존 19px -> 15px로 줄임 */
-        letter-spacing: -0.5px;     /* 자간을 좁혀서 공간 확보 */
-        white-space: nowrap;        /* 강제로 한 줄 유지 */
-    }
-
-    /* 이벤트 설명 텍스트 축소 */
-    .event-banner p {
-        font-size: 12px !important;
-        letter-spacing: -0.5px;
-    }
-
-    /* 컨텐츠 박스 좌우 여백 축소 */
     .content-box {
-        padding-left: 14px !important;
-        padding-right: 14px !important;
+        padding-left: 14px;
+        padding-right: 14px;
     }
-}
-/* [수정] 2번 박스 통합 디자인 */
-.product-mini {
-    position: relative; /* 중요! 뱃지가 이 박스를 기준으로 위치를 잡게 함 */
-    border: 2px solid #EAEAEA; 
-    background: #fff;
-    overflow: visible; /* 중요! ⭐ 뱃지가 박스 위로 튀어나와도 잘리지 않게 함 */
-    transition: all 0.3s ease;
-    cursor: pointer; /* 마우스를 올리면 손가락 모양으로 변함 (클릭 가능 암시) */
     
-    /* 심장 박동처럼 두근거리는 애니메이션 적용 (2초 간격 무한반복) */
-    animation: gentlePulse 2s infinite; 
-}
-
-/* 마우스 올렸을 때 효과 */
-.product-mini:hover {
-    border-color: #C5A059; /* 테두리가 금색으로 변함 */
-    transform: translateY(-3px); /* 살짝 위로 떠오름 */
-    box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); /* 그림자 진하게 */
-}
-
-/* 🍀 상단 빨간색 뱃지 (당첨확률 UP) */
-.chance-badge {
-    position: absolute; /* 자유롭게 위치 지정 가능 */
-    top: -14px; /* 박스 위쪽 라인보다 14px 더 위로 튀어나오게 */
-    left: 50%;  /* 좌우 중앙 정렬 시작점 */
-    transform: translateX(-50%); /* 정확한 정중앙 맞추기 */
-    
-    background: #FF4B4B; /* 눈에 확 띄는 빨간색 배경 */
-    color: #fff; /* 글씨는 흰색 */
-    padding: 6px 14px; /* 뱃지 크기 조절 */
-    border-radius: 20px; /* 둥근 알약 모양 */
-    font-size: 12px;
-    font-weight: 800; /* 글씨 두껍게 */
-    box-shadow: 0 4px 10px rgba(255, 75, 75, 0.3); /* 붉은색 그림자 */
-    white-space: nowrap; /* 글씨가 줄바꿈 되지 않고 한 줄로 나오게 */
-    z-index: 10; /* 다른 요소보다 맨 위에 보이게 */
-}
-
-/* 💓 두근거리는 애니메이션 (Pulse) 동작 원리 */
-@keyframes gentlePulse {
-    0% { transform: scale(1); } /* 원래 크기 */
-    50% { 
-        transform: scale(1.02); /* 1.02배 커짐 (살짝 줌인) */
-        border-color: #D4AF70;  /* 테두리 색이 진해짐 */
-        box-shadow: 0 8px 15px rgba(197, 160, 89, 0.15); /* 그림자 생김 */
+    .event-banner h3 {
+        font-size: 15px;
+        letter-spacing: -0.5px;
+        white-space: nowrap;
     }
-    100% { transform: scale(1); } /* 다시 원래 크기로 */
-}
 
-/* "터치하여 바로가기" 글씨 스타일 */
-.click-guide {
-    color: #C5A059 !important; /* 금색 */
-    font-weight: 700 !important;
-    text-decoration: underline; /* 밑줄 쫙 */
-    margin-top: 5px;
-    display: block; /* 줄바꿈 됨 */
-}
-/* [추가] 결과 페이지 텍스트 디자인 */
-
-/* 1. 결과 카드 설명 텍스트 */
-#result-desc {
-    font-size: 15px;
-    line-height: 1.6;        /* 줄 간격 넓게 */
-    color: #444;
-    word-break: keep-all;    /* 단어 중간 끊김 방지 */
-    padding: 0 10px;
-}
-
-/* 2. 닥터수 처방전 텍스트 */
-#product-copy {
-    font-size: 14px;
-    line-height: 1.55;
-    color: #555;
-    word-break: keep-all;
-    margin-top: 10px;
-}
-
-/* 3. 공통 강조 효과 (굵게 + 브랜드 컬러) */
-.highlight-txt {
-    color: #82181C;      /* 붉은 계열 포인트 컬러 */
-    font-weight: 700;
-    background: rgba(130, 24, 28, 0.05); /* 살짝 배경색 깔기 */
-    padding: 0 2px;
-    border-radius: 4px;
-}
-/* [수정] 긴 텍스트 정렬 및 디자인 최적화 */
-
-/* [수정] 1번(결과), 2번(처방전) 텍스트 박스 완벽 통일 */
-#result-desc, #product-copy {
-    display: block;
-    width: 90%;             /* 너비 동일 */
-    margin: 15px auto;      /* 중앙 위치 및 여백 동일 */
-    
-    padding: 15px;          /* 안쪽 여백 동일 */
-    background-color: #F8F8F8;
-    border-radius: 12px;
-    border: 1px solid #EEEEEE;
-    
-    /* [핵심] 폰트 및 정렬 통일 */
-    text-align: center;     /* 둘 다 가운데 정렬 */
-    font-family: 'Noto Sans KR', sans-serif; /* 폰트 강제 통일 */
-    font-size: 14px;        /* 글자 크기 동일 */
-    font-weight: 400;       /* 글자 굵기 동일 (일반) */
-    line-height: 1.65;      /* 줄 간격 동일 */
-    color: #444;            /* 글자 색상 동일 */
-    
-    word-break: keep-all;   /* 단어 끊김 방지 동일 */
-    letter-spacing: -0.03em;
-}
-
-/* [수정 후] white-space: nowrap 속성 추가 */
-.highlight-txt {
-    color: #82181C;
-    font-weight: 700;
-    background: rgba(130, 24, 28, 0.08);
-    padding: 2px 4px;
-    border-radius: 4px;
-    
-    white-space: nowrap;    /* [핵심 추가] 이 부분은 절대 줄바꿈하지 않음 */
-    display: inline-block;  /* [추가] nowrap이 잘 적용되도록 블록 속성 부여 */
-}
-
-/* 3. 모바일 화면에서 답답하지 않게 조정 */
-@media (max-width: 400px) {
     #result-desc, #product-copy {
-        width: 95%;     /* 모바일에서는 더 넓게 */
-        padding: 15px;  /* 패딩 약간 축소 */
+        width: 95%;
+        padding: 15px;
         font-size: 13.5px;
     }
-}
-/* ==============================================
-   [최종 수정] 텍스트 박스 디자인 + 하단 여백 추가
-   ============================================== */
-#product-copy {
-    display: block;
-    width: 90%;                 
-    
-    /* 👇 위쪽 여백을 0으로 수정했습니다 */
-    margin: 0 auto 40px auto;
-    
-    padding: 20px;              /* 안쪽 여백 */
-    background-color: #F8F8F8;  /* 회색 배경 */
-    border-radius: 12px;        /* 둥근 모서리 */
-    border: 1px solid #EEEEEE;  /* 연한 테두리 */
-    
-    text-align: left;           /* 왼쪽 정렬 */
-    font-size: 14px;            
-    line-height: 1.65;          
-    color: #444;                
-    word-break: keep-all;       
-    letter-spacing: -0.03em;   
-}
-
-/* 모바일 화면 대응 */
-@media (max-width: 400px) {
-    #product-copy {
-        width: 95%;     
-        padding: 15px; 
-        margin-bottom: 30px; /* 모바일에서는 여백을 조금 줄임 */
-    }
-}
-/* 파일 맨 아래에 추가하거나 기존 #result-title을 덮어쓰세요 */
-#result-title {
-    display: none !important; /* 👈 영역 자체를 완전히 삭제 */
-}
-/* [추가] 하단 스크롤 유도 가이드 박스 */
-.scroll-guide-box {
-    display: block;
-    width: fit-content;
-    margin: 20px auto 10px;    /* 위아래 여백 조절 */
-    padding: 10px 20px;
-    
-    border: 1.5px solid #82181C; /* 브랜드 레드 컬러 테두리 */
-    border-radius: 50px;       /* 둥근 캡슐 모양 */
-    background-color: #FFF5F5;  /* 아주 연한 배경색 */
-    
-    color: #82181C;            /* 글자색 */
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: -0.5px;
-    
-    /* 위아래로 살짝 움직이는 효과로 시선 강탈 */
-    animation: moveDown 1.5s infinite;
-}
-
-@keyframes moveDown {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); }
-}
-
-/* [긴급 수정] 2번 박스 중앙 정렬 강제 적용 */
-
-/* 1. 기존 방해꾼 스타일 초기화 (배경, 정렬 제거) */
-.product-details {
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    text-align: center !important;
-}
-
-/* 2. 1번(결과), 2번(처방전) 박스 디자인 및 폰트 완벽 통일 */
-#result-desc, #product-copy {
-    display: block !important;
-    width: 90% !important;
-    margin: 15px auto !important;
-    
-    padding: 20px 15px !important; /* 상하 20px, 좌우 15px */
-    background-color: #F8F8F8 !important; /* 연한 회색 */
-    border-radius: 12px !important;
-    border: 1px solid #EEEEEE !important;
-    
-    /* [핵심] 중앙 정렬 및 폰트 강제 적용 */
-    text-align: center !important; 
-    font-family: 'Noto Sans KR', sans-serif !important;
-    font-size: 14px !important;
-    font-weight: 400 !important; /* 일반 굵기 */
-    line-height: 1.65 !important;
-    color: #444 !important;
-    
-    word-break: keep-all !important; /* 단어 끊김 방지 */
-    letter-spacing: -0.03em !important;
-}
-
-/* 3. 제목(h3) 스타일도 강제로 덮어쓰기 (혹시 태그가 남아있을 경우 대비) */
-.detail-title {
-    text-align: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
 }
