@@ -51,6 +51,19 @@
         .btn-golden .shiny { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: shine 3s infinite; }
         @keyframes shine { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
         footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 11px; padding: 20px 0 40px; }
+        /* [추가] 버튼 깜빡임 애니메이션 (갈색 <-> 노란색) */
+        
+        @keyframes flashAttention {
+            0% { background-color: #82181C; color: #ffffff; transform: scale(1); }
+            50% { background-color: #FEE500; color: #3C1E1E; transform: scale(1.05); box-shadow: 0 0 15px #FEE500; } /* 대비색(노랑) + 살짝 커짐 */
+            100% { background-color: #82181C; color: #ffffff; transform: scale(1); }
+        }
+        
+        .btn-flash-mode {
+            animation: flashAttention 0.8s infinite ease-in-out !important; /* 0.8초마다 반복 */
+            background: #82181C !important; /* 기본 배경 */
+            font-weight: 800 !important;
+        }
 
         #share-modal { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 20px !important; box-sizing: border-box !important; }
         #share-modal > div { background: #fff !important; padding: 30px !important; border-radius: 16px !important; text-align: center !important; width: 100% !important; max-width: 320px !important; }
@@ -239,12 +252,14 @@ function shareAndTrack() {
     localStorage.setItem('pendingShare', 'true'); 
 
     // UI 변경
-    const shareBtn = document.getElementById('kakao-share-btn');
+const shareBtn = document.getElementById('kakao-share-btn');
     if (shareBtn) {
-        shareBtn.innerText = "✅ 공유 완료 후 반드시 클릭해주세요!";
-        shareBtn.style.background = "#82181C"; 
-        shareBtn.style.color = "#ffffff";
-        shareBtn.style.fontWeight = "800";
+        shareBtn.innerText = "✅ 공유 완료 시 반드시 클릭해주세요!";
+        
+        // [핵심] 번쩍이는 애니메이션 클래스 추가
+        shareBtn.classList.add('btn-flash-mode'); 
+        
+        // 클릭 이벤트를 '완료 확인' 함수로 교체
         shareBtn.onclick = confirmShareCompletion;
     }
 
@@ -283,15 +298,18 @@ function shareAndTrack() {
             if(modalDesc) modalDesc.innerHTML = "친구에게 <b>한 번 더 공유</b>하면<br>당첨 확률이 올라가요🆙";
 
             // (4) 버튼을 다시 '공유하기' 상태로 복구
-            if (shareBtn) {
-                shareBtn.innerText = "💬 한 번 더 공유하기";
-                shareBtn.style.background = "#FEE500";
-                shareBtn.style.color = "#3C1E1E";
-                
-                // 클릭 이벤트를 다시 공유 함수로 되돌림 (무한 공유 루프)
-                shareBtn.onclick = shareAndTrack;
-            }
-        }
+if (shareBtn) {
+        shareBtn.innerText = "💬 한 번 더 공유하기";
+        
+        // [핵심] 번쩍이는 애니메이션 제거 (얌전해짐)
+        shareBtn.classList.remove('btn-flash-mode'); 
+        
+        // 원래 노란색 스타일로 복구
+        shareBtn.style.background = "#FEE500";
+        shareBtn.style.color = "#3C1E1E";
+        
+        shareBtn.onclick = shareAndTrack;
+    }
 
         /* 5. 안전 장치: 혹시라도 버튼이 안 바뀌었을 경우를 대비한 자동 감지 */
         // (대부분의 경우 위 shareAndTrack에서 이미 바뀌어 있겠지만, 안전을 위해 남겨둡니다)
