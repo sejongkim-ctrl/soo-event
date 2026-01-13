@@ -465,25 +465,26 @@ footer {
 }
 /* [수정] 긴 텍스트 정렬 및 디자인 최적화 */
 
-/* [수정] 텍스트 박스 디자인 (가운데 정렬 + 단어 유지) */
+/* [수정] 1번(결과), 2번(처방전) 텍스트 박스 완벽 통일 */
 #result-desc, #product-copy {
     display: block;
-    width: 90%;
-    margin: 15px auto;
+    width: 90%;             /* 너비 동일 */
+    margin: 15px auto;      /* 중앙 위치 및 여백 동일 */
     
-    padding: 15px;
+    padding: 15px;          /* 안쪽 여백 동일 */
     background-color: #F8F8F8;
     border-radius: 12px;
     border: 1px solid #EEEEEE;
     
-    text-align: center;     /* [변경] left -> center (가운데 정렬) */
+    /* [핵심] 폰트 및 정렬 통일 */
+    text-align: center;     /* 둘 다 가운데 정렬 */
+    font-family: 'Noto Sans KR', sans-serif; /* 폰트 강제 통일 */
+    font-size: 14px;        /* 글자 크기 동일 */
+    font-weight: 400;       /* 글자 굵기 동일 (일반) */
+    line-height: 1.65;      /* 줄 간격 동일 */
+    color: #444;            /* 글자 색상 동일 */
     
-    font-size: 14px;
-    line-height: 1.65;
-    color: #444;
-    
-    word-break: keep-all;   /* [변경] 가운데 정렬일 때는 단어가 안 끊기는 게 훨씬 예쁩니다 */
-    
+    word-break: keep-all;   /* 단어 끊김 방지 동일 */
     letter-spacing: -0.03em;
 }
 
