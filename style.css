@@ -465,23 +465,24 @@ footer {
 }
 /* [수정] 긴 텍스트 정렬 및 디자인 최적화 */
 
-/* [수정 후] padding을 줄이고 word-break 속성을 변경합니다 */
+/* [수정] 텍스트 박스 디자인 (가운데 정렬 + 단어 유지) */
 #result-desc, #product-copy {
     display: block;
     width: 90%;
     margin: 15px auto;
     
-    padding: 15px;          /* [변경 1] 여백을 20px -> 15px로 축소 */
-    
+    padding: 15px;
     background-color: #F8F8F8;
     border-radius: 12px;
     border: 1px solid #EEEEEE;
-    text-align: left;
+    
+    text-align: center;     /* [변경] left -> center (가운데 정렬) */
+    
     font-size: 14px;
     line-height: 1.65;
     color: #444;
     
-    word-break: break-word; /* [변경 2] keep-all 대신 break-word 사용 (자연스러운 줄바꿈) */
+    word-break: keep-all;   /* [변경] 가운데 정렬일 때는 단어가 안 끊기는 게 훨씬 예쁩니다 */
     
     letter-spacing: -0.03em;
 }
