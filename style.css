@@ -1,10 +1,10 @@
 /* =========================================
-   [전체 리뉴얼] style.css 최종본
+   [최종 리뉴얼] style.css
    ========================================= */
 
-/* 1. 기본 세팅 및 컬러 변수 */
+/* 1. 기본 세팅 */
 :root {
-    --bg-page: #F9F9F9;   /* [변경] 페이지 배경: 밝은 흰색 */
+    --bg-page: #F9F9F9;
     --brand-red: #82181C;
     --brand-gold: #C5A059;
     --text-white: #FFFFFF;
@@ -12,26 +12,24 @@
 }
 
 body {
-    background: var(--bg-page); /* 배경을 밝게 변경 */
+    background: var(--bg-page);
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    color: #333; /* 기본 글자색은 어둡게 */
+    color: #333;
 }
 
 .container {
     width: 100%;
     max-width: 480px;
-    background: var(--bg-page); /* 컨테이너도 밝게 */
+    background: var(--bg-page);
     padding: 20px;
     margin: 0 auto;
     box-sizing: border-box;
 }
 
-/* =========================================
-   2. 헤더 (로고)
-   ========================================= */
+/* 2. 헤더 */
 .page-header {
     text-align: center;
     margin-bottom: 30px;
@@ -39,7 +37,7 @@ body {
 }
 
 .brand-logo {
-    color: var(--brand-red); /* [변경] 흰 배경이므로 로고는 버건디색 */
+    color: var(--brand-red);
     font-family: 'Noto Serif KR', serif;
     font-size: 16px;
     letter-spacing: 2px;
@@ -49,11 +47,9 @@ body {
     font-weight: 700;
 }
 
-/* =========================================
-   3. [핵심] 콘텐츠 박스 (버건디 텍스처 + 3D 입체감)
-   ========================================= */
+/* 3. 콘텐츠 박스 (버건디 텍스처 + 입체감) */
 .content-box {
-    /* [변경] 배경을 버건디색 + 고급 텍스처 그라데이션으로 변경 */
+    /* 고급스러운 버건디 텍스처 배경 */
     background: 
         radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 20%),
         radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 20%),
@@ -65,222 +61,131 @@ body {
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
-    color: #fff; /* 박스 안의 글자는 흰색 */
-
-    /* [변경] 3D 입체 테두리 효과 */
-    border: 1px solid #C5A059; /* 금색 테두리 */
+    color: #fff;
+    
+    /* 3D 입체 테두리 */
+    border: 1px solid #C5A059;
     box-shadow: 
-        0 10px 25px rgba(0,0,0,0.3),       /* 아래 그림자 */
-        inset 2px 2px 5px rgba(255,255,255,0.2), /* 왼쪽 위 하이라이트 (입체감) */
-        inset -2px -2px 5px rgba(0,0,0,0.5);     /* 오른쪽 아래 그림자 (입체감) */
+        0 10px 25px rgba(0,0,0,0.3),
+        inset 2px 2px 5px rgba(255,255,255,0.2),
+        inset -2px -2px 5px rgba(0,0,0,0.5);
 }
 
-/* 박스 내부 텍스트 색상 강제 조정 */
-.content-box h2, .content-box h3, .content-box h4, .content-box h5 {
-    color: #fff !important;
-}
-.content-box p, .content-box li, .agree-list li {
-    color: rgba(255,255,255,0.9) !important;
-}
-
-/* =========================================
-   4. 섹션별 내부 스타일
-   ========================================= */
-/* 타이틀 */
-.title-serif {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: #FFD700 !important; /* 금색으로 변경 */
-    margin: 0 0 20px 0;
-    line-height: 1.3;
-}
-
-/* 결과 배지 */
-.result-badge {
-    display: inline-block;
-    background: #fff; /* 배경 반전 */
-    color: var(--brand-red);
-    font-size: 13px;
-    padding: 6px 18px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-/* 이미지 프레임 (밝은 배경) */
-.frame-wrapper {
-    padding: 8px;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    border-radius: 16px;
-    margin-bottom: 24px;
-    background: rgba(255, 255, 255, 0.1); /* 반투명 흰색 */
-}
-.img-frame img {
-    width: 100%;
-    border-radius: 10px;
-    display: block;
-}
-
-/* 텍스트 박스 (내부 흰색 박스 없애고 투명하게 가거나 반투명 처리) */
-#result-desc, #product-copy {
+/* 4. [수정 1] 텍스트 박스 가독성 개선 (불투명도 조정) */
+.result-text-box {
     display: block;
     width: 90%;
-    margin: 15px auto 30px auto;
+    margin: 15px auto 20px auto;
     padding: 20px 15px;
     
-    background-color: rgba(0, 0, 0, 0.2); /* 어두운 반투명 박스 */
+    /* 배경을 더 어둡게(0.4) 해서 글자가 잘 보이게 변경 */
+    background-color: rgba(0, 0, 0, 0.4); 
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3); /* 금색 테두리 살짝 */
     
     text-align: center;
     font-size: 14px;
     line-height: 1.65;
-    color: #eee !important;
+    color: #eee;
     word-break: keep-all;
 }
 
-/* 강조 텍스트 */
 .highlight-txt {
-    color: #FFD700; /* 금색 */
+    color: #FFD700; /* 금색 강조 */
     font-weight: 700;
     background: rgba(255, 215, 0, 0.1);
-    padding: 2px 4px;
+    padding: 0 4px;
     border-radius: 4px;
-    white-space: nowrap;
+}
+
+/* 5. [수정 2] 스크롤 유도 버튼 (디자인 + 애니메이션) */
+.scroll-guide-btn {
     display: inline-block;
-}
-
-/* =========================================
-   5. [이동된 섹션] 제품 상세 (처방전) 스타일
-   ========================================= */
-.premium-box {
-    /* content-box 스타일을 상속받으므로 배경/테두리는 자동 적용 */
-    padding-top: 40px;
-}
-.sub-title {
-    font-size: 13px;
-    color: rgba(255,255,255,0.7) !important;
-    margin-bottom: 8px;
-    font-weight: 700;
-}
-.main-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 24px;
-    margin: 0 0 30px 0;
-    color: #fff !important;
-}
-.highlight { /* 제목 강조 */
+    margin-top: 10px;
+    padding: 10px 20px;
+    
+    background: rgba(255, 255, 255, 0.15); /* 반투명 배경 */
+    border: 1px solid #FFD700;            /* 금색 테두리 */
+    border-radius: 30px;                  /* 둥근 버튼 모양 */
     color: #FFD700;
-    background: none;
-    border-bottom: 1px solid #FFD700;
-}
-
-/* 제품 이미지 영역 */
-.product-stage {
-    position: relative;
-    margin: 0 auto 10px;
-    width: 100%;
-    max-width: 280px;
-    border-radius: 24px;
-    border: 2px solid rgba(255,215,0,0.5);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    overflow: hidden;
-    background: #fff;
-    cursor: pointer;
-}
-.product-img { width: 100%; display: block; }
-
-/* 돋보기 버튼 */
-.hint-tag {
-    position: absolute;
-    bottom: 15px; right: 15px;
-    background: var(--brand-red);
-    color: #fff;
-    border: 1px solid var(--brand-gold);
-    padding: 7px 15px;
-    border-radius: 30px;
-    font-size: 12px;
-    z-index: 10;
+    
+    font-size: 13px;
     font-weight: 700;
-    animation: pulse-gold 1.5s infinite;
+    cursor: pointer;
+    text-decoration: none;
+    
+    /* 둥둥 떠다니는 애니메이션 */
+    animation: floatBob 1.5s infinite ease-in-out;
 }
 
-@keyframes pulse-gold {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-    50% { transform: scale(1.05); box-shadow: 0 0 10px 5px rgba(255, 215, 0, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+@keyframes floatBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); } /* 아래로 6px 이동 */
 }
 
-/* =========================================
-   6. 이벤트 배너 및 동의 박스
-   ========================================= */
-/* 이벤트 배너 */
-.event-banner {
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
+/* 6. [수정 4] 이벤트 안내 가독성 개선 (배지 스타일) */
+.event-info-container {
+    background: rgba(0, 0, 0, 0.2); /* 전체 어두운 배경 */
     border-radius: 12px;
-    margin-bottom: 24px;
-}
-.gold-txt { color: #FFD700 !important; }
-
-/* 약관 동의 박스 (여기는 가독성을 위해 흰 배경 유지하거나 밝게 처리) */
-.agreement-box { 
-    background: rgba(255,255,255,0.1); 
-    padding: 10px; 
-    border-radius: 8px; 
-    border: 1px solid rgba(255,255,255,0.2); 
-    margin-bottom: 15px; 
-}
-.agree-scroll-box { 
-    height: 150px; 
-    overflow-y: scroll; 
-    background: #fff; /* 글자 읽어야 하므로 흰 배경 */
-    color: #333 !important; /* 글자는 검정 */
-    padding: 15px; 
-    border-radius: 6px; 
-    text-align: left; 
-}
-/* 약관 내부 글자색 복구 */
-.agree-scroll-box h4, .agree-scroll-box h5, .agree-scroll-box p, .agree-scroll-box li {
-    color: #333 !important; 
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    text-align: left; /* 왼쪽 정렬 */
 }
 
-/* 인풋 필드 */
-.input-label { color: #fff !important; }
-.input-field { 
-    background: #fff; 
-    color: #333;
-    border: none;
+.event-row {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+.event-row:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
-/* =========================================
-   7. [최종 CTA] 테두리 회전 애니메이션 버튼
-   ========================================= */
+/* 소제목 배지 (알약 모양) */
+.info-badge {
+    display: inline-block;
+    background: #FFD700; /* 금색 배경 */
+    color: #5D0000;      /* 버건디 글자 */
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+}
+
+.info-text {
+    display: block;
+    font-size: 13px;
+    color: #fff;
+    line-height: 1.5;
+    padding-left: 2px;
+}
+
+/* 7. [수정 5] 하단 CTA (회전하는 테두리 빛) */
 .btn-rotating-border {
     position: relative;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 10px;
     
-    /* 버튼 내부 배경 (버건디) */
+    /* 버튼 내부 (버건디) */
     background: #82181C; 
     color: #fff !important;
     
     border: none;
-    border-radius: 50px; /* 둥근 캡슐 */
+    border-radius: 50px;
     font-size: 18px;
     font-weight: 800;
     cursor: pointer;
-    padding: 18px 0; /* 높이 확보 */
+    padding: 18px 0;
     
-    /* 회전하는 테두리를 위해 overflow hidden하지 않음 (선택사항) */
-    z-index: 1;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    z-index: 1; /* 매우 중요 */
+    overflow: hidden; /* 빛이 밖으로 새지 않게 */
 }
 
-/* (1) 회전하는 그라데이션 원판 (테두리 역할) */
+/* 회전하는 빛 (그라데이션 원판) */
 .btn-rotating-border::before {
     content: '';
     position: absolute;
@@ -293,28 +198,22 @@ body {
     /* 시계방향으로 도는 빛 (투명 -> 금색/흰색 -> 투명) */
     background: conic-gradient(
         transparent, 
-        rgba(255, 215, 0, 0.8), 
-        #fff,
-        rgba(255, 215, 0, 0.8), 
+        rgba(255, 215, 0, 0.3), 
+        #fff, 
+        rgba(255, 215, 0, 0.3), 
         transparent 30%
     );
     
-    /* 회전 애니메이션 */
     animation: rotate-border 4s linear infinite;
 }
 
-/* (2) 버튼 내부를 가리는 마스크 (내용 배경) */
+/* 버튼 안쪽 배경 (내용 가리기용) */
 .btn-rotating-border::after {
     content: '';
     position: absolute;
     z-index: -1;
-    
-    /* 테두리 두께만큼 안쪽으로 들어옴 (3px 두께) */
-    left: 3px;
-    top: 3px;
-    width: calc(100% - 6px);
-    height: calc(100% - 6px);
-    
+    /* 테두리 3px 남기고 안쪽을 덮음 */
+    left: 3px; top: 3px; right: 3px; bottom: 3px;
     background: linear-gradient(135deg, #9E2A2F 0%, #82181C 100%);
     border-radius: 48px;
 }
@@ -325,5 +224,24 @@ body {
 
 .btn-rotating-border:active { transform: scale(0.98); }
 
-/* 푸터 */
-footer { color: #999; margin-top: 20px;}
+/* 기타 유틸 */
+.title-serif {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFD700;
+    margin: 0 0 20px 0;
+}
+.result-badge {
+    background: #fff; color: #82181C;
+    font-size: 13px; padding: 6px 18px;
+    border-radius: 20px; margin-bottom: 10px;
+    font-weight: 700; display: inline-block;
+}
+.frame-wrapper {
+    padding: 8px; border: 1px solid rgba(255,215,0,0.3);
+    border-radius: 16px; margin-bottom: 24px;
+    background: rgba(255,255,255,0.1);
+}
+.img-frame img { width: 100%; border-radius: 10px; display: block; }
+footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px;}
