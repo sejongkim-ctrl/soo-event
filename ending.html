@@ -68,7 +68,7 @@
         .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #fff; } /* 라벨 흰색 */
         .input-field { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 14px; background: #fff; color: #333; box-sizing: border-box; }
 
-        /* 6. 제품 이미지 프레임 (이미지 깨짐 방지) */
+        /* 6. 제품 이미지 프레임 */
         .product-stage {
             position: relative;
             margin: 0 auto 15px;
@@ -110,7 +110,7 @@
         }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
 
-        /* 8. [신규 추가] 결과 페이지와 동일한 스크롤 가이드 버튼 스타일 */
+        /* 8. 스크롤 가이드 버튼 스타일 */
         .scroll-guide-btn {
             display: inline-block;
             margin-top: 15px;
@@ -121,10 +121,23 @@
             color: #FFD700;
             font-size: 13px;
             font-weight: 700;
-            cursor: default; /* 클릭 커서 제거 (단순 정보용) */
+            cursor: default;
         }
 
-        /* 9. 모달 스타일 */
+        /* 9. [추가] 모달 내 버튼 강조 애니메이션 (깜빡임 효과 복구) */
+        @keyframes flashAttention {
+            0% { background-color: #82181C; color: #ffffff; transform: scale(1); }
+            50% { background-color: #FEE500; color: #3C1E1E; transform: scale(1.05); box-shadow: 0 0 15px #FEE500; }
+            100% { background-color: #82181C; color: #ffffff; transform: scale(1); }
+        }
+        
+        .btn-flash-mode {
+            animation: flashAttention 0.8s infinite ease-in-out !important; /* 0.8초마다 반복 */
+            background: #82181C !important;
+            font-weight: 800 !important;
+        }
+
+        /* 10. 모달 스타일 */
         #share-modal { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 20px !important; box-sizing: border-box !important; }
         #share-modal > div { background: #fff !important; padding: 30px !important; border-radius: 16px !important; text-align: center !important; width: 100% !important; max-width: 320px !important; }
 
@@ -307,11 +320,11 @@
             if (phone) localStorage.setItem('savedPhone', phone);
             localStorage.setItem('pendingShare', 'true'); 
 
+            // 버튼 강조 효과 추가 로직
             const shareBtn = document.getElementById('kakao-share-btn');
             if (shareBtn) {
                 shareBtn.innerText = "✅ 공유 완료 시 반드시 클릭해주세요!";
-                shareBtn.style.background = "#82181C"; 
-                shareBtn.style.color = "#ffffff";
+                shareBtn.classList.add('btn-flash-mode'); // [복구] 깜빡임 애니메이션 클래스 추가
                 shareBtn.onclick = confirmShareCompletion;
             }
 
@@ -342,6 +355,7 @@
 
             if (shareBtn) {
                 shareBtn.innerText = "💬 한 번 더 공유하기";
+                shareBtn.classList.remove('btn-flash-mode'); // [복구] 애니메이션 제거
                 shareBtn.style.background = "#FEE500";
                 shareBtn.style.color = "#3C1E1E";
                 shareBtn.onclick = shareAndTrack;
