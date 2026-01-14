@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [스타일 통합] 별도의 CSS 파일 없이 디자인이 적용됩니다. */
+        /* [스타일 통합] */
 
         /* 1. 기본 배경 및 폰트 */
         body { margin: 0; padding: 0; background: #F9F9F9; font-family: 'Noto Sans KR', sans-serif; color: #333; }
@@ -22,7 +22,7 @@
         .page-header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
         .brand-logo { color: #82181C; font-family: 'Noto Serif KR', serif; font-size: 16px; letter-spacing: 2px; border-bottom: 1px solid #C5A059; padding-bottom: 5px; font-weight: 700; }
 
-        /* 3. [핵심] 콘텐츠 박스 (노이즈 텍스처 + 버건디 배경) */
+        /* 3. 콘텐츠 박스 */
         .content-box {
             background: 
                 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXV0dHR4eHh2dnZ6enp8fHx5eXl9fX1xcXF/f39vb29wcHBubm5+fn5zc3NtbW1xcXFwcHBtbW1ubm5tbW0zWK9EAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvOIaxAAAAHklEQVR4XqWXCWoAAAhC3/9/bR8UY52gZStTq/EC4wAPhTE3rgAAAABJRU5ErkJggg=="),
@@ -38,7 +38,7 @@
             margin-bottom: 24px;
             position: relative;
             overflow: hidden;
-            color: #fff; /* 박스 내 글씨는 흰색 */
+            color: #fff; 
             border: 1px solid #C5A059;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
@@ -51,7 +51,7 @@
         .sub-title { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 700; margin-bottom: 5px; }
         .main-title { font-family: 'Noto Serif KR', serif; font-size: 20px; color: #fff; margin: 0 0 20px 0; }
 
-        /* 5. 약관 박스 & 폼 스타일 */
+        /* 5. 약관 & 폼 */
         .agreement-box { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 15px; }
         .agree-scroll-box { height: 150px; overflow-y: scroll; background: #fff; color: #333; padding: 15px; border-radius: 6px; text-align: left; font-size: 12px; line-height: 1.6; }
         .agree-scroll-box h4 { font-size: 14px; color: #333; margin-bottom: 10px; }
@@ -65,7 +65,7 @@
         input[type="radio"]:checked + .radio-label { border-color: #82181C; background: #FFF5F5; color: #82181C; font-weight: 700; box-shadow: 0 0 0 1px #82181C; }
 
         .input-group { margin-bottom: 15px; text-align: left; }
-        .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #fff; } /* 라벨 흰색 */
+        .input-label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #fff; }
         .input-field { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 14px; background: #fff; color: #333; box-sizing: border-box; }
 
         /* 6. 제품 이미지 프레임 */
@@ -73,7 +73,7 @@
             position: relative;
             margin: 0 auto 15px;
             width: 100%;
-            max-width: 280px; /* 너비 제한 */
+            max-width: 280px; 
             border-radius: 20px;
             border: 2px solid rgba(255,215,0,0.5);
             overflow: hidden;
@@ -82,7 +82,7 @@
         }
         .product-img { width: 100%; display: block; }
 
-        /* 7. CTA 버튼 (회전하는 테두리) */
+        /* 7. CTA 버튼 */
         .btn-rotating-border {
             position: relative;
             width: 100%;
@@ -110,29 +110,42 @@
         }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
 
-        /* 8. 스크롤 가이드 버튼 스타일 */
+        /* 8. [수정됨] 스크롤 가이드 버튼 (줄바꿈 방지) */
         .scroll-guide-btn {
             display: inline-block;
             margin-top: 15px;
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.1); /* 반투명 배경 */
-            border: 1px solid #FFD700;            /* 금색 테두리 */
+            
+            /* [수정] 패딩을 줄이고 폰트를 미세하게 조정하여 작은 화면 대응 */
+            padding: 12px 12px; 
+            
+            background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid #FFD700;            
             border-radius: 30px;
             color: #FFD700;
-            font-size: 13px;
+            
+            /* [수정] 폰트 사이즈를 12px로 고정 */
+            font-size: 12px; 
             font-weight: 700;
             cursor: default;
+            
+            /* [핵심] 절대 줄바꿈 금지 */
+            white-space: nowrap; 
+            
+            /* [수정] 자간을 좁혀서 공간 확보 */
+            letter-spacing: -0.5px;
+            
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
-        /* 9. [추가] 모달 내 버튼 강조 애니메이션 (깜빡임 효과 복구) */
+        /* 9. 모달 애니메이션 */
         @keyframes flashAttention {
             0% { background-color: #82181C; color: #ffffff; transform: scale(1); }
             50% { background-color: #FEE500; color: #3C1E1E; transform: scale(1.05); box-shadow: 0 0 15px #FEE500; }
             100% { background-color: #82181C; color: #ffffff; transform: scale(1); }
         }
-        
         .btn-flash-mode {
-            animation: flashAttention 0.8s infinite ease-in-out !important; /* 0.8초마다 반복 */
+            animation: flashAttention 0.8s infinite ease-in-out !important;
             background: #82181C !important;
             font-weight: 800 !important;
         }
@@ -169,8 +182,8 @@
                             </ul>
                             <h5>2. 제세공과금 및 경품 지급 안내 (필독)</h5>
                             <ul class="agree-list">
-                                <li>본 경품(순금)은 5만 원을 초과하므로 <strong>제세공과금(22%)이 발생하며, 이는 전액 '본사'가 부담합니다.</strong></li>
-                                <li>단, 소득세법에 따라 제세공과금 대납 처리를 위해 <strong>당첨자의 '신분증 사본(주민등록번호 포함)' 제출이 필수</strong>입니다.</li>
+                                <li>본 경품(순금)은 5만 원을 초과하므로 <strong>제세공과금(22%)이 발생하며, 이는 전액 '당첨자'가 부담합니다.</strong></li>
+                                <li>소득세법에 따라 제세공과금 대납 처리를 위해 <strong>당첨자의 '신분증 사본(주민등록번호 포함)' 제출이 필수</strong>입니다.</li>
                                 <li>당첨자 발표 후 요청 기한 내에 신분증 사본을 제출하지 않을 경우, 당첨이 자동 취소됩니다.</li>
                                 <li>수집된 고유식별정보(주민등록번호)는 세무 신고 목적으로만 사용되며, 신고 완료 후 관련 법령에 따라 안전하게 파기됩니다.</li>
                             </ul>
@@ -320,11 +333,10 @@
             if (phone) localStorage.setItem('savedPhone', phone);
             localStorage.setItem('pendingShare', 'true'); 
 
-            // 버튼 강조 효과 추가 로직
             const shareBtn = document.getElementById('kakao-share-btn');
             if (shareBtn) {
                 shareBtn.innerText = "✅ 공유 완료 시 반드시 클릭해주세요!";
-                shareBtn.classList.add('btn-flash-mode'); // [복구] 깜빡임 애니메이션 클래스 추가
+                shareBtn.classList.add('btn-flash-mode'); 
                 shareBtn.onclick = confirmShareCompletion;
             }
 
@@ -355,7 +367,7 @@
 
             if (shareBtn) {
                 shareBtn.innerText = "💬 한 번 더 공유하기";
-                shareBtn.classList.remove('btn-flash-mode'); // [복구] 애니메이션 제거
+                shareBtn.classList.remove('btn-flash-mode'); 
                 shareBtn.style.background = "#FEE500";
                 shareBtn.style.color = "#3C1E1E";
                 shareBtn.onclick = shareAndTrack;
