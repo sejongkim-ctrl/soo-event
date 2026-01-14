@@ -110,7 +110,21 @@
         }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
 
-        /* 8. 모달 스타일 */
+        /* 8. [신규 추가] 결과 페이지와 동일한 스크롤 가이드 버튼 스타일 */
+        .scroll-guide-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1); /* 반투명 배경 */
+            border: 1px solid #FFD700;            /* 금색 테두리 */
+            border-radius: 30px;
+            color: #FFD700;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: default; /* 클릭 커서 제거 (단순 정보용) */
+        }
+
+        /* 9. 모달 스타일 */
         #share-modal { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 20px !important; box-sizing: border-box !important; }
         #share-modal > div { background: #fff !important; padding: 30px !important; border-radius: 16px !important; text-align: center !important; width: 100% !important; max-width: 320px !important; }
 
@@ -124,7 +138,7 @@
         <form id="submit-form">
             
             <div class="content-box">
-                <h2 class="title-serif">수[壽] 브랜드<br>순금 1돈 이벤트 응모</h2>
+                <h2 class="title-serif">수[壽] 한약<br>순금 1돈 이벤트 응모</h2>
                 
                 <div id="section-1-target">
                     <span class="step-num">01.</span>
@@ -142,8 +156,8 @@
                             </ul>
                             <h5>2. 제세공과금 및 경품 지급 안내 (필독)</h5>
                             <ul class="agree-list">
-                                <li>본 경품(순금)은 5만 원을 초과하므로 <strong>제세공과금(22%)이 발생하며, 이는 전액 '당첨자'가 부담합니다.</strong></li>
-                                <li>소득세법에 따라 제세공과금 대납 처리를 위해 <strong>당첨자의 '신분증 사본(주민등록번호 포함)' 제출이 필수</strong>입니다.</li>
+                                <li>본 경품(순금)은 5만 원을 초과하므로 <strong>제세공과금(22%)이 발생하며, 이는 전액 '본사'가 부담합니다.</strong></li>
+                                <li>단, 소득세법에 따라 제세공과금 대납 처리를 위해 <strong>당첨자의 '신분증 사본(주민등록번호 포함)' 제출이 필수</strong>입니다.</li>
                                 <li>당첨자 발표 후 요청 기한 내에 신분증 사본을 제출하지 않을 경우, 당첨이 자동 취소됩니다.</li>
                                 <li>수집된 고유식별정보(주민등록번호)는 세무 신고 목적으로만 사용되며, 신고 완료 후 관련 법령에 따라 안전하게 파기됩니다.</li>
                             </ul>
@@ -180,9 +194,12 @@
                     <img src="./images/product_c.jpg" alt="원방공진단" class="product-img">
                 </div>
 
-                <div style="font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.9); word-break: keep-all;">
+                <div style="font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.9); word-break: keep-all; margin-top: 15px;">
                     2026년 새해를 맞이하여<br> <span class="highlight-txt">부모님의 활력을 위한 선물</span>을 준비해보세요.
-                    <br><span style="font-size:12px; color:#FFD700; text-decoration:underline; margin-top:5px; display:inline-block;">🔍 사진을 클릭하면 당첨확률이 올라가요🆙</span>
+                </div>
+
+                <div class="scroll-guide-btn" style="width: auto;">
+                    🔍 사진을 클릭하면 당첨확률이 올라가요 UP!
                 </div>
             </div>
 
