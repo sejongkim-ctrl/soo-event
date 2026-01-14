@@ -155,22 +155,28 @@
                 </div>
             </div>
 
-            <div class="input-group" style="margin-top: 40px;">
-                <div class="section-header-group">
-                    <span class="step-num">02.</span>
-                    <span class="step-title">가장 소중한 분께<br>건강을 선물하세요</span>
-                </div>
-                <input type="hidden" name="is_clicked" id="is_clicked_input" value="X">
-                <div class="product-mini" onclick="trackClickAndGo()">
-                    <div class="chance-badge">🍀 클릭 시 당첨확률 UP!</div>
-                    <img src="./images/product_main.jpg" alt="공진단" class="mini-img">
-                    <div class="mini-text">
-                        <h4>황제의 보약, 공진단 수壽</h4>
-                        <p>지금 바로, 전문 한의사의<br>1:1 밀착 상담을 받아보세요.</p>
-                        <span class="click-guide">🔍 상세내용 보러가기</span>
-                    </div>
-                </div>
-            </div>
+<div class="content-box premium-box" style="margin-top: 40px; padding-top: 40px;">
+    <div class="section-header-group">
+        <span class="step-num" style="color: #FFD700;">02.</span>
+        <span class="step-title" style="color: #fff;">닥터 수의 황제 처방</span>
+    </div>
+
+    <div class="text-center">
+        <p class="sub-title">지친 나를 위한</p>
+        <h2 class="main-title">원방공진단 수<span style="font-size:0.8em">壽</span></h2>
+    </div>
+    
+    <div class="product-stage" onclick="trackClickAndGo()">
+        <img src="./images/product_main.jpg" alt="원방공진단" class="product-img">
+        <div class="hint-tag">🔍 처방전 자세히 보기</div>
+    </div>
+
+    <div id="product-copy">
+        당신의 지칠 줄 모르는 에너지는 부모님께 물려받은 유산이나, 
+        정작 부모님의 엔진은 서서히 식어가고 있습니다.<br><br>
+        부모님의 체력을 <span class="highlight-txt">강력하게 끌어올릴 준비</span>를 해보세요.
+    </div>
+</div>
 
             <div class="input-group" style="margin-top: 40px;">
                 <div class="section-header-group"><span class="step-num">03.</span><span class="step-title">응모자 정보 입력</span></div>
@@ -186,13 +192,12 @@
                     <input type="text" id="detailAddress" class="input-field" placeholder="상세주소 입력">
                     <input type="hidden" name="address" id="real-address">
                 </div>
-            </div>
+</div>
 
-<button type="button" class="btn-burgundy-glow" id="submit-btn" onclick="handleSubmit()">
-    <span id="btn-text">응모 완료하기</span>
-</button>
-
-        </form>
+    <button type="button" class="btn-rotating-border" id="submit-btn" onclick="handleSubmit()">
+        <span id="btn-text">응모 완료하기</span>
+    </button>
+</form>
         <footer><p>© 2026 SOO BRAND. All rights reserved.</p></footer>
     </div>
 
