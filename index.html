@@ -102,20 +102,26 @@
             display: block;
         }
 
-        /* 텍스트 박스 가독성 */
+        /* [수정됨] 텍스트 박스 가독성 및 줄바꿈 최적화 */
         .result-text-box {
             display: block;
-            width: 90%;
+            width: 92%; /* 너비를 살짝 넓혀서 여유 공간 확보 */
             margin: 15px auto 20px auto;
-            padding: 20px 15px;
+            padding: 25px 15px; /* 내부 여백 조정 */
+            
             background-color: rgba(0, 0, 0, 0.4); 
             border-radius: 12px;
             border: 1px solid rgba(255, 215, 0, 0.3);
+            
             text-align: center;
             font-size: 14px;
-            line-height: 1.65;
+            line-height: 1.7; /* 줄간격을 넓혀서 읽기 편하게 */
             color: #eee;
-            word-break: keep-all;
+            
+            /* [핵심] 단어 단위 줄바꿈 설정 (한글 최적화) */
+            word-break: keep-all; 
+            word-wrap: break-word;
+            letter-spacing: -0.5px; /* 자간을 좁혀 깔끔하게 */
         }
 
         .highlight-txt {
@@ -145,7 +151,7 @@
             50% { transform: translateY(6px); }
         }
 
-        /* 5. 이벤트 정보 스타일 (수정됨) */
+        /* 5. 이벤트 정보 스타일 */
         .event-info-container {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 12px;
@@ -176,17 +182,15 @@
             margin-bottom: 6px;
         }
 
-        /* [수정] 폰트 크기 증가 및 줄바꿈 고정 설정 */
+        /* 폰트 크기 및 줄바꿈 고정 설정 */
         .info-text {
             display: block;
-            font-size: 14px; /* 13px -> 14px로 증가 */
+            font-size: 14px;
             color: #fff;
             line-height: 1.5;
             padding-left: 2px;
-            
-            /* 함부로 줄바꿈 되지 않도록 설정 */
-            word-break: keep-all; /* 단어 단위로만 줄바꿈 */
-            letter-spacing: -0.5px; /* 자간을 좁혀서 공간 확보 */
+            word-break: keep-all; 
+            letter-spacing: -0.5px;
         }
 
         /* 6. CTA 버튼 (회전하는 테두리) */
@@ -247,7 +251,7 @@
         <section id="event-section" class="content-box">
             <div style="margin-bottom: 20px;">
                 <div class="result-badge">EVENT</div>
-                <h3 style="color:#fff; font-size:20px; margin:10px 0 0 0;">매주 '수요일'<br> 순금 1돈🥇을 드려요!</h3>
+                <h3 style="color:#fff; font-size:20px; margin:10px 0 0 0;">🏆 매주 '수요일' 순금 1돈 증정 🏆</h3>
             </div>
 
             <div class="event-info-container">
@@ -267,8 +271,8 @@
                 </div>
                 
                 <div class="event-row">
-                    <span class="info-badge">⚡ 참여 방법</span>
-                    <span class="info-text">아래 버튼 클릭하여 카톡친구 추가하면<br>응모 메시지가 발송돼요!</span>
+                    <span class="info-badge">📝 참여 방법</span>
+                    <span class="info-text">아래 버튼 클릭하여 카카오플러스친구<br>추가 시, 시크릿 응모 메시지 발송</span>
                 </div>
             </div>
 
