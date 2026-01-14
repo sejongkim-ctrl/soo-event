@@ -8,33 +8,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="background-overlay"></div>
-    
-    <div class="container">
-        <header class="page-header">
-            <span class="brand-logo">THE SOO</span>
-        </header>
-
-        <section id="result-section" class="content-box">
-            <div class="result-badge">'한 방' 테스트 결과</div>
-            
-            <h1 id="result-title" class="title-serif">결과 분석 중...</h1>
-            
-            <div class="frame-wrapper">
-                <div class="img-frame">
-                    <img id="result-img" src="" alt="결과 이미지">
-                </div>
-            </div>
-            
-            <p id="result-desc" class="desc-text">당신의 2026년 에너지를 분석하고 있습니다.</p>
-            
-            <div class="scroll-guide-box">
-                🔽 아래 내용 확인하고, 이벤트 응모하기 🔽
-            </div>
-        </section>
-
-<body>
     <div class="container">
         <header class="page-header">
             <span class="brand-logo">THE SOO</span>
@@ -42,7 +15,6 @@
 
         <div class="content-box">
             <div class="result-badge">'한 방' 테스트 결과</div>
-            <h1 id="result-title" class="title-serif">결과 분석 완료</h1>
             
             <div class="frame-wrapper">
                 <div class="img-frame">
@@ -50,64 +22,63 @@
                 </div>
             </div>
             
-            <div id="result-desc">
+            <div id="result-desc" class="result-text-box">
                 당신의 2026년 에너지를 분석하고 있습니다.
             </div>
-
+            
+            <div onclick="document.getElementById('event-section').scrollIntoView({ behavior: 'smooth' });" class="scroll-guide-btn">
+                ▼ 아래 내용 확인하고, 이벤트 응모하기 ▼
             </div>
+        </div>
 
         <section id="event-section" class="content-box">
-            <div class="event-banner">
+            <div style="margin-bottom: 20px;">
                 <span class="gold-txt">EVENT</span>
-                <h3>🏆 매주 '수요일' 순금 1돈 증정 🏆</h3>
-                <p>지금 바로 응모하고 2026년 행운을 잡으세요!</p>
+                <h3 style="color:#fff; font-size:20px; margin:5px 0 0 0;">🏆 매주 '수요일' 순금 1돈 증정 🏆</h3>
+            </div>
+
+            <div class="event-info-container">
+                <div class="event-row">
+                    <span class="info-badge">📅 참여 기간</span>
+                    <span class="info-text">
+                        1주차 : 1/14 - 1/20<br>
+                        2주차 : 1/21 - 1/27<br>
+                        3주차 : 1/28 - 2/3<br>
+                        4주차 : 2/4 - 2/10
+                    </span>
+                </div>
+                
+                <div class="event-row">
+                    <span class="info-badge">📢 당첨 고지</span>
+                    <span class="info-text">매주 수요일 18:00시 당첨자 개별 고지</span>
+                </div>
+                
+                <div class="event-row">
+                    <span class="info-badge">⚡ 참여 방법</span>
+                    <span class="info-text">아래 버튼 클릭하여 1분만에 응모 가능</span>
+                </div>
             </div>
 
             <button class="btn-rotating-border" onclick="goToEventPage()">
                 순금 1돈 이벤트 응모하러 가기
             </button>
             
-            <p class="footer-notice">*당첨 안내는 매주 수요일 개별 고지됩니다.</p>
-        </section>
-
-        <footer>© 2026 SOO BRAND. All rights reserved.</footer>
-    </div>
-    
-    <script src="script.js"></script>
-</body>
-
-<section id="event-section" class="content-box last-box">
-            <div class="event-banner">
-                <span class="gold-txt">EVENT</span>
-                <h3 style="margin-bottom: 20px;">🏆매주 '수요일' 순금 1돈 증정🏆</h3>
-                
-                <div class="event-info" style="font-size: 14px; line-height: 1.7; color: #444; background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
-                    <p><strong>📅 참여 기간</strong><br>
-                    1주차 : 1/14 - 1/20<br>
-                    2주차 : 1/21 - 1/27<br>
-                    3주차 : 1/28 - 2/3<br>
-                    4주차 : 2/4 - 2/10</p>
-
-                    <p style="margin-top: 15px;"><strong>📢 당첨 고지</strong><br>
-                    매주 수요일 18:00시 당첨자 개별 고지</p>
-
-                    <p style="margin-top: 15px;"><strong>👇 참여 방법</strong><br>
-                    아래 버튼 클릭하여 1분만에 응모 가능</p>
-                </div>
-            </div>
-
-      <button class="btn-burgundy-glow" onclick="goToKakaoChannel()" style="margin-top: 10px;">
-    순금 1돈 이벤트 응모하러 가기
-</button>
-
-            <p class="footer-notice">*당첨 안내는 매주 수요일 개별 고지됩니다.</p>
+            <p style="color:rgba(255,255,255,0.5); font-size:11px; margin-top:15px;">
+                *당첨 안내는 매주 수요일 개별 고지됩니다.
+            </p>
         </section>
 
         <footer>
             <p>© 2026 SOO BRAND. All rights reserved.</p>
         </footer>
     </div>
-
+    
     <script src="script.js"></script>
+    <script>
+        function goToEventPage() {
+            // 응모 페이지 파일명으로 이동
+            location.href = 'ending.html'; 
+        }
+    </script>
 </body>
 </html>
