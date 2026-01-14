@@ -47,13 +47,21 @@ body {
     font-weight: 700;
 }
 
-/* 3. 콘텐츠 박스 (버건디 텍스처 + 입체감) */
+/* [수정] 콘텐츠 박스 (노이즈 텍스처 + 버건디 그라데이션 + 입체감) */
 .content-box {
-    /* 고급스러운 버건디 텍스처 배경 */
+    /* 배경 레이어 순서: 노이즈 패턴(맨 위) -> 금색 포인트 -> 버건디 그라데이션(맨 아래) */
     background: 
-        radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 20%),
-        linear-gradient(135deg, #5D0000 0%, #82181C 50%, #4a0507 100%);
+        /* 1. 미세한 노이즈 질감 패턴 (Base64 이미지 활용) */
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXV0dHR4eHh2dnZ6enp8fHx5eXl9fX1xcXF/f39vb29wcHBubm5+fn5zc3NtbW1xcXFwcHBtbW1ubm5tbW0zWK9EAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvOIaxAAAAHklEQVR4XqWXCWoAAAhC3/9/bR8UY52gZStTq/EC4wAPhTE3rgAAAABJRU5ErkJggg=="),
+        
+        /* 2. 기존 금색 포인트 및 버건디 그라데이션 */
+        radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.2) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.2) 0%, transparent 20%),
+        linear-gradient(135deg, #460002 0%, #82181C 50%, #3d0507 100%);
+    
+    /* 노이즈 이미지가 반복되도록 설정 */
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+    background-blend-mode: soft-light, normal, normal, normal; /* 노이즈를 부드럽게 합성 */
     
     padding: 30px 20px;
     text-align: center;
@@ -70,7 +78,6 @@ body {
         inset 2px 2px 5px rgba(255,255,255,0.2),
         inset -2px -2px 5px rgba(0,0,0,0.5);
 }
-
 /* 4. [수정 1] 텍스트 박스 가독성 개선 (불투명도 조정) */
 .result-text-box {
     display: block;
