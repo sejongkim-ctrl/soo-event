@@ -53,6 +53,11 @@
         .btn-rotating-border::after { content: ''; position: absolute; z-index: -1; left: 3px; top: 3px; right: 3px; bottom: 3px; background: linear-gradient(135deg, #9E2A2F 0%, #82181C 100%); border-radius: 48px; }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
 
+        /* [추가] 채널 추가 안내 모달 스타일 */
+        #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+        .modal-btn-confirm { background: #FEE500; color: #3C1E1E; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; }
+
         footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px; }
     </style>
 </head>
@@ -100,7 +105,7 @@
                 </div>
             </div>
 
-            <button class="btn-rotating-border" onclick="goToEventPage()">
+            <button class="btn-rotating-border" onclick="openChannelModal()">
                 순금 1돈 이벤트 응모하러 가기
             </button>
             <p style="color:rgba(255,255,255,0.5); font-size:11px; margin-top:15px;">*당첨 안내는 매주 수요일 개별 고지됩니다.</p>
@@ -108,20 +113,45 @@
 
         <footer><p>© 2026 SOO BRAND. All rights reserved.</p></footer>
     </div>
+
+    <div id="channel-modal">
+        <div>
+            <h3 style="margin: 0 0 10px 0; color: #82181C; font-size: 20px;">잠깐! 🖐️</h3>
+            <p style="font-size: 15px; color: #555; line-height: 1.5; margin-bottom: 5px;">
+                당첨 확률을 높이려면<br>
+                <b>'채널 추가'</b>가 필수입니다!
+            </p>
+            <p style="font-size: 13px; color: #999; margin-top: 5px;">
+                (채널 추가 후, 자동으로 응모 페이지로 이동합니다)
+            </p>
+            <button class="modal-btn-confirm" onclick="processChannelAndRedirect()">
+                채널 추가하고 응모하기 👉
+            </button>
+            <button onclick="document.getElementById('channel-modal').style.display='none'" style="background:none; border:none; color:#999; margin-top:15px; font-size:13px; text-decoration:underline; cursor:pointer;">
+                닫기
+            </button>
+        </div>
+    </div>
     
     <script>
-        function goToEventPage() {
-            // 1. 카카오 채널 추가 페이지를 '새 창'으로 띄웁니다.
-            window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
-
-            // 2. 현재 브라우저 창은 '응모 페이지'로 이동시킵니다.
-            setTimeout(function() {
-                // 테스트 중이므로 ending_test.html로 이동
-                location.href = 'ending_test.html'; 
-            }, 500);
+        // 1. 모달 띄우기 함수
+        function openChannelModal() {
+            document.getElementById('channel-modal').style.display = 'flex';
         }
 
-        // 여기에 필요한 경우 결과 이미지 표시 코드를 넣으세요.
+        // 2. [핵심] 채널 열기 + 페이지 이동 프로세스
+        function processChannelAndRedirect() {
+            // A. 카카오 채널 새 창으로 열기 (앱 실행 유도)
+            window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
+
+            // B. 현재 페이지는 응모 페이지로 이동 (약간의 딜레이를 줘서 A가 씹히지 않게 함)
+            setTimeout(function() {
+                // 테스트 중: ending_test.html / 실배포 시: ending.html 로 변경
+                location.href = 'ending_test.html'; 
+            }, 1000); // 1초 뒤 이동
+        }
+
+        // 결과 이미지 로직 예시 (필요시 활성화)
         // document.getElementById('result-img').src = "./images/result_type1.jpg";
     </script>
 </body>
