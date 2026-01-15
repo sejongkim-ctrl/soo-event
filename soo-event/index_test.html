@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE SOO : 한 방 테스트</title>
+    <title>THE SOO : 한 방 테스트 (TEST)</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [스타일 통합] 별도의 CSS 파일 없이 디자인이 적용됩니다. */
+        /* [스타일 통합] 외부 style.css 없이 여기서 바로 적용됩니다. */
 
         /* 1. 기본 세팅 */
         :root {
@@ -100,14 +100,16 @@
             width: 100%;
             border-radius: 10px;
             display: block;
+            min-height: 200px; /* 이미지가 없을 때를 대비한 최소 높이 */
+            background: rgba(0,0,0,0.2); /* 이미지 로딩 전 배경 */
         }
 
-        /* [수정됨] 텍스트 박스 가독성 및 줄바꿈 최적화 */
+        /* 텍스트 박스 */
         .result-text-box {
             display: block;
-            width: 92%; /* 너비를 살짝 넓혀서 여유 공간 확보 */
+            width: 92%;
             margin: 15px auto 20px auto;
-            padding: 25px 15px; /* 내부 여백 조정 */
+            padding: 25px 15px;
             
             background-color: rgba(0, 0, 0, 0.4); 
             border-radius: 12px;
@@ -115,13 +117,13 @@
             
             text-align: center;
             font-size: 14px;
-            line-height: 1.7; /* 줄간격을 넓혀서 읽기 편하게 */
+            line-height: 1.7;
             color: #eee;
             
-            /* [핵심] 단어 단위 줄바꿈 설정 (한글 최적화) */
+            /* 줄바꿈 최적화 */
             word-break: keep-all; 
             word-wrap: break-word;
-            letter-spacing: -0.5px; /* 자간을 좁혀 깔끔하게 */
+            letter-spacing: -0.5px;
         }
 
         .highlight-txt {
@@ -182,10 +184,9 @@
             margin-bottom: 6px;
         }
 
-        /* 폰트 크기 및 줄바꿈 고정 설정 */
         .info-text {
             display: block;
-            font-size: 14px;
+            font-size: 14px; /* 14px로 고정 */
             color: #fff;
             line-height: 1.5;
             padding-left: 2px;
@@ -235,12 +236,13 @@
             
             <div class="frame-wrapper">
                 <div class="img-frame">
-                    <img id="result-img" src="" alt="결과 이미지">
+                    <img id="result-img" src="" alt="결과 분석 중...">
                 </div>
             </div>
             
             <div id="result-desc" class="result-text-box">
-                당신의 2026년 에너지를 분석하고 있습니다.
+                당신의 2026년 에너지를 분석하고 있습니다.<br>
+                (잠시만 기다려주세요)
             </div>
             
             <div onclick="document.getElementById('event-section').scrollIntoView({ behavior: 'smooth' });" class="scroll-guide-btn">
@@ -251,7 +253,7 @@
         <section id="event-section" class="content-box">
             <div style="margin-bottom: 20px;">
                 <div class="result-badge">EVENT</div>
-                <h3 style="color:#fff; font-size:20px; margin:10px 0 0 0;">매주 '수요일'<br> 순금 1돈🥇을 드려요!</h3>
+                <h3 style="color:#fff; font-size:20px; margin:10px 0 0 0;">🏆 매주 '수요일' 순금 1돈 증정 🏆</h3>
             </div>
 
             <div class="event-info-container">
@@ -271,13 +273,13 @@
                 </div>
                 
                 <div class="event-row">
-                    <span class="info-badge">📝 참여 방법</span>
-                    <span class="info-text">아래 버튼 클릭하여 카카오플러스친구<br>추가 시, 시크릿 응모페이지가 보여요!</span>
+                    <span class="info-badge">⚡ 참여 방법</span>
+                    <span class="info-text">아래 버튼 클릭하여 1분만에 응모 가능</span>
                 </div>
             </div>
 
             <button class="btn-rotating-border" onclick="goToEventPage()">
-            이벤트 응모하러 가기
+                순금 1돈 이벤트 응모하러 가기
             </button>
             
             <p style="color:rgba(255,255,255,0.5); font-size:11px; margin-top:15px;">
@@ -290,11 +292,18 @@
         </footer>
     </div>
     
-    <script src="script.js"></script>
     <script>
+        // 1. 이벤트 페이지 이동 함수
         function goToEventPage() {
+            // 카카오 채널 추가 링크로 이동
             window.open('http://pf.kakao.com/_JReVG/friend', '_blank');
         }
+
+        // 2. (테스트용) 기존 script.js에 있던 결과 로직이 있다면 여기에 붙여넣으세요.
+        // 현재는 디자인 테스트를 위해 UI 기능만 포함했습니다.
+        
+        // 예시: 결과 이미지를 강제로 보여주고 싶다면 아래 주석을 해제하고 주소를 넣으세요.
+        // document.getElementById('result-img').src = "./images/result_type1.jpg";
     </script>
 </body>
 </html>
