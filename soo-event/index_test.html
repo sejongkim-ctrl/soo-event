@@ -294,9 +294,21 @@
     
     <script>
         // 1. 이벤트 페이지 이동 함수
-function goToEventPage() {
-    location.href = 'https://pf.kakao.com/_JReVG/friend';
+<script>
+        // [수정된 함수] 카카오 채널 띄우기 + 응모 페이지로 이동 동시에 하기
+        function goToEventPage() {
+            // 1. 카카오 채널 추가 페이지를 '새 창'으로 띄웁니다.
+            // (모바일에서는 카카오톡 앱이 실행됩니다)
+            window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
+
+            // 2. 현재 보고 있는 뒷 배경(브라우저)은 '응모 페이지'로 미리 이동시킵니다.
+            // (0.5초 뒤 이동하여 자연스럽게 처리)
+            setTimeout(function() {
+                // 테스트 중이므로 ending_test.html로 설정 (나중에 ending.html로 변경 필요)
+                location.href = 'ending_test.html'; 
+            }, 500);
         }
+    </script>
 
         // 2. (테스트용) 기존 script.js에 있던 결과 로직이 있다면 여기에 붙여넣으세요.
         // 현재는 디자인 테스트를 위해 UI 기능만 포함했습니다.
