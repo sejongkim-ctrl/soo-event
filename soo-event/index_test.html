@@ -57,7 +57,7 @@
         #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
         
-        /* [수정] 버튼 스타일 */
+        /* 버튼 스타일 */
         .modal-btn-confirm { 
             display: block; 
             background: #FEE500; 
@@ -137,8 +137,11 @@
                 당첨 확률을 높이려면<br>
                 <b>'채널 추가'</b>가 필수입니다!
             </p>
-            <p style="font-size: 13px; color: #999; margin-top: 5px;">
-                (추가 후, 원래 화면으로 돌아오면<br>응모 페이지가 나옵니다)
+            
+            <p style="font-size: 13px; color: #999; margin-top: 10px; background-color: #f5f5f5; padding: 10px; border-radius: 8px;">
+                💡 <b>안내</b><br>
+                채널 추가 후, <b>다시 이 화면으로 돌아오시면</b><br>
+                응모 페이지가 열려있습니다.
             </p>
             
             <button class="modal-btn-confirm" onclick="processChannelAndRedirect()">
@@ -158,18 +161,16 @@
 
         function processChannelAndRedirect() {
             // 1. 카카오톡 채널을 '새 창'으로 엽니다.
-            // (모바일에서는 앱 실행 시도가 일어남)
             window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
 
-            // 2. [핵심] 0.1초 뒤에 현재 창을 '응모 페이지'로 바꿔버립니다.
-            // 이렇게 하면 사용자가 카톡을 보고 돌아왔을 때 이미 화면이 바뀌어 있습니다.
+            // 2. 현재 창은 '응모 페이지'로 변경해둡니다.
             setTimeout(function() {
-                // 테스트 시 ending_test.html / 실 배포 시 ending.html 사용
+                // 테스트 중: ending_test.html / 실 배포 시: ending.html 로 변경
                 location.href = 'ending_test.html'; 
             }, 100); 
         }
 
-        // 결과 이미지 로직 예시 (필요시 사용)
+        // 결과 이미지 로직 예시
         // document.getElementById('result-img').src = "./images/result_type1.jpg";
     </script>
 </body>
