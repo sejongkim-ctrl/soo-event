@@ -53,10 +53,26 @@
         .btn-rotating-border::after { content: ''; position: absolute; z-index: -1; left: 3px; top: 3px; right: 3px; bottom: 3px; background: linear-gradient(135deg, #9E2A2F 0%, #82181C 100%); border-radius: 48px; }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
 
-        /* [추가] 채널 추가 안내 모달 스타일 */
+        /* 채널 추가 안내 모달 스타일 */
         #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-        .modal-btn-confirm { background: #FEE500; color: #3C1E1E; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; }
+        
+        /* [수정] 모달 버튼을 a 태그로 변경하여 디자인 적용 */
+        .modal-btn-confirm { 
+            display: block; /* a 태그는 inline이므로 block으로 변경 */
+            text-decoration: none; /* 밑줄 제거 */
+            background: #FEE500; 
+            color: #3C1E1E; 
+            border: none; 
+            width: 100%; 
+            padding: 15px 0; /* 좌우 패딩 대신 전체 너비 사용 */
+            border-radius: 8px; 
+            font-weight: 800; 
+            margin-top: 20px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            box-sizing: border-box;
+        }
 
         footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px; }
     </style>
@@ -124,9 +140,11 @@
             <p style="font-size: 13px; color: #999; margin-top: 5px;">
                 (채널 추가 후, 자동으로 응모 페이지로 이동합니다)
             </p>
-            <button class="modal-btn-confirm" onclick="processChannelAndRedirect()">
+            
+            <a href="https://pf.kakao.com/_JReVG/friend" target="_blank" class="modal-btn-confirm" onclick="redirectParentPage()">
                 채널 추가하고 응모하기 👉
-            </button>
+            </a>
+
             <button onclick="document.getElementById('channel-modal').style.display='none'" style="background:none; border:none; color:#999; margin-top:15px; font-size:13px; text-decoration:underline; cursor:pointer;">
                 닫기
             </button>
@@ -139,19 +157,18 @@
             document.getElementById('channel-modal').style.display = 'flex';
         }
 
-        // 2. [핵심] 채널 열기 + 페이지 이동 프로세스
-        function processChannelAndRedirect() {
-            // A. 카카오 채널 새 창으로 열기 (앱 실행 유도)
-            window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
-
-            // B. 현재 페이지는 응모 페이지로 이동 (약간의 딜레이를 줘서 A가 씹히지 않게 함)
+        // 2. [수정] a태그 클릭 시 실행되는 함수 (배경 페이지 이동)
+        function redirectParentPage() {
+            // 링크는 html의 href가 처리하고, 여기서는 뒷배경 이동만 담당
+            
+            // 시간을 2초(2000ms)로 넉넉하게 주어 앱이 켜질 시간을 확보
             setTimeout(function() {
-                // 테스트 중: ending_test.html / 실배포 시: ending.html 로 변경
+                // 테스트 중: ending_test.html / 실배포 시: ending.html 로 변경 필수
                 location.href = 'ending_test.html'; 
-            }, 1000); // 1초 뒤 이동
+            }, 2000); 
         }
 
-        // 결과 이미지 로직 예시 (필요시 활성화)
+        // 결과 이미지 로직 예시
         // document.getElementById('result-img').src = "./images/result_type1.jpg";
     </script>
 </body>
