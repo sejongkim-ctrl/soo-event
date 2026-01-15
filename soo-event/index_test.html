@@ -57,21 +57,21 @@
         #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
         
-        /* [수정] 모달 버튼을 a 태그로 변경하여 디자인 적용 */
+        /* [수정] 버튼 스타일 */
         .modal-btn-confirm { 
-            display: block; /* a 태그는 inline이므로 block으로 변경 */
-            text-decoration: none; /* 밑줄 제거 */
+            display: block; 
             background: #FEE500; 
             color: #3C1E1E; 
             border: none; 
             width: 100%; 
-            padding: 15px 0; /* 좌우 패딩 대신 전체 너비 사용 */
+            padding: 15px 0; 
             border-radius: 8px; 
             font-weight: 800; 
             margin-top: 20px; 
             cursor: pointer; 
             font-size: 16px; 
             box-sizing: border-box;
+            text-decoration: none;
         }
 
         footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px; }
@@ -138,12 +138,12 @@
                 <b>'채널 추가'</b>가 필수입니다!
             </p>
             <p style="font-size: 13px; color: #999; margin-top: 5px;">
-                (채널 추가 후, 자동으로 응모 페이지로 이동합니다)
+                (추가 후, 원래 화면으로 돌아오면<br>응모 페이지가 나옵니다)
             </p>
             
-            <a href="https://pf.kakao.com/_JReVG/friend" target="_blank" class="modal-btn-confirm" onclick="redirectParentPage()">
+            <button class="modal-btn-confirm" onclick="processChannelAndRedirect()">
                 채널 추가하고 응모하기 👉
-            </a>
+            </button>
 
             <button onclick="document.getElementById('channel-modal').style.display='none'" style="background:none; border:none; color:#999; margin-top:15px; font-size:13px; text-decoration:underline; cursor:pointer;">
                 닫기
@@ -152,23 +152,24 @@
     </div>
     
     <script>
-        // 1. 모달 띄우기 함수
         function openChannelModal() {
             document.getElementById('channel-modal').style.display = 'flex';
         }
 
-        // 2. [수정] a태그 클릭 시 실행되는 함수 (배경 페이지 이동)
-        function redirectParentPage() {
-            // 링크는 html의 href가 처리하고, 여기서는 뒷배경 이동만 담당
-            
-            // 시간을 2초(2000ms)로 넉넉하게 주어 앱이 켜질 시간을 확보
+        function processChannelAndRedirect() {
+            // 1. 카카오톡 채널을 '새 창'으로 엽니다.
+            // (모바일에서는 앱 실행 시도가 일어남)
+            window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
+
+            // 2. [핵심] 0.1초 뒤에 현재 창을 '응모 페이지'로 바꿔버립니다.
+            // 이렇게 하면 사용자가 카톡을 보고 돌아왔을 때 이미 화면이 바뀌어 있습니다.
             setTimeout(function() {
-                // 테스트 중: ending_test.html / 실배포 시: ending.html 로 변경 필수
+                // 테스트 시 ending_test.html / 실 배포 시 ending.html 사용
                 location.href = 'ending_test.html'; 
-            }, 2000); 
+            }, 100); 
         }
 
-        // 결과 이미지 로직 예시
+        // 결과 이미지 로직 예시 (필요시 사용)
         // document.getElementById('result-img').src = "./images/result_type1.jpg";
     </script>
 </body>
