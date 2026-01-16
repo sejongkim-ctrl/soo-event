@@ -160,14 +160,16 @@
         }
 
         function processChannelAndRedirect() {
-            // 1. 카카오톡 채널을 '새 창'으로 엽니다.
+            // 1. 카카오톡 채널 열기
             window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
 
-            // 2. 현재 창은 '응모 페이지'로 변경해둡니다.
+            // 2. [핵심 수정] 3초(3000ms) 뒤에 페이지 이동
+            // 카카오톡이 켜지는 동안 브라우저가 멈춰도, 돌아오면 이 타이머가 작동하거나
+            // 이미 이동되어 있을 확률을 높입니다.
             setTimeout(function() {
-                // 테스트 중: ending_test.html / 실 배포 시: ending.html 로 변경
+                // 테스트 중: ending_test.html / 실 배포 시: ending.html
                 location.href = 'ending_test.html'; 
-            }, 100); 
+            }, 3000); 
         }
 
         // 결과 이미지 로직 예시
