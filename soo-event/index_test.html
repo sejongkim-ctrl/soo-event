@@ -57,7 +57,7 @@
         #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
         
-        /* 모달 버튼 스타일 */
+        /* 1단계 버튼 스타일 */
         .modal-btn-confirm { 
             display: block; 
             background: #FEE500; 
@@ -71,12 +71,11 @@
             cursor: pointer; 
             font-size: 16px; 
             box-sizing: border-box;
-            text-decoration: none;
         }
 
-        /* [추가] 2단계 버튼 (숨김 상태) */
+        /* 2단계 버튼 (숨김 상태) */
         .modal-btn-next {
-            display: none; /* 처음엔 안 보임 */
+            display: none; 
             background: #82181C;
             color: #fff;
             border: none; 
@@ -88,7 +87,6 @@
             cursor: pointer; 
             font-size: 16px; 
             box-sizing: border-box;
-            text-decoration: none;
         }
 
         footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px; }
@@ -159,14 +157,14 @@
             <p style="font-size: 13px; color: #999; margin-top: 10px; background-color: #f5f5f5; padding: 10px; border-radius: 8px;">
                 💡 <b>안내</b><br>
                 채널 추가 후, <b>다시 이 화면으로 돌아오시면</b><br>
-                자동으로 응모 페이지가 열립니다.
+                '입력하기' 버튼이 활성화됩니다.
             </p>
             
             <button id="btn-step-1" class="modal-btn-confirm" onclick="processChannel()">
                 채널 추가하러 가기 👉
             </button>
 
-            <button id="btn-step-2" class="modal-btn-next" onclick="forceGoEnding()">
+            <button id="btn-step-2" class="modal-btn-next" onclick="location.href='ending_test.html'">
                 ✅ 추가했어요! 응모 정보 입력하기
             </button>
 
@@ -181,29 +179,23 @@
             document.getElementById('channel-modal').style.display = 'flex';
         }
 
-        // [핵심] 1단계: 채널 열기 + UI 변경 (페이지 이동 절대 금지!)
         function processChannel() {
-            // 1. 카톡 열기
-            window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
-
-            // 2. 버튼 바꾸기 (즉시 실행됨)
-            // 브라우저가 이동하지 않으므로 멈추지 않음!
+            // 1. UI 즉시 변경 (버튼 교체)
             document.getElementById('btn-step-1').style.display = 'none';
             document.getElementById('btn-step-2').style.display = 'block';
             document.getElementById('modal-desc').innerHTML = "채널 추가를 완료하셨나요?<br>아래 버튼을 눌러주세요!";
 
-            // 3. (보너스) 돌아왔을 때 자동 이동 시도
-            // 실패해도 상관없음. 왜냐? 2번 버튼이 생겼으니까!
-            document.addEventListener('visibilitychange', function() {
-                if (document.visibilityState === 'visible') {
-                    location.href = 'ending_test.html';
-                }
-            }, { once: true });
-        }
+            // 2. [핵심] 모바일 여부 체크
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        // [핵심] 2단계: 수동 이동 (안전 장치)
-        function forceGoEnding() {
-            location.href = 'ending_test.html';
+            if (isMobile) {
+                // [모바일] '앱 스키마' 사용 -> 브라우저 이동 X, 새 창 X, 오직 앱만 실행됨
+                // pf.kakao.com의 주소에서 ID는 '_JReVG' 입니다.
+                location.href = 'kakaoplus://plusfriend/friend/@_JReVG';
+            } else {
+                // [PC] PC는 앱 실행이 안 되므로 새 창 띄우기 (기존 방식)
+                window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
+            }
         }
     </script>
 </body>
