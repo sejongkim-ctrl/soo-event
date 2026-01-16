@@ -161,27 +161,20 @@
 
         function processChannelAndRedirect() {
             // 1. 카카오톡 채널 '새 창'으로 열기
+            // 모바일에서는 이 시점에 앱이 켜지면서 브라우저가 백그라운드로 갑니다.
             window.open('https://pf.kakao.com/_JReVG/friend', '_blank');
 
-            // 2. [핵심 수정] 모바일 화이트 스크린 방지 로직
-            // 타이머로 강제 이동하지 않고, '돌아왔을 때' 이동시킵니다.
-            
-            // A. PC용 Fallback (PC는 창이 안 덮이므로 1초 뒤 이동)
-            if (!/Mobi/i.test(navigator.userAgent)) {
-                setTimeout(function() {
-                     location.href = 'ending_test.html';
-                }, 1000);
-            }
-
-            // B. 모바일용 로직 (앱 갔다가 돌아오면 이동)
-            // 'visibilitychange' 이벤트: 브라우저 탭이 다시 보일 때 실행됨
-            document.addEventListener("visibilitychange", function() {
-                // 브라우저가 다시 활성화(visible) 되었을 때
-                if (document.visibilityState === 'visible') {
-                    location.href = 'ending_test.html';
-                }
-            }, { once: true }); // 딱 한 번만 실행
+            // 2. [수정됨] 모든 기기에서 1초 뒤 페이지 강제 이동 타이머 가동
+            // - 만약 앱이 켜져서 브라우저가 멈추면? -> 타이머도 멈춥니다.
+            // - 사용자가 돌아오면? -> 멈췄던 타이머가 즉시 끝나면서 페이지가 이동됩니다.
+            // - 앱이 안 켜지면? -> 그냥 1초 뒤에 이동합니다.
+            setTimeout(function() {
+                location.href = 'ending_test.html'; 
+            }, 1000); 
         }
+
+        // 결과 이미지 로직 예시
+        // document.getElementById('result-img').src = "./images/result_type1.jpg";
     </script>
 </body>
 </html>
