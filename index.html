@@ -7,52 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [스타일 통합] 별도의 CSS 파일 없이 디자인이 적용됩니다. */
+        /* [스타일 통합] */
+        :root { --bg-page: #F9F9F9; --brand-red: #82181C; --brand-gold: #C5A059; }
+        body { background: var(--bg-page); font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; min-height: 100vh; color: #333; }
+        .container { width: 100%; max-width: 480px; background: var(--bg-page); padding: 20px; margin: 0 auto; box-sizing: border-box; }
+        
+        /* 헤더 */
+        .page-header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
+        .brand-logo { color: var(--brand-red); font-family: 'Noto Serif KR', serif; font-size: 16px; letter-spacing: 2px; border-bottom: 1px solid var(--brand-gold); padding-bottom: 5px; display: inline-block; font-weight: 700; }
 
-        /* 1. 기본 세팅 */
-        :root {
-            --bg-page: #F9F9F9;
-            --brand-red: #82181C;
-            --brand-gold: #C5A059;
-        }
-
-        body {
-            background: var(--bg-page);
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            background: var(--bg-page);
-            padding: 20px;
-            margin: 0 auto;
-            box-sizing: border-box;
-        }
-
-        /* 2. 헤더 */
-        .page-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-top: 20px;
-        }
-
-        .brand-logo {
-            color: var(--brand-red);
-            font-family: 'Noto Serif KR', serif;
-            font-size: 16px;
-            letter-spacing: 2px;
-            border-bottom: 1px solid var(--brand-gold);
-            padding-bottom: 5px;
-            display: inline-block;
-            font-weight: 700;
-        }
-
-        /* 3. 콘텐츠 박스 (노이즈 텍스처 + 버건디 배경) */
+        /* 콘텐츠 박스 */
         .content-box {
             background: 
                 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXV0dHR4eHh2dnZ6enp8fHx5eXl9fX1xcXF/f39vb29wcHBubm5+fn5zc3NtbW1xcXFwcHBtbW1ubm5tbW0zWK9EAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvOIaxAAAAHklEQVR4XqWXCWoAAAhC3/9/bR8UY52gZStTq/EC4wAPhTE3rgAAAABJRU5ErkJggg=="),
@@ -61,188 +25,65 @@
                 linear-gradient(135deg, #460002 0%, #82181C 50%, #3d0507 100%);
             background-repeat: repeat, no-repeat, no-repeat, no-repeat;
             background-blend-mode: soft-light, normal, normal, normal;
-            
-            padding: 30px 20px;
-            text-align: center;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-            color: #fff;
-            
-            border: 1px solid #C5A059;
-            box-shadow: 
-                0 10px 25px rgba(0,0,0,0.3),
-                inset 2px 2px 5px rgba(255,255,255,0.2),
-                inset -2px -2px 5px rgba(0,0,0,0.5);
+            padding: 30px 20px; text-align: center; border-radius: 16px; margin-bottom: 24px; position: relative; overflow: hidden; color: #fff; border: 1px solid #C5A059; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
-        /* 4. 내부 요소 스타일 */
-        .result-badge {
-            display: inline-block;
-            background: #fff; /* 흰색 배경 */
-            color: #82181C;   /* 버건디 글씨 */
-            font-size: 13px;
-            padding: 6px 18px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+        /* 뱃지 및 프레임 */
+        .result-badge { display: inline-block; background: #fff; color: #82181C; font-size: 13px; padding: 6px 18px; border-radius: 20px; margin-bottom: 10px; font-weight: 700; }
+        .frame-wrapper { padding: 8px; border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 16px; margin-bottom: 24px; background: rgba(255, 255, 255, 0.1); }
+        
+        /* [중요] script.js가 이미지를 넣을 곳 (ID 유지) */
+        .img-frame img { width: 100%; border-radius: 10px; display: block; }
 
-        .frame-wrapper {
-            padding: 8px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 16px;
-            margin-bottom: 24px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .img-frame img {
-            width: 100%;
-            border-radius: 10px;
-            display: block;
-        }
+        /* [중요] script.js가 텍스트를 넣을 곳 (ID 유지) */
+        .result-text-box { display: block; width: 92%; margin: 15px auto 20px auto; padding: 25px 15px; background-color: rgba(0, 0, 0, 0.4); border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.3); text-align: center; font-size: 14px; line-height: 1.7; color: #eee; word-break: keep-all; word-wrap: break-word; letter-spacing: -0.5px; }
 
-        /* [수정됨] 텍스트 박스 가독성 및 줄바꿈 최적화 */
-        .result-text-box {
-            display: block;
-            width: 92%; /* 너비를 살짝 넓혀서 여유 공간 확보 */
-            margin: 15px auto 20px auto;
-            padding: 25px 15px; /* 내부 여백 조정 */
-            
-            background-color: rgba(0, 0, 0, 0.4); 
-            border-radius: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.7; /* 줄간격을 넓혀서 읽기 편하게 */
-            color: #eee;
-            
-            /* [핵심] 단어 단위 줄바꿈 설정 (한글 최적화) */
-            word-break: keep-all; 
-            word-wrap: break-word;
-            letter-spacing: -0.5px; /* 자간을 좁혀 깔끔하게 */
-        }
-
-        .highlight-txt {
-            color: #FFD700;
-            font-weight: 700;
-            background: rgba(255, 215, 0, 0.1);
-            padding: 0 4px;
-            border-radius: 4px;
-        }
+        .highlight-txt { color: #FFD700; font-weight: 700; background: rgba(255, 215, 0, 0.1); padding: 0 4px; border-radius: 4px; }
 
         /* 스크롤 버튼 */
-        .scroll-guide-btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #FFD700;
-            border-radius: 30px;
-            color: #FFD700;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            animation: floatBob 1.5s infinite ease-in-out;
-        }
-        @keyframes floatBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(6px); }
-        }
+        .scroll-guide-btn { display: inline-block; margin-top: 10px; padding: 12px 25px; background: rgba(255, 255, 255, 0.1); border: 1px solid #FFD700; border-radius: 30px; color: #FFD700; font-size: 13px; font-weight: 700; cursor: pointer; animation: floatBob 1.5s infinite ease-in-out; }
+        @keyframes floatBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-        /* 5. 이벤트 정보 스타일 */
-        .event-info-container {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            padding: 20px 15px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
+        /* 이벤트 정보 */
+        .event-info-container { background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 20px 15px; margin-bottom: 20px; text-align: left; }
+        .event-row { margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; }
+        .event-row:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+        .info-badge { display: inline-block; background: #FFD700; color: #5D0000; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; margin-bottom: 6px; }
+        .info-text { display: block; font-size: 14px; color: #fff; line-height: 1.5; padding-left: 2px; word-break: keep-all; letter-spacing: -0.5px; }
 
-        .event-row {
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-        }
-        .event-row:last-child {
-            margin-bottom: 0;
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .info-badge {
-            display: inline-block;
-            background: #FFD700;
-            color: #5D0000;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 12px;
-            margin-bottom: 6px;
-        }
-
-        /* 폰트 크기 및 줄바꿈 고정 설정 */
-        .info-text {
-            display: block;
-            font-size: 14px;
-            color: #fff;
-            line-height: 1.5;
-            padding-left: 2px;
-            word-break: keep-all; 
-            letter-spacing: -0.5px;
-        }
-
-        /* 6. CTA 버튼 (회전하는 테두리) */
-        .btn-rotating-border {
-            position: relative;
-            width: 100%;
-            margin-top: 10px;
-            background: #82181C; 
-            color: #fff !important;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 800;
-            cursor: pointer;
-            padding: 18px 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-            z-index: 1; overflow: hidden;
-        }
-        .btn-rotating-border::before {
-            content: ''; position: absolute; z-index: -2; left: -50%; top: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, rgba(255, 215, 0, 0.3), #fff, rgba(255, 215, 0, 0.3), transparent 30%);
-            animation: rotate-border 4s linear infinite;
-        }
-        .btn-rotating-border::after {
-            content: ''; position: absolute; z-index: -1; left: 3px; top: 3px; right: 3px; bottom: 3px;
-            background: linear-gradient(135deg, #9E2A2F 0%, #82181C 100%);
-            border-radius: 48px;
-        }
+        /* CTA 버튼 */
+        .btn-rotating-border { position: relative; width: 100%; margin-top: 10px; background: #82181C; color: #fff !important; border: none; border-radius: 50px; font-size: 18px; font-weight: 800; cursor: pointer; padding: 18px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.4); z-index: 1; overflow: hidden; }
+        .btn-rotating-border::before { content: ''; position: absolute; z-index: -2; left: -50%; top: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, rgba(255, 215, 0, 0.3), #fff, rgba(255, 215, 0, 0.3), transparent 30%); animation: rotate-border 4s linear infinite; }
+        .btn-rotating-border::after { content: ''; position: absolute; z-index: -1; left: 3px; top: 3px; right: 3px; bottom: 3px; background: linear-gradient(135deg, #9E2A2F 0%, #82181C 100%); border-radius: 48px; }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
+
+        /* 모달 스타일 */
+        #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+        
+        /* 1단계 버튼 */
+        .modal-btn-confirm { display: block; background: #FEE500; color: #3C1E1E; border: none; width: 100%; padding: 15px 0; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; box-sizing: border-box; }
+        
+        /* 2단계 버튼 (숨김) */
+        .modal-btn-next { display: none; background: #82181C; color: #fff; border: none; width: 100%; padding: 15px 0; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; box-sizing: border-box; }
 
         footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="page-header">
-            <span class="brand-logo">THE SOO</span>
-        </header>
+        <header class="page-header"><span class="brand-logo">THE SOO</span></header>
 
         <div class="content-box">
             <div class="result-badge">'한 방' 테스트 결과</div>
-            
             <div class="frame-wrapper">
                 <div class="img-frame">
                     <img id="result-img" src="" alt="결과 이미지">
                 </div>
             </div>
-            
             <div id="result-desc" class="result-text-box">
                 당신의 2026년 에너지를 분석하고 있습니다.
             </div>
-            
             <div onclick="document.getElementById('event-section').scrollIntoView({ behavior: 'smooth' });" class="scroll-guide-btn">
                 ▼ 아래 내용 확인하고, 이벤트 응모하기 ▼
             </div>
@@ -258,42 +99,87 @@
                 <div class="event-row">
                     <span class="info-badge">📅 참여 기간</span>
                     <span class="info-text">
-                        1주차 : 1/14 - 1/20<br>
-                        2주차 : 1/21 - 1/27<br>
-                        3주차 : 1/28 - 2/3<br>
-                        4주차 : 2/4 - 2/10
+                        1주차 : 1/14 - 1/20<br>2주차 : 1/21 - 1/27<br>3주차 : 1/28 - 2/3<br>4주차 : 2/4 - 2/10
                     </span>
                 </div>
-                
                 <div class="event-row">
                     <span class="info-badge">📢 당첨 고지</span>
                     <span class="info-text">매주 수요일 18:00시 당첨자 개별 고지</span>
                 </div>
-                
                 <div class="event-row">
                     <span class="info-badge">📝 참여 방법</span>
                     <span class="info-text">아래 버튼 클릭하여 카카오플러스친구<br>추가 시, 시크릿 응모페이지가 보여요!</span>
                 </div>
             </div>
 
-            <button class="btn-rotating-border" onclick="goToEventPage()">
-            이벤트 응모하러 가기
+            <button class="btn-rotating-border" onclick="openChannelModal()">
+                이벤트 응모하러 가기
             </button>
-            
-            <p style="color:rgba(255,255,255,0.5); font-size:11px; margin-top:15px;">
-                *당첨 안내는 매주 수요일 개별 고지됩니다.
-            </p>
+            <p style="color:rgba(255,255,255,0.5); font-size:11px; margin-top:15px;">*당첨 안내는 매주 수요일 개별 고지됩니다.</p>
         </section>
 
-        <footer>
-            <p>© 2026 SOO BRAND. All rights reserved.</p>
-        </footer>
+        <footer><p>© 2026 SOO BRAND. All rights reserved.</p></footer>
+    </div>
+    
+    <div id="channel-modal">
+        <div>
+            <h3 id="modal-title" style="margin: 0 0 10px 0; color: #82181C; font-size: 20px;">잠깐! 🖐️</h3>
+            
+            <p id="modal-desc" style="font-size: 15px; color: #555; line-height: 1.5; margin-bottom: 5px;">
+                금 1돈 이벤트에 참여하려면<br><b>'채널 추가'</b>가 필수에요!
+            </p>
+            
+            <p id="modal-guide" style="font-size: 13px; color: #999; margin-top: 10px; background-color: #f5f5f5; padding: 10px; border-radius: 8px;">
+                💡 <b>안내</b><br>채널 추가 후, <b>뒤로가기</b>를 누르면<br>'응모페이지' 버튼이 활성화됩니다.
+            </p>
+            
+            <button id="btn-step-1" class="modal-btn-confirm" onclick="processChannel()">
+                채널 추가하러 가기 👉
+            </button>
+
+            <button id="btn-step-2" class="modal-btn-next" onclick="location.href='ending.html'">
+                클릭 시, 응모 페이지로 이동 ▶
+            </button>
+
+            <button onclick="document.getElementById('channel-modal').style.display='none'" style="background:none; border:none; color:#999; margin-top:15px; font-size:13px; text-decoration:underline; cursor:pointer;">닫기</button>
+        </div>
     </div>
     
     <script src="script.js"></script>
+    
     <script>
-        function goToEventPage() {
-    location.href = 'https://pf.kakao.com/_JReVG/friend';
+        // 페이지 로드 시 '과거 클릭 여부' 확인 (뒤로가기 시 Step 2 자동 활성화)
+        window.onload = function() {
+            if (sessionStorage.getItem('channelClicked') === 'true') {
+                openChannelModal(); 
+                switchToStep2();    
+            }
+        };
+
+        function openChannelModal() { document.getElementById('channel-modal').style.display = 'flex'; }
+        
+        function switchToStep2() {
+            // 1. 버튼 교체
+            document.getElementById('btn-step-1').style.display = 'none';
+            document.getElementById('btn-step-2').style.display = 'block';
+
+            // 2. 타이틀 & 가이드 숨기기 (심플 모드)
+            document.getElementById('modal-title').style.display = 'none';
+            document.getElementById('modal-guide').style.display = 'none';
+
+            // 3. 멘트 변경
+            document.getElementById('modal-desc').innerHTML = "채널 추가를 완료하셨다면<br>아래 버튼을 눌러주세요!";
+        }
+
+        function processChannel() {
+            // 1. 클릭 상태 저장
+            sessionStorage.setItem('channelClicked', 'true');
+            
+            // 2. UI 변경 (즉시 적용)
+            switchToStep2();
+            
+            // 3. 카카오 채널로 이동 (현재 창)
+            location.href = 'https://pf.kakao.com/_JReVG/friend';
         }
     </script>
 </body>
