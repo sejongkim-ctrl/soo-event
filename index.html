@@ -102,12 +102,12 @@
             display: block;
         }
 
-        /* [수정됨] 텍스트 박스 가독성 및 줄바꿈 최적화 */
+        /* 텍스트 박스 가독성 및 줄바꿈 최적화 */
         .result-text-box {
             display: block;
-            width: 92%; /* 너비를 살짝 넓혀서 여유 공간 확보 */
+            width: 92%;
             margin: 15px auto 20px auto;
-            padding: 25px 15px; /* 내부 여백 조정 */
+            padding: 25px 15px;
             
             background-color: rgba(0, 0, 0, 0.4); 
             border-radius: 12px;
@@ -115,13 +115,12 @@
             
             text-align: center;
             font-size: 14px;
-            line-height: 1.7; /* 줄간격을 넓혀서 읽기 편하게 */
+            line-height: 1.7;
             color: #eee;
             
-            /* [핵심] 단어 단위 줄바꿈 설정 (한글 최적화) */
             word-break: keep-all; 
             word-wrap: break-word;
-            letter-spacing: -0.5px; /* 자간을 좁혀 깔끔하게 */
+            letter-spacing: -0.5px;
         }
 
         .highlight-txt {
@@ -221,6 +220,14 @@
         }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
 
+        /* ============================
+           [추가] 모달 전용 CSS
+           ============================ */
+        #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+        .modal-btn-confirm { display: block; background: #FEE500; color: #3C1E1E; border: none; width: 100%; padding: 15px 0; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; box-sizing: border-box; }
+        .modal-btn-next { display: none; background: #82181C; color: #fff; border: none; width: 100%; padding: 15px 0; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; box-sizing: border-box; }
+
         footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px; }
     </style>
 </head>
@@ -276,8 +283,8 @@
                 </div>
             </div>
 
-            <button class="btn-rotating-border" onclick="goToEventPage()">
-            이벤트 응모하러 가기
+            <button class="btn-rotating-border" onclick="openChannelModal()">
+                이벤트 응모하러 가기
             </button>
             
             <p style="color:rgba(255,255,255,0.5); font-size:11px; margin-top:15px;">
@@ -290,10 +297,59 @@
         </footer>
     </div>
     
+    <div id="channel-modal">
+        <div>
+            <h3 id="modal-title" style="margin: 0 0 10px 0; color: #82181C; font-size: 20px;">잠깐! 🖐️</h3>
+            
+            <p id="modal-desc" style="font-size: 15px; color: #555; line-height: 1.5; margin-bottom: 5px;">
+                금 1돈 이벤트에 참여하려면<br><b>'채널 추가'</b>가 필수에요!
+            </p>
+            
+            <p id="modal-guide" style="font-size: 13px; color: #999; margin-top: 10px; background-color: #f5f5f5; padding: 10px; border-radius: 8px;">
+                💡 <b>안내</b><br>채널 추가 후, <b>뒤로가기</b>를 누르면<br>'응모페이지' 버튼이 활성화됩니다.
+            </p>
+            
+            <button id="btn-step-1" class="modal-btn-confirm" onclick="processChannel()">
+                채널 추가하러 가기 👉
+            </button>
+
+            <button id="btn-step-2" class="modal-btn-next" onclick="location.href='ending.html'">
+                클릭 시, 응모 페이지로 이동 ▶
+            </button>
+
+            <button onclick="document.getElementById('channel-modal').style.display='none'" style="background:none; border:none; color:#999; margin-top:15px; font-size:13px; text-decoration:underline; cursor:pointer;">
+                닫기
+            </button>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
+    
     <script>
-        function goToEventPage() {
-    location.href = 'https://pf.kakao.com/_JReVG/friend';
+        // window.onload 대신 addEventListener를 사용하여 script.js와 공존
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('channelClicked') === 'true') {
+                openChannelModal(); 
+                switchToStep2();    
+            }
+        });
+
+        function openChannelModal() { 
+            document.getElementById('channel-modal').style.display = 'flex'; 
+        }
+        
+        function switchToStep2() {
+            document.getElementById('btn-step-1').style.display = 'none';
+            document.getElementById('btn-step-2').style.display = 'block';
+            document.getElementById('modal-title').style.display = 'none';
+            document.getElementById('modal-guide').style.display = 'none';
+            document.getElementById('modal-desc').innerHTML = "채널 추가를 완료하셨다면<br>아래 버튼을 눌러주세요!";
+        }
+
+        function processChannel() {
+            sessionStorage.setItem('channelClicked', 'true');
+            switchToStep2();
+            location.href = 'https://pf.kakao.com/_JReVG/friend';
         }
     </script>
 </body>
