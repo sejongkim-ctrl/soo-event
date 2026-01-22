@@ -25,7 +25,7 @@
                 linear-gradient(135deg, #460002 0%, #82181C 50%, #3d0507 100%);
             background-repeat: repeat, no-repeat, no-repeat, no-repeat;
             background-blend-mode: soft-light, normal, normal, normal;
-            padding: 30px 20px; text-align: center; border-radius: 16px; margin-bottom: 24px; position: relative; overflow: hidden; color: #fff; border: 1px solid #C5A059; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            padding: 30px 20px; text-align: center; border-radius: 16px; margin-bottom: 24px; position: relative; overflow: hidden; color: #fff; border: 1px solid #C5A059; box-shadow: 0 10px 25px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.2), inset -2px -2px 5px rgba(0,0,0,0.5);
         }
 
         /* 뱃지 및 프레임 */
@@ -35,6 +35,7 @@
 
         /* 텍스트 박스 */
         .result-text-box { display: block; width: 92%; margin: 15px auto 20px auto; padding: 25px 15px; background-color: rgba(0, 0, 0, 0.4); border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.3); text-align: center; font-size: 14px; line-height: 1.7; color: #eee; word-break: keep-all; word-wrap: break-word; letter-spacing: -0.5px; }
+        .highlight-txt { color: #FFD700; font-weight: 700; background: rgba(255, 215, 0, 0.1); padding: 0 4px; border-radius: 4px; }
 
         /* 스크롤 버튼 */
         .scroll-guide-btn { display: inline-block; margin-top: 10px; padding: 12px 25px; background: rgba(255, 255, 255, 0.1); border: 1px solid #FFD700; border-radius: 30px; color: #FFD700; font-size: 13px; font-weight: 700; cursor: pointer; animation: floatBob 1.5s infinite ease-in-out; }
@@ -47,6 +48,44 @@
         .info-badge { display: inline-block; background: #FFD700; color: #5D0000; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; margin-bottom: 6px; }
         .info-text { display: block; font-size: 14px; color: #fff; line-height: 1.5; padding-left: 2px; word-break: keep-all; letter-spacing: -0.5px; }
 
+        /* ----------------------------------------------------
+           [추가됨] 주차별 스케줄 디자인 (종료/진행중 표시) 
+           ---------------------------------------------------- */
+        .schedule-list { display: flex; flex-direction: column; gap: 4px; } /* 줄 간격 */
+        
+        .week-item { font-size: 14px; color: #fff; display: flex; align-items: center; }
+        
+        /* 1. 종료된 주차 스타일 */
+        .week-item.ended { 
+            color: rgba(255, 255, 255, 0.4); /* 흐린 색 */
+            text-decoration: line-through;   /* 취소선 */
+        }
+        /* 종료 뱃지 */
+        .tag-end { 
+            color: #FF6B6B; /* 붉은색 */
+            font-size: 11px; 
+            font-weight: 700;
+            margin-left: 6px; 
+            text-decoration: none !important; /* 취소선 제외 */
+            display: inline-block; 
+        }
+
+        /* 2. 진행중인 주차 스타일 */
+        .week-item.active {
+            color: #FFD700; /* 황금색 강조 */
+            font-weight: 700;
+        }
+        /* 진행중 뱃지 */
+        .tag-ing {
+            background: #FFD700;
+            color: #5D0000;
+            font-size: 10px;
+            padding: 1px 5px;
+            border-radius: 4px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
         /* CTA 버튼 */
         .btn-rotating-border { position: relative; width: 100%; margin-top: 10px; background: #82181C; color: #fff !important; border: none; border-radius: 50px; font-size: 18px; font-weight: 800; cursor: pointer; padding: 18px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.4); z-index: 1; overflow: hidden; }
         .btn-rotating-border::before { content: ''; position: absolute; z-index: -2; left: -50%; top: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, rgba(255, 215, 0, 0.3), #fff, rgba(255, 215, 0, 0.3), transparent 30%); animation: rotate-border 4s linear infinite; }
@@ -56,11 +95,7 @@
         /* 모달 스타일 */
         #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-        
-        /* 1단계 버튼 */
         .modal-btn-confirm { display: block; background: #FEE500; color: #3C1E1E; border: none; width: 100%; padding: 15px 0; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; box-sizing: border-box; }
-        
-        /* 2단계 버튼 (숨김) */
         .modal-btn-next { display: none; background: #82181C; color: #fff; border: none; width: 100%; padding: 15px 0; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; box-sizing: border-box; }
 
         footer { text-align: center; color: #999; margin-top: 30px; font-size: 11px; }
@@ -74,7 +109,7 @@
             <div class="result-badge">'한 방' 테스트 결과</div>
             <div class="frame-wrapper">
                 <div class="img-frame">
-                    <img id="result-img" src="" alt="결과 이미지">
+                    <img id="result-img" src="./images/result_a.jpg" alt="결과 이미지">
                 </div>
             </div>
             <div id="result-desc" class="result-text-box">
@@ -94,14 +129,28 @@
             <div class="event-info-container">
                 <div class="event-row">
                     <span class="info-badge">📅 참여 기간</span>
-                    <span class="info-text">
-                        1주차 : 1/14 - 1/20<br>2주차 : 1/21 - 1/27<br>3주차 : 1/28 - 2/3<br>4주차 : 2/4 - 2/10
-                    </span>
+                    <div class="schedule-list" style="margin-top:5px; padding-left:2px;">
+                        
+                        <div class="week-item ended">
+                            <span>1주차 : 1/14 - 1/20</span>
+                            <span class="tag-end">(종료)</span>
+                        </div>
+                        
+                        <div class="week-item active">
+                            <span>2주차 : 1/21 - 1/27</span>
+                            <span class="tag-ing">진행중</span>
+                        </div>
+                        
+                        <div class="week-item">3주차 : 1/28 - 2/3</div>
+                        <div class="week-item">4주차 : 2/4 - 2/10</div>
+                    </div>
                 </div>
+                
                 <div class="event-row">
                     <span class="info-badge">📢 당첨 고지</span>
                     <span class="info-text">매주 수요일 18:00시 당첨자 개별 고지</span>
                 </div>
+                
                 <div class="event-row">
                     <span class="info-badge">📝 참여 방법</span>
                     <span class="info-text">아래 버튼 클릭하여 카카오플러스친구<br>추가 시, 시크릿 응모페이지가 보여요!</span>
@@ -142,26 +191,23 @@
     </div>
     
     <script src="script.js"></script>
+    
     <script>
-        window.onload = function() {
+        // 모달 로직
+        window.addEventListener('load', function() {
             if (sessionStorage.getItem('channelClicked') === 'true') {
                 openChannelModal(); 
                 switchToStep2();    
             }
-        };
+        });
 
         function openChannelModal() { document.getElementById('channel-modal').style.display = 'flex'; }
         
         function switchToStep2() {
-            // 1. 버튼 교체
             document.getElementById('btn-step-1').style.display = 'none';
             document.getElementById('btn-step-2').style.display = 'block';
-
-            // 2. 타이틀 & 가이드 숨기기
             document.getElementById('modal-title').style.display = 'none';
             document.getElementById('modal-guide').style.display = 'none';
-
-            // 3. 멘트 변경
             document.getElementById('modal-desc').innerHTML = "채널 추가를 완료하셨다면<br>아래 버튼을 눌러주세요!";
         }
 
