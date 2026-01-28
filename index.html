@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [스타일 통합] 별도의 CSS 파일 없이 디자인이 적용됩니다. */
+        /* [스타일 통합] */
 
         /* 1. 기본 세팅 */
         :root {
@@ -80,8 +80,8 @@
         /* 4. 내부 요소 스타일 */
         .result-badge {
             display: inline-block;
-            background: #fff; /* 흰색 배경 */
-            color: #82181C;   /* 버건디 글씨 */
+            background: #fff;
+            color: #82181C;
             font-size: 13px;
             padding: 6px 18px;
             border-radius: 20px;
@@ -102,22 +102,19 @@
             display: block;
         }
 
-        /* 텍스트 박스 가독성 및 줄바꿈 최적화 */
+        /* 텍스트 박스 */
         .result-text-box {
             display: block;
             width: 92%;
             margin: 15px auto 20px auto;
             padding: 25px 15px;
-            
             background-color: rgba(0, 0, 0, 0.4); 
             border-radius: 12px;
             border: 1px solid rgba(255, 215, 0, 0.3);
-            
             text-align: center;
             font-size: 14px;
             line-height: 1.7;
             color: #eee;
-            
             word-break: keep-all; 
             word-wrap: break-word;
             letter-spacing: -0.5px;
@@ -181,7 +178,6 @@
             margin-bottom: 6px;
         }
 
-        /* 폰트 크기 및 줄바꿈 고정 설정 */
         .info-text {
             display: block;
             font-size: 14px;
@@ -193,30 +189,30 @@
         }
 
         /* ----------------------------------------------------
-           [추가됨] 주차별 스케줄 디자인 (종료/진행중 표시) 
+           [업데이트] 주차별 스케줄 디자인 (종료/진행중 표시) 
            ---------------------------------------------------- */
-        .schedule-list { display: flex; flex-direction: column; gap: 4px; } /* 줄 간격 */
+        .schedule-list { display: flex; flex-direction: column; gap: 4px; } 
         
         .week-item { font-size: 14px; color: #fff; display: flex; align-items: center; }
         
-        /* 1. 종료된 주차 스타일 */
+        /* 종료된 주차 스타일 */
         .week-item.ended { 
-            color: rgba(255, 255, 255, 0.4); /* 흐린 색 */
-            text-decoration: line-through;   /* 취소선 */
+            color: rgba(255, 255, 255, 0.4); 
+            text-decoration: line-through;   
         }
         /* 종료 뱃지 */
         .tag-end { 
-            color: #FF6B6B; /* 붉은색 */
+            color: #FF6B6B; 
             font-size: 11px; 
             font-weight: 700;
             margin-left: 6px; 
-            text-decoration: none !important; /* 취소선 제외 */
+            text-decoration: none !important;
             display: inline-block; 
         }
 
-        /* 2. 진행중인 주차 스타일 */
+        /* 진행중인 주차 스타일 */
         .week-item.active {
-            color: #FFD700; /* 황금색 강조 */
+            color: #FFD700; 
             font-weight: 700;
         }
         /* 진행중 뱃지 */
@@ -230,7 +226,7 @@
             vertical-align: middle;
         }
 
-        /* 6. CTA 버튼 (회전하는 테두리) */
+        /* 6. CTA 버튼 */
         .btn-rotating-border {
             position: relative;
             width: 100%;
@@ -258,9 +254,7 @@
         }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
 
-        /* ============================
-           [추가] 모달 전용 CSS
-           ============================ */
+        /* [추가] 모달 전용 CSS */
         #channel-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         #channel-modal > div { background: #fff; padding: 30px 20px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
         .modal-btn-confirm { display: block; background: #FEE500; color: #3C1E1E; border: none; width: 100%; padding: 15px 0; border-radius: 8px; font-weight: 800; margin-top: 20px; cursor: pointer; font-size: 16px; box-sizing: border-box; }
@@ -280,7 +274,7 @@
             
             <div class="frame-wrapper">
                 <div class="img-frame">
-                    <img id="result-img" src="" alt="결과 이미지">
+                    <img id="result-img" src="./images/result_a.jpg" alt="결과 이미지">
                 </div>
             </div>
             
@@ -310,12 +304,16 @@
                             <span class="tag-end">(종료)</span>
                         </div>
                         
-                        <div class="week-item active">
+                        <div class="week-item ended">
                             <span>2주차 : 1/21 - 1/27</span>
-                            <span class="tag-ing">진행중</span>
+                            <span class="tag-end">(종료)</span>
                         </div>
                         
-                        <div class="week-item">3주차 : 1/28 - 2/3</div>
+                        <div class="week-item active">
+                            <span>3주차 : 1/28 - 2/3</span>
+                            <span class="tag-ing">진행중</span>
+                        </div>
+
                         <div class="week-item">4주차 : 2/4 - 2/10</div>
                     </div>
                 </div>
@@ -374,7 +372,7 @@
     <script src="script.js"></script>
     
     <script>
-        // window.onload 대신 addEventListener를 사용하여 script.js와 공존
+        // 모달 로직 (기존 스크립트와 충돌 방지)
         window.addEventListener('load', function() {
             if (sessionStorage.getItem('channelClicked') === 'true') {
                 openChannelModal(); 
